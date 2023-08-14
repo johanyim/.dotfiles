@@ -1,0 +1,9 @@
+[user]
+	name = johanyim
+	email = 37012949+johanyim@users.noreply.github.com
+[init]
+	defaultBranch = main
+[color]
+	ui = auto
+[pull]
+	rebase = false

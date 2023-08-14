@@ -1,0 +1,7 @@
+#ignores all that matches the regular expressions below
+
+\.git
+misc
+#LICENSE
+^/.*\.org
+steps.md
