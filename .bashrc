@@ -5,10 +5,12 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-alias ls='ls --color=auto'
+alias ls='ls -a --color=auto'
 alias grep='grep --color=auto'
 alias wifi='nmcli dev wifi connect'
 alias wifilist='nmcli dev wifi list'
+alias please='sudo $(fc -ln -1)'
+
 #PS1='[\u@\h \W]\$ '
 
 #eval "$(starship init bash)"
