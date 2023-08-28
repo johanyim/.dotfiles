@@ -139,12 +139,20 @@ tooltip {
     margin-right: 10px;
 }
 
-#battery {
+#battery.bat0 {
+    color: #a6e3a1;
+    border-radius: 0 0px 0px 0;
+    margin-right: 0px;
+    border-left: 0px;
+}
+
+#battery.bat1 {
     color: #a6e3a1;
     border-radius: 0 10px 10px 0;
     margin-right: 10px;
     border-left: 0px;
 }
+
 
 #custom-weather {
     border-radius: 0px 10px 10px 0px;
