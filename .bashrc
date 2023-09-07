@@ -1,5 +1,4 @@
-
-# ~/.bashrc
+#~/.bashrc
 #
 
 # If not running interactively, don't do anything
@@ -15,8 +14,9 @@ alias please='sudo $(fc -ln -1)'
 
 #eval "$(starship init bash)"
 #. "$HOME/.cargo/env"
-#export PATH="$HOME/bin:$PATH"
-
+#
+export PATH="$HOME/bin:$PATH"
+export RUSTC_WRAPPER="$HOME/.cargo/bin/sccache"
 #color and style generator
 function C() {
     local style=$2
