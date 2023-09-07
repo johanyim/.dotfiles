@@ -13,7 +13,11 @@ $rust\
 $golang\
 $php\
 [](fg:surface0 bg:base)\
-\n$character"""
+\n\
+[   ](fg:red bg:surface0)\
+[ ](surface0)\
+"""
+
 
 
 # right_format = """$duration"""
@@ -72,11 +76,8 @@ format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 disabled = false
 time_format = "%H:%M:%S " # Hour:Minute Format
 style = "bg:overlay0"
-format = '[[$time](fg:pink bg:overlay0)]($style)'
+format = '[[$time](fg:text bg:overlay0)]($style)'
 
-[character]
-success_symbol = '[  ](red)'
-error_symbol = '[  ](red)'
 
 
 [palettes.catppuccin_mocha]
