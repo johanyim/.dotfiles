@@ -55,6 +55,7 @@ bindkey '^e' edit-command-line
 
 # aliases, (probably should be in a different file)
 alias ls='exa -al --no-user --no-time -h '
+alias cd='z'
 
 #default system variables
 export VISUAL=nvim
@@ -67,6 +68,9 @@ bindkey "^[[1;5D" backward-word
 
 # starship
 eval "$(starship init zsh)"
+# zoxide
+eval "$(zoxide init zsh)"
+
 
 # fzf
 source /usr/share/fzf/key-bindings.zsh
