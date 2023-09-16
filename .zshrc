@@ -1,6 +1,5 @@
 # Johan's zsh config
 
-
 #colors and prompt
 autoload -U colors && colors
 PS1='%F{blue}%~ %(?.%F{green}.%F{red})%#%f '
@@ -48,15 +47,19 @@ zle-line-init() {
 zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
-# 
+#
 
 # edit line in nvim with ctrl-e
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
-
 # aliases, (probably should be in a different file)
 alias ls='exa -al --no-user --no-time -h '
+
+#default system variables
+export VISUAL=nvim
+export EDITOR=nvim
+
 
 # forward and backwords with ctrl
 bindkey "^[[1;5C" forward-word
