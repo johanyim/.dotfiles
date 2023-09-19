@@ -53,9 +53,6 @@ preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
-# aliases, (probably should be in a different file)
-alias ls='exa -al --no-user --no-time -h '
-alias cd='z'
 
 #default system variables
 export VISUAL=nvim
@@ -70,6 +67,11 @@ bindkey "^[[1;5D" backward-word
 eval "$(starship init zsh)"
 # zoxide
 eval "$(zoxide init zsh)"
+
+# aliases, (probably should be in a different file)
+alias ls='exa -al --no-user --no-time -h '
+alias cd='z'
+alias grep='rg'
 
 
 # fzf
