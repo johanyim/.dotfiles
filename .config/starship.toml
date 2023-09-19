@@ -36,22 +36,12 @@ truncation_length = 4
 truncation_symbol = "…/"
 
 [directory.substitutions]
-"/documents" =  "/󰈙 documents"
-"/Documents" =  "/󰈙 Documents"
-"/downloads" =  "/ downloads"
-"/Downloads" =  "/ Downloads"
-"/music" =      "/ music"
-"/Music" =      "/ Music"
-"/pictures" =   "/ pictures"
-"/Pictures" =   "/ Pictures"
-".dotfiles" =   " .dotfiles"
-".config" =     " .config"
-"/files" =      "/ files"
-"/videos" =     "/ videos"
-"/youtube" =    "/ youtube"
-"/torrents" =   "/ torrents"
-"/code" =       "/ code"
-
+"Documents" = "󰈙 Documents"
+"Downloads" = " Downloads"
+"Music" = " Music"
+"Pictures" = " Pictures"
+"code" = " code"
+".dotfiles" = " .dotfiles"
 
 [git_branch]
 symbol = ""

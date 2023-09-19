@@ -25,7 +25,7 @@ text = [
 	{ exec = '$EDITOR "$@"', block = true },
 ]
 image = [
-	{ exec = 'feh --scale-down --auto-zoom "$@"', display_name = "Open", block = true },
+	{ exec = 'feh "$@"', display_name = "Open", block = true },
 	# { exec = '''exiftool "$1"; echo "Press enter to exit"; read''', block = true, display_name = "Show EXIF" },
 ]
 document = [

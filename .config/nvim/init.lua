@@ -1,5 +1,3 @@
-require("core.options")
 require("core.keymaps")
-require("core.scripts")
 require("core.plugins")
 require("core.plugin_config")
