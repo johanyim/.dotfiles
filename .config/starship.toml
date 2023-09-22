@@ -11,9 +11,9 @@ $nodejs\
 $rust\
 $golang\
 $php\
-[](fg:surface0 bg:base)\
+[](surface0)\
 \n\
-[   ](fg:red bg:surface0)\
+[   ](fg:red bg:surface0)\
 [ ](surface0)"""
 
 # No new line between shell prompts
@@ -40,12 +40,21 @@ truncation_length = 4
 truncation_symbol = "…/"
 
 [directory.substitutions]
-"Documents" = "󰈙 Documents"
-"Downloads" = " Downloads"
-"Music" = " Music"
-"Pictures" = " Pictures"
-"code" = " code"
-".dotfiles" = " .dotfiles"
+"/documents" =  "/󰈙 documents"
+"/Documents" =  "/󰈙 Documents"
+"/downloads" =  "/ downloads"
+"/Downloads" =  "/ Downloads"
+"/music" =      "/ music"
+"/Music" =      "/ Music"
+"/pictures" =   "/ pictures"
+"/Pictures" =   "/ Pictures"
+".dotfiles" =   " .dotfiles"
+".config" =     " .config"
+"/files" =      "/ files"
+"/videos" =     "/ videos"
+"/youtube" =    "/ youtube"
+"/torrents" =   "/ torrents"
+"/code" =       "/ code"
 
 [git_branch]
 symbol = ""
