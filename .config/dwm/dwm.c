@@ -169,11 +169,6 @@ typedef struct {
 	int monitor;
 } Rule;
 
-typedef struct {
-	const char *cmd;
-	int id;
-} StatusCmd;
-
 /* function declarations */
 static void applyrules(Client *c);
 static int applysizehints(Client *c, int *x, int *y, int *w, int *h, int interact);
@@ -210,6 +205,7 @@ static void focusstack(const Arg *arg);
 static Atom getatomprop(Client *c, Atom prop);
 static int getrootptr(int *x, int *y);
 static long getstate(Window w);
+static pid_t getstatusbarpid();
 static int gettextprop(Window w, Atom atom, char *text, unsigned int size);
 static void grabbuttons(Client *c, int focused);
 static void grabkeys(void);
@@ -245,6 +241,7 @@ static void setup(void);
 static void seturgent(Client *c, int urg);
 static void showhide(Client *c);
 static void sigchld(int unused);
+static void sigstatusbar(const Arg *arg);
 static int solitary(Client *c);
 static void spawn(const Arg *arg);
 static void tag(const Arg *arg);
@@ -291,9 +288,9 @@ static pid_t winpid(Window w);
 /* variables */
 static const char broken[] = "broken";
 static char stext[1024];
+static int statussig;
 static int statusw;
-static int statuscmdn;
-static char lastbutton[] = "-";
+static pid_t statuspid = -1;
 static int screen;
 static int sw, sh;           /* X display screen geometry width, height */
 static int bh;               /* bar height */
@@ -589,13 +586,11 @@ buttonpress(XEvent *e)
 		} else if (ev->x < x + TEXTW(selmon->ltsymbol))
 			click = ClkLtSymbol;
 		else if (ev->x > selmon->ww - statusw) {
-			char *text, *s, ch;
-			*lastbutton = '0' + ev->button;
-
 			x = selmon->ww - statusw;
 			click = ClkStatusText;
 
-			statuscmdn = 0;
+			char *text, *s, ch;
+			statussig = 0;
 			for (text = s = stext; *s && x <= ev->x; s++) {
 				if ((unsigned char)(*s) < ' ') {
 					ch = *s;
@@ -605,11 +600,19 @@ buttonpress(XEvent *e)
 					text = s + 1;
 					if (x >= ev->x)
 						break;
-					statuscmdn = ch;
+					statussig = ch;
+				} else if (*s == '^') {
+					*s = '\0';
+					x += TEXTW(text) - lrpad;
+					*s = '^';
+					if (*(++s) == 'f')
+						x += atoi(++s);
+					while (*(s++) != '^');
+					text = s;
+					s--;
 				}
 			}
-		}
-		else
+		} else
 			click = ClkWinTitle;
 	} else if ((c = wintoclient(ev->window))) {
 		focus(c);
@@ -1004,7 +1007,7 @@ drawbar(Monitor *m)
 
 	/* draw status first so it can be overdrawn by tags later */
 	if (m == selmon) { /* status is only drawn on selected monitor */
-		tw = m->ww - drawstatusbar(m, bh, stext);
+		tw = statusw = m->ww - drawstatusbar(m, bh, stext);
         //:::
 		while (1) {
 			if ((unsigned int)*ts > LENGTH(colors)) { ts++; continue ; }
@@ -1296,6 +1299,30 @@ getatomprop(Client *c, Atom prop)
 		XFree(p);
 	}
 	return atom;
+}
+
+pid_t
+getstatusbarpid()
+{
+	char buf[32], *str = buf, *c;
+	FILE *fp;
+
+	if (statuspid > 0) {
+		snprintf(buf, sizeof(buf), "/proc/%u/cmdline", statuspid);
+		if ((fp = fopen(buf, "r"))) {
+			fgets(buf, sizeof(buf), fp);
+			while ((c = strchr(str, '/')))
+				str = c + 1;
+			fclose(fp);
+			if (!strcmp(str, STATUSBAR))
+				return statuspid;
+		}
+	}
+	if (!(fp = popen("pidof -s "STATUSBAR, "r")))
+		return -1;
+	fgets(buf, sizeof(buf), fp);
+	pclose(fp);
+	return strtoul(buf, NULL, 10);
 }
 
 int
@@ -2122,22 +2149,25 @@ solitary(Client *c)
 }
 
 void
+sigstatusbar(const Arg *arg)
+{
+	union sigval sv;
+
+	if (!statussig)
+		return;
+	sv.sival_int = arg->i;
+	if ((statuspid = getstatusbarpid()) <= 0)
+		return;
+
+	sigqueue(statuspid, SIGRTMIN+statussig, sv);
+}
+
+void
 spawn(const Arg *arg)
 {
 	if (fork() == 0) {
 		if (dpy)
 			close(ConnectionNumber(dpy));
-		if (arg->v == statuscmd) {
-			for (int i = 0; i < LENGTH(statuscmds); i++) {
-				if (statuscmdn == statuscmds[i].id) {
-					statuscmd[2] = statuscmds[i].cmd;
-					setenv("BUTTON", lastbutton, 1);
-					break;
-				}
-			}
-			if (!statuscmd[2])
-				exit(EXIT_SUCCESS);
-		}
 		setsid();
 		execvp(((char **)arg->v)[0], (char **)arg->v);
 		die("dwm: execvp '%s' failed:", ((char **)arg->v)[0]);
@@ -2472,24 +2502,8 @@ updatesizehints(Client *c)
 void
 updatestatus(void)
 {
-	if (!gettextprop(root, XA_WM_NAME, stext, sizeof(stext))) {
+	if (!gettextprop(root, XA_WM_NAME, stext, sizeof(stext))) 
  		strcpy(stext, "dwm-"VERSION);
-		statusw = TEXTW(stext) - lrpad + 2;
-	} else {
-		char *text, *s, ch;
-		statusw = 0;
-		for (text = s = stext; *s; s++) {
-			if ((unsigned char)(*s) < ' ') {
-				ch = *s;
-				*s = '\0';
-				statusw += TEXTW(text) - lrpad;
-				*s = ch;
-				text = s + 1;
-			}
-		}
-		statusw += TEXTW(text) - lrpad + 2;
-	}
-    //	strcpy(stext, "\0");
 	drawbar(selmon);
 }
 

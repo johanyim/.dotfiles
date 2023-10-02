@@ -1,6 +1,14 @@
 --- dwm.c
 +++ dwm.c
-@@ -845,7 +877,7 @@ drawbar(Monitor *m)
+@@ -208,6 +209,7 @@ static void setup(void);
+ static void seturgent(Client *c, int urg);
+ static void showhide(Client *c);
+ static void sigchld(int unused);
++static void sigstatusbar(const Arg *arg);
+ static void spawn(const Arg *arg);
+ static void tag(const Arg *arg);
+ static void tagmon(const Arg *arg);
+@@ -847,7 +882,7 @@ drawbar(Monitor *m)
  
  	/* draw status first so it can be overdrawn by tags later */
  	if (m == selmon) { /* status is only drawn on selected monitor */
@@ -9,28 +17,3 @@
  	}
  
  	for (c = m->clients; c; c = c->next) {
-@@ -2141,8 +2184,23 @@ updatesizehints(Client *c)
- void
- updatestatus(void)
- {
--	if (!gettextprop(root, XA_WM_NAME, stext, sizeof(stext)))
-+	if (!gettextprop(root, XA_WM_NAME, stext, sizeof(stext))) {
- 		strcpy(stext, "dwm-"VERSION);
-+		statusw = TEXTW(stext) - lrpad + 2;
-+	} else {
-+		char *text, *s, ch;
-+		statusw = 0;
-+		for (text = s = stext; *s; s++) {
-+			if ((unsigned char)(*s) < ' ') {
-+				ch = *s;
-+				*s = '\0';
-+				statusw += TEXTW(text) - lrpad;
-+				*s = ch;
-+				text = s + 1;
-+			}
-+		}
-+		statusw += TEXTW(text) - lrpad + 2;
-+	}
- 	drawbar(selmon);
- }
- 

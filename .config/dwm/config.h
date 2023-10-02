@@ -117,16 +117,11 @@ static const Layout layouts[] = {
 	{ MODKEY|ShiftMask,             KEY,      toggletag,      {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      tag,            {.ui = 1 << TAG} },
 
-/* commands spawned when clicking statusbar, the mouse button pressed is exported as BUTTON */
-static const StatusCmd statuscmds[] = {
-	{ "notify-send Mouse$BUTTON", 1 },
-};
-
-/* For running terminal commands*/
-static const char *statuscmd[] = { "/bin/sh", "-c", NULL, NULL };
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
+
+#define STATUSBAR "dwmblocks"
 
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", mantle, "-nf", overlay0, "-sb", base, "-sf", yellow, NULL };
@@ -192,7 +187,8 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_9,                      8)
 
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-//Brightness and audio
+
+    //Brightness and audio
     { 0,XF86XK_MonBrightnessDown,spawn,SHCMD("brightnessctl set 5%-; pkill -RTMIN+9 dwmblocks") },
     { 0,XF86XK_MonBrightnessUp,  spawn,SHCMD("brightnessctl set 5%+; pkill -RTMIN+9 dwmblocks") },
     { 0,XF86XK_AudioMute,spawn,
@@ -207,18 +203,34 @@ static const Key keys[] = {
         SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ false ; pactl set-source-volume @DEFAULT_SOURCE@ -5%; pkill -RTMIN+8 dwmblocks") },
     { ShiftMask,XF86XK_AudioRaiseVolume,spawn,
         SHCMD("pactl set-source-mute @DEFAULT_SOURCe@ false ; pactl set-source-volume @DEFAULT_SOURCE@ +5%; pkill -RTMIN+8 dwmblocks") },
+
+    //special scripts
+	{ MODKEY,                       XK_c,      spawn,          SHCMD("dm-catppuccin") },
+	{ MODKEY,                       XK_x,      spawn,          SHCMD("colormenu") },
+	{ MODKEY|ShiftMask,             XK_x,      spawn,          SHCMD("colormenu open") },
+	{ MODKEY|ControlMask,           XK_x,      spawn,          SHCMD("colormenu pick") },
+	{ MODKEY,                       XK_i,      spawn,          SHCMD("dm-wlanconnect") },
 };
 
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static const Button buttons[] = {
+    // dwmblocks signals
+    //
+	{ ClkStatusText,        0,              Button1,        sigstatusbar,   {.i = 1} }, //LMB
+	{ ClkStatusText,        0,              Button2,        sigstatusbar,   {.i = 2} }, //MMB
+	{ ClkStatusText,        0,              Button3,        sigstatusbar,   {.i = 3} }, //RMB
+	{ ClkStatusText,        0,              Button4,        sigstatusbar,   {.i = 4} }, //ScUp
+	{ ClkStatusText,        0,              Button5,        sigstatusbar,   {.i = 5} }, //ScDown
+	{ ClkStatusText,        ShiftMask,      Button1,        sigstatusbar,   {.i = 6} },
+	{ ClkStatusText,        ShiftMask,      Button2,        sigstatusbar,   {.i = 7} },
+	{ ClkStatusText,        ShiftMask,      Button3,        sigstatusbar,   {.i = 8} },
+	{ ClkStatusText,        ShiftMask,      Button4,        sigstatusbar,   {.i = 9} },
+	{ ClkStatusText,        ShiftMask,      Button5,        sigstatusbar,   {.i = 10} }, 
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button1,        spawn,          {.v = statuscmd } },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = statuscmd } },
-	{ ClkStatusText,        0,              Button3,        spawn,          {.v = statuscmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
