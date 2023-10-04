@@ -2,6 +2,10 @@
 
 #include <X11/XF86keysym.h>
 
+
+#define TERMINAL  "alacritty"
+#define TERMCLASS "Alacritty"
+
 /* appearance */
 static const unsigned int borderpx  = 4;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -74,10 +78,17 @@ static const Rule rules[] = {
 	/* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
 	{ "Gimp",    NULL,     NULL,           0,         1,          0,           0,        -1 },
 	{ "Firefox", NULL,     NULL,           1 << 8,    0,          0,          -1,        -1 },
-	{ "St",      NULL,     NULL,           0,         0,          1,           0,        -1 },
+    //Terminals
+	{ TERMCLASS, NULL,    NULL,           0,         0,          1,           0,        -1 },
+	//Other Terminals
+    { "St",      NULL,     NULL,           0,         0,          1,           0,        -1 },
 	{ "st-256color",NULL,  NULL,           0,         0,          1,           0,        -1 },
 	{ "Kitty",   NULL,     NULL,           0,         0,          1,           0,        -1 },
-	{ "Alacritty",NULL,    NULL,           0,         0,          1,           0,        -1 },
+    
+    //A getaround for the braile font problem with alacritty
+	{ "Kitty",   "btm",     NULL,           0,         1,          1,           0,        -1 },
+
+    //xev
 	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
 };
 
@@ -92,8 +103,8 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "H[]",      deck },
 	{ "[]=",      tile },    /* first entry is default */
+	{ "H[]",      deck },
 	{ "[M]",      monocle },
 	{ ":::",      gaplessgrid },
 	{ "|M|",      centeredmaster },
@@ -125,7 +136,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", mantle, "-nf", overlay0, "-sb", base, "-sf", yellow, NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
+static const char *termcmd[]  = { TERMINAL, NULL };
 static const char *browser[]  = { "qutebrowser", NULL };
 
 #include "movestack.c"
@@ -164,9 +175,9 @@ static const Key keys[] = {
     //close client
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
     
-    //Layouts 0:deck, 1:tile, 2:monocle, 3:gaplessgrid , 4:centredmaster , 5:float
-	{ MODKEY,                       XK_r,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[1]} },
+    //Layouts 0:tile, 1:deck, 2:monocle, 3:gaplessgrid , 4:centredmaster , 5:float
+	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
+	{ MODKEY,                       XK_r,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[2]} },
 
 	{ MODKEY,                       XK_Home,   setlayout,      {.v = &layouts[3]} },
@@ -204,13 +215,17 @@ static const Key keys[] = {
     { ShiftMask,XF86XK_AudioRaiseVolume,spawn,
         SHCMD("pactl set-source-mute @DEFAULT_SOURCe@ false ; pactl set-source-volume @DEFAULT_SOURCE@ +5%; pkill -RTMIN+8 dwmblocks") },
 
+    
     //special scripts
 	{ MODKEY,                       XK_c,      spawn,          SHCMD("dm-catppuccin") },
 	{ MODKEY,                       XK_x,      spawn,          SHCMD("colormenu") },
 	{ MODKEY|ShiftMask,             XK_x,      spawn,          SHCMD("colormenu open") },
 	{ MODKEY|ControlMask,           XK_x,      spawn,          SHCMD("colormenu pick") },
 	{ MODKEY,                       XK_i,      spawn,          SHCMD("dm-wlanconnect") },
+	{ 0,                            XK_Print,  spawn,          SHCMD("screenshot") },
 };
+
+
 
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
@@ -229,8 +244,7 @@ static const Button buttons[] = {
 	{ ClkStatusText,        ShiftMask,      Button5,        sigstatusbar,   {.i = 10} }, 
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
-	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
+	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} }, { ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
