@@ -1,5 +1,6 @@
 palette = "catppuccin_mocha"
-format = """[ ](bg:overlay0 fg:text)\
+format = """[](overlay0)\
+[ ](fg:overlay0 bg:overlay0)\
 $time\
 [](fg:overlay0 bg:surface2)\
 $directory\
@@ -13,8 +14,9 @@ $golang\
 $php\
 [](surface0)\
 \n\
-[   ](fg:red bg:surface0)\
-[ ](surface0)"""
+[ ](surface0)\
+[ ](red)\
+[ ](surface0)"""
 
 # No new line between shell prompts
 add_newline = false
@@ -36,7 +38,7 @@ show_always = true
 [directory]
 style = "fg:red bg:surface2"
 format = "[ $path ]($style)"
-truncation_length = 4
+truncation_length = 6
 truncation_symbol = "…/"
 
 [directory.substitutions]

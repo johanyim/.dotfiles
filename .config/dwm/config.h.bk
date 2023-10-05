@@ -222,7 +222,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_x,      spawn,          SHCMD("colormenu open") },
 	{ MODKEY|ControlMask,           XK_x,      spawn,          SHCMD("colormenu pick") },
 	{ MODKEY,                       XK_i,      spawn,          SHCMD("dm-wlanconnect") },
-	{ 0,                            XK_Print,  spawn,          SHCMD("") },
+	{ 0,                            XK_Print,  spawn,          SHCMD("screenshot") },
 };
 
 
