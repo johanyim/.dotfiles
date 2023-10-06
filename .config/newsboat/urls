@@ -1,0 +1,32 @@
+" "
+"--REDDIT--"
+http://www.reddit.com/r/unixporn/.rss
+http://www.reddit.com/r/anime/.rss
+http://www.reddit.com/r/linux/.rss
+
+
+" "
+"--YOUTUBE--"
+https://www.youtube.com/feeds/videos.xml?channel_id=UC7YOGHUfC1Tb6E4pudI9STA "yt" "tech" # Mental Outlaw
+https://www.youtube.com/feeds/videos.xml?channel_id=UCKv8Rrrdc9oxLJmdHItafLA "yt" "gaming" # ManlyBadassHero
+https://www.youtube.com/feeds/videos.xml?channel_id=UCYO_jab_esuFRV4b17AJtAw "yt" "math" # 3Blue1Brown
+https://www.youtube.com/feeds/videos.xml?channel_id=UC5--wS0Ljbin1TjWQX6eafA "yt" "tech" # bigboxSWE
+https://www.youtube.com/feeds/videos.xml?channel_id=UCsBjURrPoezykLs9EqgamOA "yt" "tech" # Fireship
+https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg "yt" "tech" # DistroTube
+https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA "yt" "tech" # Luke Smith
+https://www.youtube.com/feeds/videos.xml?channel_id=UCUMwY9iS8oMyWDYIe6_RmoA "yt" "tech" # No Boilerplate
+https://www.youtube.com/feeds/videos.xml?channel_id=UCoxcjq-8xIDTYp3uz647V5A "yt" "math" # Numberphile
+https://www.youtube.com/feeds/videos.xml?channel_id=UC8ENHE5xdFSwx71u3fDH5Xw "yt" "tech" # The Primeagen
+https://www.youtube.com/feeds/videos.xml?channel_id=UCo71RUe6DX4w-Vd47rFLXPg "yt" "tech" # typecraft
+https://www.youtube.com/feeds/videos.xml?channel_id=UCt_oFAUph4_8P3N_Xs-FGHg "yt" "anime" # Scamboli Reviews
+https://www.youtube.com/feeds/videos.xml?channel_id=UCq6VFHwMzcMXbuKyG7SQYIg "yt" # penguinz0
+https://www.youtube.com/feeds/videos.xml?channel_id=UCld68syR8Wi-GY_n4CaoJGA "yt" "tech" # Brodie Robertson
+https://www.youtube.com/feeds/videos.xml?channel_id=UC-V8FVQCUpRRUPNClviki3w "yt" "tech" # Mashed 
+https://www.youtube.com/feeds/videos.xml?channel_id=UC6pGDc4bFGD1_36IKv3FnYg "yt" "anime" # Crunchyroll Collection
+https://www.youtube.com/feeds/videos.xml?channel_id=UCSp-OaMpsO8K0KkOqyBl7_w "yt" "tech" # Let's Get Rusty
+https://www.youtube.com/feeds/videos.xml?channel_id=UCaE1z0qLeXWpExU02uMeuvA "yt" "anime" # Hero Hei
+
+" "
+"--TECH--"
+https://archlinux.org/feeds/packages/
+https://blog.rust-lang.org/feed.xml

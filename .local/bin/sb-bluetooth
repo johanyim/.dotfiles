@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# clicking behavior: 1=Left, 2=Middle, 3=Right, 4=ScrlUp, 5=ScrlDown, 5+i=Shift i
+case $BLOCK_BUTTON in
+    1) alacritty --class "FloatingClass" -T "Bluetooth" -e bluetuith;;  
+	2) ;;
+	3) ;; # brightnessctl -q set 5%- ;;
+	4) ;;
+	5) ;;
+    6) ;;
+    7) ;;
+    8) ;;
+    9) ;;
+    10) ;;
+esac
+# Check if Bluetooth is blocked (off)
+if rfkill list bluetooth | grep -q "Soft blocked: yes"; then
+    echo "󰂲 Off"
+else
+    
+    # Get the name of the connected Bluetooth device (if any)
+    connected_device=$(bluetoothctl info | grep "Alias" | awk '{print $2}')
+    
+    if [ -n "$connected_device" ]; then
+        echo "󰂰 $connected_device"
+    else
+        echo "󰂯 None"
+    fi
+fi

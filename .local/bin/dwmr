@@ -1,0 +1,5 @@
+#!/bin/sh
+rm -f ./config.h.bk
+cp config.h config.h.bk
+rm -f ./config.h
+sudo make clean install

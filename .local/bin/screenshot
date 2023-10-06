@@ -1,0 +1,27 @@
+#!/bin/sh
+
+dir=$HOME/files/pictures/screenshots
+filetype=.png
+tempfile="$dir/unnamed.png"
+
+#maim -os $dir$name$filetype
+maim -os $tempfile
+
+name=$(echo -e "AUTO (YYYY-MM-DD_hh-mm-ss)\n$(ls $dir)" | dmenu)
+
+if [[ $name == "AUTO (YYYY-MM-DD_hh-mm-ss)" ]] ; then
+    name=$(date +%Y-%m-%d_%H-%M-%S)
+fi
+
+if [[ $name != *.png && $name != *.webp && $name != *.bmp && $name != *.jpg ]]; then
+    filetype=$(echo -e ".png\n.webp\n.jpg\n.bmp" | dmenu -p "$name")
+    file="$name$filetype"
+else
+    file="$name"   
+fi
+
+mv "$tempfile" "$dir/$file"
+
+notify-send "$file has been saved to $dir"
+
+

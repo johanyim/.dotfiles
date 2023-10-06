@@ -1,0 +1,5 @@
+xsetroot -cursor_name left_ptr
+dunst &
+feh --bg-scale --no-fehbg "$JOHAN_WALLPAPERS/ThinkPadT480Mocha.png"
+dwmblocks &
+exec dwm 

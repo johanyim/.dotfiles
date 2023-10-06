@@ -1,0 +1,86 @@
+#!/bin/sh
+
+wifi_list_connect() {
+    # show dmenu
+    # nmcli_output=$(nmcli -t device wifi list | tr -d "*");
+    # ssid=$(awk -F ':' '{print }')
+    # wifi_selection=$(nmcli -t device wifi list | tr -d "*" | tr -s " " "_" | awk -F ':' '{printf( "%s:%s:%s:%s\n" , $8, $11, $12, $13 )}' | column -s ':' -t | dmenu -i -p "Connect to:")
+    # nmcli -t -f BSSID,SSID,RATE,BARS device wifi list | sed 's/\\:/TEMP/g' | column -s ':' -t | sed 's/TEMP/:/g' 
+    wifi_list=$(nmcli -t -f BSSID,SSID,RATE,BARS device wifi list) 
+    table=$(echo "$wifi_list" | sed 's/\\:/TEMP/g' | column -s ':' -t | sed 's/TEMP/:/g') 
+    dmenu_selection=$(echo "$table" | dmenu -i -p "Connect to:")
+    bssid=$(echo "$dmenu_selection" | awk '{print $1}')
+    ssid=$(echo "$wifi_list" | sed 's/\\:/:/g' | grep "$bssid" | awk -F ':' '{print $7}')
+    #echo "Connecting to $ssid..."
+    
+
+    # Doesn't show this line??
+    output=$(nmcli device wifi connect "$ssid")  
+    echo "$output"
+    notify-send "Successfully connected to $ssid"
+    sleep 3
+    pkill -RTMIN+7 dwmblocks
+    # echo "connected"
+    #echo "$dmenu_selection" | awk '{print $1}' | nmcli device wifi connect
+    
+    #bssid=$(echo "$wifi_selection" | awk '{print $1}')
+    #echo "Connecting to $ssid..."
+    
+    #nmcli device wifi connect "$ssid"
+    # Check the exit status of the nmcli command
+    #if [ $? -eq 0 ]; then
+    #    # If the exit status is 0 (success), print a success message
+    #    echo "Successfully connected to $ssid"
+    #    sleep 2
+    #else
+    #    # If the exit status is non-zero (failure), print an error message
+    #    echo "Failed to connect to $ssid"
+    #    sleep 2
+    #fi
+    
+    # pkill -RTMIN+7 dwmblocks ;
+} 
+
+# clicking behavior: 1=Left, 2=Middle, 3=Right, 4=ScrlUp, 5=ScrlDown, 5+i=Shift i
+case $BLOCK_BUTTON in
+    1) wifi_list_connect ;; # wlan_connect();;
+	2) ;;
+	3) ;; 
+	4) ;; 
+	4) ;;
+	5) ;;
+    6) ;;
+    7) ;;
+    8) ;;
+    9) ;;
+    10) ;;
+esac
+
+# case $BLOCK_BUTTON in
+# 	1) "$TERMINAL" -e nmtui; pkill -RTMIN+4 dwmblocks ;;
+# 	3) notify-send "🌐 Internet module" "\- Click to connect
+# ❌: wifi disabled
+# 📡: no wifi connection
+# 📶: wifi connection with quality
+# ❎: no ethernet
+# 🌐: ethernet working
+# 🔒: vpn is active
+# " ;;
+# 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+# esac
+
+# Wifi
+if [ "$(cat /sys/class/net/w*/operstate 2>/dev/null)" = 'up' ] ; then
+	wifiicon="$(awk '/^\s*w/ { print "󰖩", int($3 * 100 / 70) "% " }' /proc/net/wireless)"
+elif [ "$(cat /sys/class/net/w*/operstate 2>/dev/null)" = 'down' ] ; then
+	[ "$(cat /sys/class/net/w*/flags 2>/dev/null)" = '0x1003' ] && wifiicon="󱚵 Connection Failed" || wifiicon="󰖪 Connection Disabled"
+fi
+
+# Ethernet
+[ "$(cat /sys/class/net/e*/operstate 2>/dev/null)" = 'up' ] && ethericon="󰈀 " || ethericon=""
+
+# TUN
+# [ -n "$(cat /sys/class/net/tun*/operstate 2>/dev/null)" ] && tunicon=" 🔒"
+connection="$(nmcli -t -f active,ssid dev wifi | awk -F: '$1=="yes" {print $2}')"
+
+printf "%s%s%s\n" "$wifiicon" "$ethericon" "$connection"

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+selected_network=$(nmcli -t device wifi list | tr -d "*" | awk -F ':' '{printf( "\"%s\":%s:%s:%s\n" , $8, $11, $12, $13 )}' | column -s ':' -t | dmenu -i -p "Connect to:")
+
+network_name=$(echo "$selected_network" | awk -F '\"' '{print $2}')
+
+nmcli device wifi connect "$network_name"
+

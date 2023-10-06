@@ -1,0 +1,41 @@
+#!/bin/sh
+
+# Prints all batteries, their percentage remaining and an emoji corresponding
+# to charge status (🔌 for plugged up, 🔋 for discharging on battery, etc.).
+
+case $BLOCK_BUTTON in
+	1) alacritty --class "FloatingClass" -T "Battery" -e btm --battery --default_widget_type batt -e;;
+	2) ;;
+	3) ;;
+	4) ;;
+	5) ;;
+	6) ;;
+esac
+
+# Loop through all attached batteries and format the info
+for battery in /sys/class/power_supply/BAT?*; do
+	# If non-first battery, print a space separator.
+	[ -n "${capacity+x}" ] && printf " "	
+	capacity="$(cat "$battery/capacity" 2>&1)"
+    # 󰢟  󱊤  󱊥  󱊦  
+    # 󰂎  󱊡  󱊢  󱊣 
+    # Sets up the status and capacity
+	case "$(cat "$battery/status" 2>&1)" in
+		"Full") status="✓" ;;
+		"Charging") status="󰚥" ;;
+		"Discharging") status="" ;;
+        "Critical") status="󱈸" ;;
+        "Not charging") status="" ;;
+		"Unknown") status="" ;;
+		*) exit 1 ;;
+	esac
+	case 1 in
+	    $(( ${capacity} >= 70)) ) icon="󱊣"  ;;
+	    $(( ${capacity} >= 30)) ) icon="󱊢" ;;
+	    $(( ${capacity} >= 1)) ) icon="󱊡" ;;
+	    * ) icon="󰂎 " ;;
+	esac
+	printf "%s%s%d%%" "$status" "$icon" "$capacity"
+
+    
+done && printf "\\n"

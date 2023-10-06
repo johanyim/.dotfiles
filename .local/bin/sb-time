@@ -1,0 +1,11 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+	1) setsid -f "$TERMINAL" -e calcurse ;;
+	2) notify-send "📅 Time/date module" "\- Left click to show upcoming appointments for the next three days via \`calcurse -d3\` and show the month via \`cal\`
+- Middle click opens calcurse if installed" ;;
+	3) alacritty -e tty-clock -scbC7 ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+date "+ %Y-%m-%d %a  %H:%M"

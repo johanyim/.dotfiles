@@ -1,0 +1,147 @@
+#!/bin/sh
+
+# delete: shows the colors file, allows user to select lines (colors) to delete
+# pick: opens xcolor, user selects color, color is copied to clipboard with xclip, 
+#   prompts user if they want to save the color,
+#       if yes: pormpts for a name, blank = just raw RRGGBB
+#       if no: 
+# add: opens a dialog for the user to add a color, 
+#   if there is a hex color in the clipboard, the blank prompt will be the last VALID HEXCOLOR copied (pressing enter will just give you that color)
+#
+# select: opens the colors file, allows user to pick one or more colors, copies these colors separated by space
+#  
+
+COLORMENUTXT_PATH="$HOME/.local/bin/colors.txt" 
+
+
+
+
+function user_add() {
+    user_input=$(echo "" | dmenu -p "Enter something:")
+    # Check if the user input is not empty
+    if [ -n "$user_input" ]; then
+        # Save the input to a file
+        echo "$user_input" >> "$COLORMENUTXT_PATH"
+        echo "User input saved to $COLORMENUTXT_PATH"
+    else
+        echo "No input provided."
+    fi
+}
+
+function add() {
+    # color = $1 
+    # name = $2
+
+    local formatted_color="$1"
+    local valid_name="$2" # all lowercase, no space
+    
+    if [ "$2" = "AUTO" ] ; then
+        local string_array=($formatted_color)
+        valid_name=$(echo "${string_array[0]}" | tr -d '#')
+    fi
+    
+    echo "$valid_name $formatted_color" >> "$COLORMENUTXT_PATH"
+    #MESSAGE
+    echo "$valid_name has been added to $COLORMENUTXT_PATH"
+}
+
+function pick() {
+    local color=$(xcolor -S 12 | tr -d '\n')
+    echo "$color" | tr -d '\n' | xclip -selection clipboard 
+    #local choice=$(echo -e "No\nYes" | dmenu -p "Save color? ($color)")
+    #case "$choice" in 
+    #    "No")
+    #    ;;
+    #    "Yes")
+    #        local name=$(echo -e "" | dmenu -p "Name: ")
+    #        add "$color" "$name" 
+
+    #    ;;
+    colors=$(tac "$COLORMENUTXT_PATH") 
+    name=$(echo -e "AUTO\n$colors" | dmenu -p "Name: ")
+    # empty name = don't save
+    # non empty, save color as the name typed
+    if [ -n "$name" ]; then
+        add $color $name
+    fi
+}
+
+function delete() {
+    # Use dmenu to select the lines to delete
+    selected_lines=$(tac "$COLORMENUTXT_PATH" | dmenu -l 10 -p "Delete:")
+
+    # Check if selection is empty
+    if [ -z "$selected_lines" ]; then
+        echo "No colors selected for deletion."
+    else
+        # Create a temporary file to store the modified content
+        temp_file="temp_file.txt"
+        touch $temp_file
+        # Use a loop to read each line from the original file
+        while IFS= read -r line; do
+            # Check if the line is not in the list of selected lines
+            if ! echo "$selected_lines" | grep -q -x "$line"; then
+                # Append the line to the temporary file
+                echo "$line" >> "$temp_file"
+            fi
+        done < "$COLORMENUTXT_PATH"
+
+        # Replace the original file with the temporary file
+        mv "$temp_file" "$COLORMENUTXT_PATH"
+
+        echo "Selected colors deleted from $COLORMENUTXT_PATH"
+    fi
+}
+
+function open(){
+    selected_format=$(echo -e "Hex '#rrggbb'\nName\nRGB 'r,g,b'\nHSL 'h,s%,l%'" | dmenu -l 4 -p "Select output format:")
+    
+    colors="$(tac $COLORMENUTXT_PATH)"
+
+    # Use dmenu to select a color name
+    selected_color_name=$(echo -e "$colors" | awk '{ printf "%s %s\n", $1,  $2}' | dmenu -i -l 10 -p "Select a color:")
+
+    # Find the corresponding value based on the selected format
+    case "$selected_format" in
+        "Hex '#rrggbb'")
+            selected_value=$(echo -e "$colors" | grep -m 1 "$selected_color_name" | awk '{print $2}')
+            ;;
+        "Name")
+            selected_value=$(echo -e "$colors" | grep -m 1 "$selected_color_name" | awk '{print $1}')
+            ;;
+        "RGB 'r,g,b'")
+            selected_value=$(echo -e "$colors" | grep -m 1 "$selected_color_name" | awk '{print $3}')
+            ;;
+        "HSL 'h,s%,l%'")
+            selected_value=$(echo -e "$colors" | grep -m 1 "$selected_color_name" | awk '{print $4}')
+            ;;
+    esac
+
+    # copy selected value
+    echo "$selected_value" | tr -d '\n' | xclip -selection clipboard
+}
+
+if [ -n "$1" ] ; then 
+    case "$1" in 
+        "add")
+            add
+            ;;
+        "pick")
+            pick
+            ;;
+        "delete")
+            delete
+            ;;
+        "open")
+            open
+            ;;
+        *) 
+            echo 'unrecognised'
+            ;;
+    esac
+else 
+    colormenu $(echo -e "pick\nopen\ndelete\nmanual" | dmenu -l 4) 
+
+fi
+
+

@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# clicking behavior: 1=Left, 2=Middle, 3=Right, 4=ScrlUp, 5=ScrlDown, 5+i=Shift i
+case $BLOCK_BUTTON in
+    1) alacritty --class "FloatingClass" -T "ncdu" -e ncdu --color off -L;;  
+	2) ;;
+	3) ;;
+	4) ;;
+	5) ;;
+    6) ;;
+    7) ;;
+    8) ;;
+    9) ;;
+    10) ;;
+esac
+
+disk_used=$(df | awk '/home/ {printf ("󰻂 %2.1f/%2.fGB",($3 / (1024*1024)),( $4 / (1024*1024)))}')
+# Print the average CPU usage as a percentage
+echo $disk_used
+
