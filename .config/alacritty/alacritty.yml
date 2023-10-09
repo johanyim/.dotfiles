@@ -29,7 +29,7 @@ scrolling:
   history: 10000
   #multiplier: 3
   # Scroll to the bottom when new text is written to the terminal.
-  auto_scroll: false
+  #auto_scroll: false
 #tabspaces: 8
 
 # Font configuration
@@ -84,9 +84,9 @@ colors:
         focused_match:
             foreground: "#1E1E2E" # base
             background: "#A6E3A1" # green
-        footer_bar:
-            foreground: "#1E1E2E" # base
-            background: "#A6ADC8" # subtext0
+        #footer_bar:
+            #foreground: "#1E1E2E" # base
+            #background: "#A6ADC8" # subtext0
 
     # Keyboard regex hints
     hints:
@@ -146,7 +146,7 @@ colors:
   #save_to_clipboard: false
 
 # Allow terminal applications to change Alacritty's window title.
-dynamic_title: true #not working?
+#dynamic_title: true #not working?
 
 cursor:
   #   - ▇ Block
@@ -156,7 +156,7 @@ cursor:
 
   # If this is `true`, the cursor will be rendered as a hollow box when the
   # window is not focused.
-unfocused_hollow: true
+  #unfocused_hollow: true
 
 # Live config reload (changes require restart)
 live_config_reload: true
