@@ -1,1 +1,1 @@
-set viminfofile=$XDG_STATE_HOME/vim/viminfo
+set viminfo+=n~/.vim/viminfo
