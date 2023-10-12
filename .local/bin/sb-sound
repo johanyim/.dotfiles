@@ -1,15 +1,20 @@
 #!/bin/sh
 
-# Prints the current volume or 🔇 if muted.
+open_sound() {
+    alacritty --class "FloatingClass" -T "Sound" -e alsamixer -g  -V all
+}
 
 case $BLOCK_BUTTON in
-    1) amixer -q sset Master toggle ;;
+    1) open_sound ;;  
+    2) amixer -q sset Master toggle ;;
 	4) amixer -q sset Master 1%+;;
 	5) amixer -q sset Master 1%- ;;
-    6) amixer -q sset Capture toggle ;;
+    6) open_sound ;;
+    7) amixer -q sset Capture toggle ;;
 	9) amixer -q sset Capture 1%+;;
 	10) amixer -q sset Capture 1%- ;;
 esac
+
 
 # speakers
 output_muted="$(amixer sget Master | awk -F"[][]" '/Left:/ { print $4 }')"

@@ -1,0 +1,11 @@
+--- dmenu.c
++++ dmenu.c
+@@ -763,6 +769,8 @@ main(int argc, char *argv[])
+ 			colors[SchemeSel][ColFg] = argv[++i];
+ 		else if (!strcmp(argv[i], "-w"))   /* embedding window id */
+ 			embed = argv[++i];
++		else if (!strcmp(argv[i], "-n"))   /* preselected item */
++			preselected = atoi(argv[++i]);
+ 		else
+ 			usage();
+ 

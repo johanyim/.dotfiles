@@ -30,17 +30,12 @@
 #define NUMBERSBUFSIZE        (NUMBERSMAXDIGITS * 2) + 1
 
 /* enums */
-enum { SchemeNorm, 
-    SchemeSel, 
-    SchemeNormHighlight, 
-    SchemeSelHighlight,
-    SchemeOut, 
-    SchemeLast }; /* color schemes */
+enum { SchemeNorm, SchemeSel, SchemeNormHighlight, SchemeSelHighlight,
+       SchemeOut, SchemeLast }; /* color schemes */
 
 
 struct item {
 	char *text;
-	char *text_output;
 	struct item *left, *right;
     int id; /*for multiselect*/
 	double distance;
@@ -50,8 +45,6 @@ static char numbers[NUMBERSBUFSIZE] = "";
 static char text[BUFSIZ] = "";
 static char pipeout[8] = " | dmenu";
 static char *embed;
-static char separator, separator_reverse;
-static char * (*sepchr)(const char *, int);
 static int bh, mw, mh;
 static int inputw = 0, promptw;
 static int lrpad; /* sum of left and right padding */
@@ -134,7 +127,7 @@ cleanup(void)
 	for (i = 0; i < SchemeLast; i++)
 		free(scheme[i]);
 	for (i = 0; items && items[i].text; ++i)
-		free(separator_reverse ? items[i].text_output : items[i].text);
+		free(items[i].text);
 	free(items);
 	drw_free(drw);
 	XSync(dpy, False);
@@ -687,11 +680,11 @@ insert:
 				if (selid[i] != -1 && (!sel || sel->id != selid[i]))
 					puts(items[selid[i]].text);
             if ((sel && !(ev->state & ShiftMask))) {
-                if (sel->text_output[0] == startpipe[0]) {
-                    strncpy(sel->text_output + strlen(sel->text_output),pipeout,8);
-                    puts(sel->text_output+1);
+                if (sel->text[0] == startpipe[0]) {
+                    strncpy(sel->text + strlen(sel->text),pipeout,8);
+                    puts(sel->text+1);
                 }
-                puts(sel->text_output);
+                puts(sel->text);
             }
                 else {
                     if (text[0] == startpipe[0]) {
@@ -756,7 +749,7 @@ paste(void)
 static void
 readstdin(void)
 {
-	char *p, *line = NULL;
+	char *line = NULL;
 	size_t i, junk, size = 0;
 	ssize_t len;
 
@@ -769,18 +762,6 @@ readstdin(void)
 			line[len - 1] = '\0';
 		items[i].text = line;
 		//items[i].out = 0;
-        if (separator && (p = sepchr(items[i].text, separator)) != NULL) {
-			*p = '\0';
-			items[i].text_output = ++p;
-		} else {
-			items[i].text_output = items[i].text;
-		}
-		if (separator_reverse) {
-			p = items[i].text;
-			items[i].text = items[i].text_output;
-			items[i].text_output = p;
-		}
-
         items[i].id = i; /*multiselect*/
 	}
 	if (items)
@@ -940,9 +921,7 @@ usage(void)
         "[-l lines] [-p prompt] [-fn font] [-m monitor]\n"
 	    "             [-nb color] [-nf color] [-sb color] [-sf color]\n"
         "             [-nhb color] [-nhf color] [-shb color] [-shf color]\n"
-        "             [-it text] [-w windowid] [-n preselected]\n"
-	    "             [-d separator] [-D separator]\n"
-
+        "             [-it text] [-w windowid] [-n preselected]"
         "");
 }
 
@@ -1004,15 +983,6 @@ main(int argc, char *argv[])
         }
         else if (!strcmp(argv[i], "-n"))   /* preselected item */
 			preselected = atoi(argv[++i]);
-        
-		else if (!strcmp(argv[i], "-d") || /* field separator */
-		         !strcmp(argv[i], "-D")) {
-			sepchr = argv[i][1] == 'D' ? strrchr : strchr;
-			separator = argv[++i][0];
-			separator_reverse = argv[i][1] == '|';
-		}
-
-
 		else
 			usage();
 

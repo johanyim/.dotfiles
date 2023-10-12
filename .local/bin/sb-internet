@@ -43,7 +43,7 @@ wifi_list_connect() {
 
 # clicking behavior: 1=Left, 2=Middle, 3=Right, 4=ScrlUp, 5=ScrlDown, 5+i=Shift i
 case $BLOCK_BUTTON in
-    1) wifi_list_connect ;; # wlan_connect();;
+    1) alacritty --class "FloatingClass" -T "Network Manager" -e nmtui ;; 
 	2) ;;
 	3) ;; 
 	4) ;; 

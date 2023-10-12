@@ -34,10 +34,6 @@ dmenu \- dynamic menu
 .IR number ]
 .RB [ \-it
 .IR text ]
-.RB [ \-d
-.IR separator ]
-.RB [ \-D
-.IR separator ]
 .P
 .BR dmenu_run " ..."
 .SH DESCRIPTION
@@ -117,14 +113,6 @@ preseslected item starting from 0.
 .TP
 .BI \-it " text".
 start with initial text input.
-.TP
-.BI \-d " separator"
-separate the input into two halves on the first occurrence of the given charcter.
-Display only the first half in dmenu and print the second half to stdout upon selection.
-Appending '|' to the separator reverses the display/printing order.
-.TP
-.BI \-D " separator"
-same as \-d but separate based on the last occurrence.
 .SH USAGE
 dmenu is completely controlled by the keyboard.  Items are selected using the
 arrow keys, page up, page down, home, and end.
