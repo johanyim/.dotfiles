@@ -5,7 +5,7 @@
 
 case $BLOCK_BUTTON in
 	1) alacritty --class "FloatingClass" -T "Battery" -e btm --battery --default_widget_type batt -e;;
-	2) ;;
+    2) pkill -RTMIN+9 dwmblocks;;
 	3) ;;
 	4) ;;
 	5) ;;
@@ -21,7 +21,7 @@ for battery in /sys/class/power_supply/BAT?*; do
     # 󰂎  󱊡  󱊢  󱊣 
     # Sets up the status and capacity
 	case "$(cat "$battery/status" 2>&1)" in
-		"Full") status="✓" ;;
+		"Full") status="" ;;
 		"Charging") status="󰚥" ;;
 		"Discharging") status="" ;;
         "Critical") status="󱈸" ;;
@@ -29,13 +29,15 @@ for battery in /sys/class/power_supply/BAT?*; do
 		"Unknown") status="" ;;
 		*) exit 1 ;;
 	esac
+    ending="%"
 	case 1 in
+	    $(( ${capacity} >= 99)) ) icon="󱟢" ; capacity="Full";ending="";;
 	    $(( ${capacity} >= 70)) ) icon="󱊣"  ;;
 	    $(( ${capacity} >= 30)) ) icon="󱊢" ;;
 	    $(( ${capacity} >= 1)) ) icon="󱊡" ;;
 	    * ) icon="󰂎 " ;;
 	esac
-	printf "%s%s%d%%" "$status" "$icon" "$capacity"
+	printf "%s%s%s%s" "$status" "$icon" "$capacity" "$ending"
 
     
 done && printf "\\n"

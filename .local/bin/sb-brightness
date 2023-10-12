@@ -5,8 +5,8 @@ case $BLOCK_BUTTON in
 	1) ;; # brightnessctl -q set 5%+ ;;
 	2) ;;
 	3) ;; # brightnessctl -q set 5%- ;;
-	4) brightnessctl -q set 5%+ ;;
-	5) brightnessctl -q set 5%- ;;
+	4) xbacklight -inc 5 ;;
+	5) xbacklight -dec 5 ;;
     6) ;;
     7) ;;
     8) ;;
@@ -15,9 +15,9 @@ case $BLOCK_BUTTON in
 esac
 
 
-brightness_info=$(brightnessctl -m)
+brightness=$(xbacklight -get)
 # extract current percentage field from output, remove percentage
-brightness=$(echo "$brightness_info" | awk -F ',' '{print $4}' | awk -F '%' '{print $1}')
+# brightness=$(echo "$brightness_info" | awk -F ',' '{print $4}' | awk -F '%' '{print $1}')
 
 case 1 in
 	$((brightness >= 70)) ) icon="󰃠" ;;

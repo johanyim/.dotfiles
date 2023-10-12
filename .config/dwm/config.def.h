@@ -86,7 +86,8 @@ static const Rule rules[] = {
 	{ "Kitty",   NULL,     NULL,           0,         0,          1,           0,        -1 },
     
     //A getaround for the braile font problem with alacritty
-	{ "Kitty",   "btm",     NULL,           0,         1,          1,           0,        -1 },
+	{ "FloatingClass",   "Battery",NULL,   0,         1,          1,           0,        -1 },
+	{ "FloatingClass",   NULL,     NULL,   0,         1,          1,           0,        -1 },
 
     //xev
 	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
@@ -200,20 +201,20 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 
     //Brightness and audio
-    { 0,XF86XK_MonBrightnessDown,spawn,SHCMD("brightnessctl set 5%-; pkill -RTMIN+9 dwmblocks") },
-    { 0,XF86XK_MonBrightnessUp,  spawn,SHCMD("brightnessctl set 5%+; pkill -RTMIN+9 dwmblocks") },
+    { 0,XF86XK_MonBrightnessDown,spawn,SHCMD("xbacklight -dec 5; pkill -RTMIN+9 dwmblocks") },
+    { 0,XF86XK_MonBrightnessUp,  spawn,SHCMD("xbacklight -inc 5; pkill -RTMIN+9 dwmblocks") },
     { 0,XF86XK_AudioMute,spawn,
-        SHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle; pkill -RTMIN+8 dwmblocks") },
+        SHCMD("amixer -q sset Master toggle ; pkill -RTMIN+8 dwmblocks") },
     { 0,XF86XK_AudioLowerVolume, spawn,
-        SHCMD("pactl set-sink-mute @DEFAULT_SINK@ false ; pactl set-sink-volume @DEFAULT_SINK@ -5%; pkill -RTMIN+8 dwmblocks") },
+        SHCMD("amixer -q sset Master unmute ; amixer -q sset Master 5%-; pkill -RTMIN+8 dwmblocks") },
     { 0,XF86XK_AudioRaiseVolume,spawn,
-        SHCMD("pactl set-sink-mute @DEFAULT_SINK@ false ; pactl set-sink-volume @DEFAULT_SINK@ +5%; pkill -RTMIN+8 dwmblocks") },
+        SHCMD("amixer -q sset Master unmute ; amixer -q sset Master 5%+ ; pkill -RTMIN+8 dwmblocks") },
     { 0,XF86XK_AudioMicMute,spawn,
-        SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle ; pkill -RTMIN+8 dwmblocks") },
+        SHCMD("amixer -q sset Capture toggle ; pkill -RTMIN+8 dwmblocks") },
     { ShiftMask,XF86XK_AudioLowerVolume, spawn,
-        SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ false ; pactl set-source-volume @DEFAULT_SOURCE@ -5%; pkill -RTMIN+8 dwmblocks") },
+        SHCMD("amixer -q sset Capture unmute ; amixer -q sset Capture 5%-; pkill -RTMIN+8 dwmblocks") },
     { ShiftMask,XF86XK_AudioRaiseVolume,spawn,
-        SHCMD("pactl set-source-mute @DEFAULT_SOURCe@ false ; pactl set-source-volume @DEFAULT_SOURCE@ +5%; pkill -RTMIN+8 dwmblocks") },
+        SHCMD("amixer -q sset Capture unmute ; amixer -q sset Capture 5%+ ; pkill -RTMIN+8 dwmblocks") },
 
     
     //special scripts

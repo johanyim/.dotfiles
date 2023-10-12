@@ -3,38 +3,41 @@
 # Prints the current volume or 🔇 if muted.
 
 case $BLOCK_BUTTON in
-	4) wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+ ;;
-	5) wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%- ;;
+    1) amixer -q sset Master toggle ;;
+	4) amixer -q sset Master 1%+;;
+	5) amixer -q sset Master 1%- ;;
+    6) amixer -q sset Capture toggle ;;
+	9) amixer -q sset Capture 1%+;;
+	10) amixer -q sset Capture 1%- ;;
 esac
 
 # speakers
-sink_muted="$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}')"
+output_muted="$(amixer sget Master | awk -F"[][]" '/Mono:/ { print $6 }')"
 
-# free --mebi | sed -n '2{p;q}' | awk '{printf (" %2.1f/%2.1fGB\n", ( $3 / 1024), ($2 / 1024))}'
-
-if [ "$sink_muted" = "yes" ] ; then 
-    sink_icon="󰸈 " 
-    sink_volume="Muted"
+if [ "$output_muted" = "off" ] ; then 
+    output_icon="󰸈 " 
+    output_volume="Muted"
 else     
-    sink_volume="$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}')"
+    output_volume="$(amixer sget Master | awk -F"[][]" '/Mono:/ { print $2 }' )"
+
     case 1 in
-	    $(( ${sink_volume%\%} >= 70)) ) sink_icon="󰕾 " ;;
-	    $(( ${sink_volume%\%} >= 30)) ) sink_icon="󰖀 " ;;
-	    $(( ${sink_volume%\%} >= 1)) ) sink_icon="󰕿 " ;;
-	    * ) sink_icon="󰸈 " ;;
+	    $(( ${output_volume%\%} >= 70)) ) output_icon="󰕾 " ;;
+	    $(( ${output_volume%\%} >= 30)) ) output_icon="󰖀 " ;;
+	    $(( ${output_volume%\%} >= 1)) ) output_icon="󰕿 " ;;
+	    * ) output_icon="󰸈 " ;;
     esac
 fi
 
 # microphone
-source_muted="$(pactl get-source-mute @DEFAULT_SOURCE@ | awk '{print $2}')"
+input_muted="$(amixer sget Capture | awk -F"[][]" '/Right: / { print $6 }')"
 
-if [ "$source_muted" = "yes" ] ; then 
-    source_icon=" " 
-    source_volume="Muted"
+if [ "$input_muted" = "off" ] ; then 
+    input_icon=" " 
+    input_volume="Muted"
 else     
-    source_icon=" "  
-    source_volume="$(pactl get-source-volume @DEFAULT_SOURCE@ | awk '{print $5}')"
+    input_icon=" "  
+    input_volume="$(amixer sget Capture | awk -F"[][]" '/Right: / { print $2 }')"
 fi
 
-echo "$sink_icon$sink_volume $source_icon$source_volume"
+echo "$output_icon$output_volume $input_icon$input_volume"
 
