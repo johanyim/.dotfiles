@@ -12,13 +12,13 @@ case $BLOCK_BUTTON in
 esac
 
 # speakers
-output_muted="$(amixer sget Master | awk -F"[][]" '/Mono:/ { print $6 }')"
+output_muted="$(amixer sget Master | awk -F"[][]" '/Left:/ { print $4 }')"
 
 if [ "$output_muted" = "off" ] ; then 
     output_icon="󰸈 " 
     output_volume="Muted"
 else     
-    output_volume="$(amixer sget Master | awk -F"[][]" '/Mono:/ { print $2 }' )"
+    output_volume="$(amixer sget Master | awk -F"[][]" '/Left:/ { print $2 }' )"
 
     case 1 in
 	    $(( ${output_volume%\%} >= 70)) ) output_icon="󰕾 " ;;
@@ -29,14 +29,14 @@ else
 fi
 
 # microphone
-input_muted="$(amixer sget Capture | awk -F"[][]" '/Right: / { print $6 }')"
+input_muted="$(amixer sget Capture | awk -F"[][]" '/Left: / { print $4 }')"
 
 if [ "$input_muted" = "off" ] ; then 
     input_icon=" " 
     input_volume="Muted"
 else     
     input_icon=" "  
-    input_volume="$(amixer sget Capture | awk -F"[][]" '/Right: / { print $2 }')"
+    input_volume="$(amixer sget Capture | awk -F"[][]" '/Left: / { print $2 }')"
 fi
 
 echo "$output_icon$output_volume $input_icon$input_volume"
