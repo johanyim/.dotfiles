@@ -18,6 +18,9 @@ static void centeredmaster(Monitor *m);
 static void getgaps(Monitor *m, int *oh, int *ov, int *ih, int *iv, unsigned int *nc);
 static void getfacts(Monitor *m, int msize, int ssize, float *mf, float *sf, int *mr, int *sr);
 static void setgaps(int oh, int ov, int ih, int iv);
+/* helper */
+static void centeralone(Monitor *m);
+
 
 /* Settings */
 #if !PERTAG_PATCH
@@ -182,6 +185,27 @@ getfacts(Monitor *m, int msize, int ssize, float *mf, float *sf, int *mr, int *s
 	*sr = ssize - stotal; // the remainder (rest) of pixels after a cfacts stack split
 }
 
+void
+centeralone(Monitor *m) {
+    unsigned int i, n;
+    int oh, ov, ih, iv;
+    getgaps(m, &oh, &ov, &ih, &iv, &n);
+	if (
+        n == 1 
+        //nexttiled(nexttiled(c)) == nexttiled(c)        
+        && selmon->sel->alonecenteredsize > 0.05
+       )
+    {
+        resizeclient(selmon->sel,
+                (selmon->mw - selmon->mw * selmon->sel->alonecenteredsize) / 2,
+                //selmon->my,
+                m->wy + ov + m->sel->bw,
+                selmon->mw * selmon->sel->alonecenteredsize,
+                m->wh - (ov*2) - (m->sel->bw * 4)
+        );
+    }
+}
+
 /***
  * Layouts
  */
@@ -273,12 +297,7 @@ centeredmaster(Monitor *m)
 			}
 		}
 	}
-	if (n == 1 && selmon->sel->CenterThisWindow)
-        resizeclient(selmon->sel,
-                (selmon->mw - selmon->mw * 0.5) / 2,
-                (selmon->mh - selmon->mh * 0.5) / 2,
-                selmon->mw * 0.5,
-                selmon->mh * 0.5);
+    centeralone(m);
 }
 
 /*
@@ -324,12 +343,7 @@ deck(Monitor *m)
 		} else {
 			resize(c, sx, sy, sw - (2*c->bw), sh - (2*c->bw), 0);
 		}
-	if (n == 1 && selmon->sel->CenterThisWindow)
-        resizeclient(selmon->sel,
-                (selmon->mw - selmon->mw * 0.5) / 2,
-                (selmon->mh - selmon->mh * 0.5) / 2,
-                selmon->mw * 0.5,
-                selmon->mh * 0.5);
+    centeralone(m);
 }
 
 /*
@@ -425,11 +439,5 @@ tile(Monitor *m)
 			resize(c, sx, sy, sw - (2*c->bw), sh * (c->cfact / sfacts) + ((i - m->nmaster) < srest ? 1 : 0) - (2*c->bw), 0);
 			sy += HEIGHT(c) + ih;
 		}
-
-	if (n == 1 && selmon->sel->CenterThisWindow)
-        resizeclient(selmon->sel,
-                (selmon->mw - selmon->mw * 0.5) / 2,
-                (selmon->mh - selmon->mh * 0.5) / 2,
-                selmon->mw * 0.5,
-                selmon->mh * 0.5);
+    centeralone(m);
 }
