@@ -14,7 +14,7 @@ static const unsigned int gappih    = 10;       /* horiz inner gap between windo
 static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
 static const unsigned int gappoh    = 22;       /* horiz outer gap between windows and screen edge */
 static const unsigned int gappov    = 22;       /* vert outer gap between windows and screen edge */
-static       int smartgaps          = 1;        /* 1 means no outer gap when there is only one window */
+static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int horizpadbar        = -4;        /* horizontal padding for statusbar */
@@ -75,22 +75,23 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
-	{ "Gimp",    NULL,     NULL,           0,         1,          0,           0,        -1 },
-	{ "Firefox", NULL,     NULL,           1 << 8,    0,          0,          -1,        -1 },
+	/* class     instance  title           tags mask  isfloating  isterminal  noswallow  alonecenteredsize monitor */
+	{ "Gimp",    NULL,     NULL,           0,         1,          0,          0,         0,             -1 },
+	{ "Firefox", NULL,     NULL,           1 << 8,    0,          0,         -1,         0,             -1 },
     //Terminals
-	{ TERMCLASS, NULL,    NULL,           0,         0,          1,           0,        -1 },
+	{ TERMCLASS, NULL,     NULL,           0,         0,          1,          0,         0.62,          -1 },
 	//Other Terminals
-    { "St",      NULL,     NULL,           0,         0,          1,           0,        -1 },
-	{ "st-256color",NULL,  NULL,           0,         0,          1,           0,        -1 },
-	{ "Kitty",   NULL,     NULL,           0,         0,          1,           0,        -1 },
+    { "St",      NULL,     NULL,           0,         0,          1,          0,         0.62,          -1 },
+	{ "st-256color",NULL,  NULL,           0,         0,          1,          0,         0.62,          -1 },
+	{ "Kitty",   NULL,     NULL,           0,         0,          1,          0,         0.62,          -1 },
+	{ "Alacritty",NULL,    NULL,           0,         0,          1,          0,         0.62,          -1 },
     
     //A getaround for the braile font problem with alacritty
-	{ "FloatingClass",   "Battery",NULL,   0,         1,          1,           0,        -1 },
-	{ "FloatingClass",   NULL,     NULL,   0,         1,          1,           0,        -1 },
+	{ "FloatingClass",   "Battery",NULL,   0,         1,          1,          0,         0,             -1 },
+	{ "FloatingClass",   NULL,     NULL,   0,         1,          1,          0,         0,             -1 },
 
     //xev
-	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
+	{ NULL,      NULL,     "Event Tester", 0,         0,          0,          1,         0,             -1 }, /* xev */
 };
 
 /* layout(s) */

@@ -1,7 +1,9 @@
 #ignores all that matches the regular expressions below
 
 \.git
+\.gitignore
 misc
 #LICENSE
 ^/.*\.org
 README.md
+
