@@ -111,8 +111,7 @@ struct Client {
 	int basew, baseh, incw, inch, maxw, maxh, minw, minh, hintsvalid;
 	int bw, oldbw;
 	unsigned int tags;
-	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen,  isterminal, noswallow;
-    float alonecenteredsize;
+	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen, isterminal, noswallow;
 	pid_t pid;
 	Client *next;
 	Client *snext;
@@ -167,7 +166,6 @@ typedef struct {
 	int isfloating;
 	int isterminal;
 	int noswallow;
-    float alonecenteredsize;
 	int monitor;
 } Rule;
 
@@ -383,7 +381,6 @@ applyrules(Client *c)
 
 	/* rule matching */
 	c->isfloating = 0;
-    c->alonecenteredsize = 0.0;
 	c->tags = 0;
 	XGetClassHint(dpy, c->win, &ch);
 	class    = ch.res_class ? ch.res_class : broken;
@@ -398,7 +395,6 @@ applyrules(Client *c)
 			c->isterminal = r->isterminal;
 			c->noswallow  = r->noswallow;
 			c->isfloating = r->isfloating;
-			c->alonecenteredsize = r->alonecenteredsize;
 			c->tags |= r->tags;
 			for (m = mons; m && m->num != r->monitor; m = m->next);
 			if (m)
@@ -1121,7 +1117,7 @@ focus(Client *c)
 		/* Avoid flickering when another client appears and the border
 		 * is restored */
 		if (!solitary(c)) {
-		    XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColBorder].pixel);
+			XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColBorder].pixel);
 		}
 		setfocus(c);
 	} else {
@@ -2146,16 +2142,10 @@ sigchld(int unused)
 int
 solitary(Client *c)
 {
-	return ((
-                c->mon->clients == c 
-            && !(c->next)
-            )
-	    || 
-                &monocle == c->mon->lt[c->mon->sellt]->arrange)
-	        && !c->isfullscreen 
-            && !c->isfloating
-	        && NULL != c->mon->lt[c->mon->sellt]->arrange;
-	    
+	return ((nexttiled(c->mon->clients) == c && !nexttiled(c->next))
+	    || &monocle == c->mon->lt[c->mon->sellt]->arrange)
+	    && !c->isfullscreen && !c->isfloating
+	    && NULL != c->mon->lt[c->mon->sellt]->arrange;
 }
 
 void
