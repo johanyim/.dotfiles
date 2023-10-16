@@ -8,3 +8,4 @@ Light #a9c1e9
 Grey #585b70
 Yellow #f9e2af
 a6da7d #a6da7d
+border #585b70
