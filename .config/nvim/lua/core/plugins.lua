@@ -42,11 +42,20 @@ return require('packer').startup(function(use)
     use 'saadparwaiz1/cmp_luasnip'
     use 'rafamadriz/friendly-snippets'
 
+    --commenting
+    use 'numToStr/Comment.nvim'
+
     --rust tools
     use 'simrat39/rust-tools.nvim'
 
     --rgba colors 
     use 'norcalli/nvim-colorizer.lua'
+
+    -- surround tags
+    use({
+        "kylechui/nvim-surround",
+        tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+    })
 
     --markdown previews in browser
     use({ 

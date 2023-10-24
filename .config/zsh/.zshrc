@@ -65,7 +65,9 @@ alias please='sudo $(fc -ln -1)'
 #default system variables
 export VISUAL=nvim
 export EDITOR=nvim
-export PATH="$HOME/.local/bin:$PATH"
+# export PATH="$HOME/.local/bin:$PATH"
+source ~/.zshenv
+
 
 # forward and backwords with ctrl
 bindkey "^[[1;5C" forward-word
