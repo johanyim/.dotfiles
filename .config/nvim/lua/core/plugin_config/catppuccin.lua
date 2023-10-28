@@ -4,7 +4,7 @@ require("catppuccin").setup {
         frappe = {},
         macchiato = {},
         mocha = {
-            -- base = "#11111b",
+            base = "#11111b",
 
         },
     }
