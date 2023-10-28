@@ -27,7 +27,7 @@ static const char dmenufont[]       = "NotoSansM Nerd Font:medium:pixelsize=16";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { surface0, mantle, crust },
-	[SchemeSel]  = { surface0, mantle, surface2 },
+	[SchemeSel]  = { surface0, mantle, base },
     /*                     border bg        fg (for dwm blocks specifically)*/
     [SchemeDisk]        = {flamingo,  mantle, crust}, //4
     [SchemeCpu]         = {peach,  mantle,   crust}, //8
