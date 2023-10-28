@@ -1130,6 +1130,7 @@ focus(Client *c)
 	}
 	selmon->sel = c;
 	drawbars();
+
 }
 
 /* there are some broken focus acquiring clients needing extra handling */
@@ -1190,17 +1191,23 @@ focusmasterstrict(const Arg *arg)
 {
 	Client *master;
 
+    // cant handle when >1 masters on the monitor 
 	if (selmon->nmaster > 1)
 		return;
+    
+    // no selection, or fullscreen and locked on fullscreen
 	if (!selmon->sel || (selmon->sel->isfullscreen && lockfullscreen))
 		return;
 
+    // get the master window 
 	master = nexttiled(selmon->clients);
-
+    
+    // none found
 	if (!master)
 		return;
     
-    if (selmon->sel == master) { //do nothing if on master
+    //do nothing if on master
+    if (selmon->sel == master) { 
         return;
     } 
 
@@ -1208,13 +1215,16 @@ focusmasterstrict(const Arg *arg)
 	for (i = 0; !(selmon->tagset[selmon->seltags] & 1 << i); i++);
 	i++;
 
-	if (selmon->sel == master) {
-		if (selmon->tagmarked[i] && ISVISIBLE(selmon->tagmarked[i]))
-			focus(selmon->tagmarked[i]);
-	} 
-    else {
+    // if selected client is not the master
+	if (selmon->sel != master) {
+        //tag it
 		selmon->tagmarked[i] = selmon->sel;
-		focus(master);
+		//focus on the master client
+        focus(master);
+        
+        //warp cursor to it
+        XWarpPointer(dpy, None, master->win, 0, 0, 0, 0, master->w/2, master->h/2);
+
 	}
 }
 void
@@ -2808,19 +2818,6 @@ zoomin(const Arg *arg)
 void
 zoomout(const Arg *arg)
 {
-    //Client *c = selmon->sel;
-	//Client *master;
-
-	//master = nexttiled(selmon->clients);
-
-	//if (!master)
-		//return;
-    //
-    //if (selmon->sel != master) { //do nothing if not on master
-        //return;
-    //}
-    //movestack() //:::
-	
     Client *c = NULL, *p = NULL, *pc = NULL, *i;
     Client *master;
     master = nexttiled(selmon->clients);
@@ -2833,13 +2830,11 @@ zoomout(const Arg *arg)
     }
     //::: 
     //this is a copy of movestack.c
-	if(1 > 0) {
-		/* find the client after selmon->sel */
-		for(c = selmon->sel->next; c && (!ISVISIBLE(c) || c->isfloating); c = c->next);
-		if(!c)
-			for(c = selmon->clients; c && (!ISVISIBLE(c) || c->isfloating); c = c->next);
+    /* find the client after selmon->sel */
+    for(c = selmon->sel->next; c && (!ISVISIBLE(c) || c->isfloating); c = c->next);
+    if(!c)
+        for(c = selmon->clients; c && (!ISVISIBLE(c) || c->isfloating); c = c->next);
 
-	}
 	/* find the client before selmon->sel and c */
 	for(i = selmon->clients; i && (!p || !pc); i = i->next) {
 		if(i->next == selmon->sel)
