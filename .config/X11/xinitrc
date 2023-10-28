@@ -4,9 +4,31 @@ xwallpaper --stretch "$JOHAN_WALLPAPERS/ThinkPadT480Mocha.png" &
 # dunst &
 # feh --bg-scale --no-fehbg "$JOHAN_WALLPAPERS/ThinkPadT480Mocha.png"
 # xwallpaper --fill 
-pipewire & 
-pipewire-pulse & 
-pipewire-media-session &
 
 dwmblocks &
+
+clipmenud &
+
+pipewire & 
+
 exec dwm 
+
+
+
+### Pipewire/Wireplumber notes
+# pacman -S pipewire pipewire-pulse pipewire-alsa pipewire-jack wireplumber
+#
+# mkdir /etc/pipewire
+#
+# cp /usr/share/pipewire/pipewire* /etc/pipewire
+#
+# edit the /etc/pipewire/pipewire.conf file
+#
+# go to the final option, context.exec = [...]
+#
+# add the following lines inside the ...
+#
+# { path = "/usr/bin/wireplumber" args = "" }
+# { path = "/usr/bin/pipewire" args = "-c pipewire-pulse.conf" }
+#
+# it should run pipewire, the pulse layer, and wireplumber to manage the session, all together at once.

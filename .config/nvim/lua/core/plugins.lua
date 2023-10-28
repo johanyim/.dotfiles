@@ -38,17 +38,17 @@ return require('packer').startup(function(use)
 	    run = "make install_jsregexp"
     })
 
-    --completions for all languages
+    -- completions for all languages
     use 'saadparwaiz1/cmp_luasnip'
     use 'rafamadriz/friendly-snippets'
 
-    --commenting
+    -- commenting
     use 'numToStr/Comment.nvim'
 
-    --rust tools
+    -- rust tools
     use 'simrat39/rust-tools.nvim'
 
-    --rgba colors 
+    -- rgba colors 
     use 'norcalli/nvim-colorizer.lua'
 
     -- surround tags
@@ -57,7 +57,7 @@ return require('packer').startup(function(use)
         tag = "*", -- Use for stability; omit to use `main` branch for the latest features
     })
 
-    --markdown previews in browser
+    -- markdown previews in browser
     use({ 
         "iamcco/markdown-preview.nvim", 
         run = "cd app && npm install", 
@@ -65,6 +65,7 @@ return require('packer').startup(function(use)
         ft = { "markdown" }, 
     })
     
+    -- live server 
     use({
         "aurum77/live-server.nvim",
         run = function()
@@ -73,9 +74,26 @@ return require('packer').startup(function(use)
         cmd = { "LiveServer", "LiveServerStart", "LiveServerStop" },
     })
 
+    -- neorg
+    use({
+        "nvim-neorg/neorg",
+        config = function()
+            require('neorg').setup {
+                load = {
+                    ["core.defaults"] = {}, -- Loads default behaviour
+                    ["core.concealer"] = {}, -- Adds pretty icons to your documents
+                    ["core.dirman"] = { -- Manages Neorg workspaces
+                        config = {
+                            workspaces = {
+                                notes = "~/notes",
+                            },
+                        },
+                    },
+                },
+            }
+        end,
+        run = ":Neorg sync-parsers",
+        requires = "nvim-lua/plenary.nvim",
+    })
 
-
-    if packer_bootstrap then
-        require('packer').sync()
-    end
 end)
