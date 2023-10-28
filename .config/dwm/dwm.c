@@ -1237,26 +1237,39 @@ focusmasterback(const Arg *arg)
 	if (!selmon->sel || (selmon->sel->isfullscreen && lockfullscreen))
 		return;
 
+    // get the master client 
 	master = nexttiled(selmon->clients);
 
+    // no master client 
 	if (!master)
 		return;
-
-    if (selmon->sel != master) { //do nothing if on anything other than master
+    
+    //do nothing if on anything other than master
+    if (selmon->sel != master) { 
         return;
     } 
 
 	int i;
 	for (i = 0; !(selmon->tagset[selmon->seltags] & 1 << i); i++);
 	i++;
-	if (selmon->sel == master) {
-		if (selmon->tagmarked[i] && ISVISIBLE(selmon->tagmarked[i]))
-			focus(selmon->tagmarked[i]);
-	} 
-    else {
-		selmon->tagmarked[i] = selmon->sel;
-		focus(master);
-	}
+
+
+    // go to the tagged monitor
+    if (selmon->tagmarked[i] && ISVISIBLE(selmon->tagmarked[i])) {
+        focus(selmon->tagmarked[i]);
+        XWarpPointer(dpy, None, selmon->tagmarked[i]->win, 0, 0, 0, 0, 
+                selmon->tagmarked[i]->w/2, selmon->tagmarked[i]->h/2);
+    }
+
+
+	// if (selmon->sel == master) {
+	// 	if (selmon->tagmarked[i] && ISVISIBLE(selmon->tagmarked[i]))
+	// 		focus(selmon->tagmarked[i]);
+	// } 
+ //    else {
+	// 	selmon->tagmarked[i] = selmon->sel;
+	// 	focus(master);
+	// }
 
 }
 void
