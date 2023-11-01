@@ -166,8 +166,8 @@ vimcmd_replace_one_symbol = '[](mauve)'
 format = '$symbol'
 
 [fill]
-symbol = '='
-style = "bold green"
+symbol = ' '
+style = "surface0"
 
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"

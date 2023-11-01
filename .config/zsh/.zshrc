@@ -94,3 +94,5 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 
 
 
+
+source /home/johan/.config/broot/launcher/bash/br

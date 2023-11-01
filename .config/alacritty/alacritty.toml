@@ -85,7 +85,7 @@ style = "Beam"
 TERM = "alacritty"
 
 [font]
-size = 9
+size = 7
 
 [font.bold]
 family = "NotoSansM Nerd Font"

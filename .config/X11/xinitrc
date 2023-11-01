@@ -2,15 +2,21 @@ xsetroot -cursor_name left_ptr
 # xwallpaper --stretch "$JOHAN_WALLPAPERS/space.jpg" &
 # xwallpaper --stretch "$JOHAN_WALLPAPERS/ThinkPadT480Mocha.png" &
 xwallpaper --no-randr --stretch "$JOHAN_WALLPAPERS/StarsMocha.png" &
-# dunst &
-# feh --bg-scale --no-fehbg "$JOHAN_WALLPAPERS/ThinkPadT480Mocha.png"
-# xwallpaper --fill 
+
+
+
+pipewire & 
+
+pipewire-media-session & 
+
+
+# wireplumber &
+#
+# pipewire &
 
 dwmblocks &
 
-clipmenud &
-
-pipewire & 
+# pipewire-pulse &
 
 exec dwm 
 
