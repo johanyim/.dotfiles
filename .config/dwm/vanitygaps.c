@@ -94,30 +94,6 @@ getfacts(Monitor *m, int msize, int ssize, float *mf, float *sf, int *mr, int *s
 	*sr = ssize - stotal; // the remainder (rest) of pixels after a cfacts stack split
 }
 
-// void
-// centeralone(Monitor *m) {
-//     unsigned int n;
-//     int oh, ov, ih, iv;
-// 	
-//     float mfacts, sfacts;
-//
-//     getgaps(m, &oh, &ov, &ih, &iv, &n);
-// 	if (
-//         n == 1 
-//         //nexttiled(nexttiled(c)) == nexttiled(c)        
-//         && selmon->sel->alonecenteredsize > 0.05
-//        )
-//     {
-//         resizeclient(selmon->sel,
-//                 (selmon->mw - selmon->mw * selmon->sel->alonecenteredsize) / 2,
-//                 //selmon->my,
-//                 m->wy + ov + selmon->sel->bw,
-//                 selmon->mw * selmon->sel->alonecenteredsize,
-//                 m->wh - (ov*2) - (selmon->sel->bw * 4)
-//         );
-//     }
-// }
-
 /***
  * Layouts
  */

@@ -112,8 +112,7 @@ struct Client {
 	int bw, oldbw;
 	unsigned int tags;
 	int isfixed, isfloating, isurgent, neverfocus, oldstate, 
-        isfullscreen, isterminal, noswallow;
-    float alonecenteredsize;
+        isfullscreen, isterminal, noswallow, iscenteredalone;
 	pid_t pid;
 	Client *next;
 	Client *snext;
@@ -168,7 +167,7 @@ typedef struct {
 	int isfloating;
 	int isterminal;
 	int noswallow;
-    float alonecenteredsize;
+    int iscenteredalone;
 	int monitor;
 } Rule;
 
@@ -220,6 +219,8 @@ static void monocle(Monitor *m);
 static void motionnotify(XEvent *e);
 static void movemouse(const Arg *arg);
 static Client *nexttiled(Client *c);
+static Client *nextonscreen(Client *c);
+
 static void pop(Client *c);
 static void propertynotify(XEvent *e);
 static void quit(const Arg *arg);
@@ -284,6 +285,7 @@ static pid_t winpid(Window w);
 
 
 static int shouldcenteralone(Client *c); 
+static int shouldborderless(Client *c); 
 static void centeralone(Client *c); // client gets centered alone, no borders, in the middle
 
 
@@ -384,7 +386,7 @@ applyrules(Client *c)
 
 	/* rule matching */
 	c->isfloating = 0;
-    c->alonecenteredsize = 0.0;
+    c->iscenteredalone = 0;
 	c->tags = 0;
 	XGetClassHint(dpy, c->win, &ch);
 	class    = ch.res_class ? ch.res_class : broken;
@@ -399,7 +401,7 @@ applyrules(Client *c)
 			c->isterminal = r->isterminal;
 			c->noswallow  = r->noswallow;
 			c->isfloating = r->isfloating;
-			c->alonecenteredsize = r->alonecenteredsize;
+			c->iscenteredalone = r->iscenteredalone;
 			c->tags |= r->tags;
 			for (m = mons; m && m->num != r->monitor; m = m->next);
 			if (m)
@@ -1122,7 +1124,7 @@ focus(Client *c)
 		detachstack(c);
 		attachstack(c);
 		grabbuttons(c, 1);
-        if (!shouldcenteralone(c)) {
+        if (!shouldborderless(c)) {
 		    XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColBorder].pixel);
 		}
 		setfocus(c);
@@ -1645,6 +1647,13 @@ nexttiled(Client *c)
 	return c;
 }
 
+Client *
+nextonscreen(Client *c)
+{
+	for (; c && !ISVISIBLE(c); c = c->next);
+	return c;
+}
+
 void
 pop(Client *c)
 {
@@ -1752,9 +1761,9 @@ resizeclient(Client *c, int x, int y, int w, int h)
 	wc.border_width = c->bw;
 
     if (shouldcenteralone(c)) {
-        wc.x = c->x = (c->mon->mw - (c->mon->mw * c->alonecenteredsize)) / 2 ;  
-        wc.y = c->y = (c->mon->wy) + c->mon->gappov + c->bw ;
-        wc.width  = c->w = (c->mon->mw) * c->alonecenteredsize ;
+        wc.x = c->x = (c->mon->mw - (c->mon->mw * c->mon->mfact) ) / 2 ;  
+        wc.y = c->y = (c->mon->wy) + (c->mon->gappov) + (c->bw);
+        wc.width  = c->w = (c->mon->mw) * (c->mon->mfact) ;
         wc.height = c->h = (c->mon->wh) - (c->mon->gappov*2) - (c->bw * 4) ;
     }
 
@@ -1768,25 +1777,25 @@ void
 centeralone(Client *c) 
 {
 
-    c->x = (c->mon->mw - c->mon->mw * c->alonecenteredsize) / 2 ;  //x TODO: dependent on mfact
+    c->x = (c->mon->mw - c->mon->mw * c->iscenteredalone) / 2 ;  //x TODO: dependent on mfact
     c->y = (c->mon->wy)  + c->mon->gappov + c->bw;                                //y
-    c->w = (c->mon->mw)  * c->alonecenteredsize;                      //w TODO: dependent on mfact
+    c->w = (c->mon->mw)  * c->iscenteredalone;                      //w TODO: dependent on mfact
     c->h = (c->mon->wh)  - (c->mon->gappov*2) - (c->bw * 4) ;                  //h
 
 
 
     resizeclient(c,
-            (c->mon->mw - c->mon->mw * c->alonecenteredsize) / 2,   //x TODO: dependent on mfact
+            (c->mon->mw - c->mon->mw * c->iscenteredalone) / 2,   //x TODO: dependent on mfact
             (c->mon->wy)  + c->mon->gappov + c->bw,                                //y
-            (c->mon->mw)  * c->alonecenteredsize,                      //w TODO: dependent on mfact
+            (c->mon->mw)  * c->iscenteredalone,                      //w TODO: dependent on mfact
             (c->mon->wh)  - (c->mon->gappov*2) - (c->bw * 4)                  //h
     );
     
     //for conditional testing
     resizeclient(c,
-            (c->mon->mw - c->mon->mw * c->alonecenteredsize) / 2,   //x TODO: dependent on mfact
+            (c->mon->mw - c->mon->mw * c->iscenteredalone) / 2,   //x TODO: dependent on mfact
             (c->mon->wy)  + c->mon->gappov + c->bw,                                //y
-            (c->mon->mw)  * c->alonecenteredsize * 3,                      //w TODO: dependent on mfact
+            (c->mon->mw)  * c->iscenteredalone * 3,                      //w TODO: dependent on mfact
             (c->mon->wh)  - (c->mon->gappov*2) - (c->bw * 4)                  //h
     );
 
@@ -2187,10 +2196,29 @@ shouldcenteralone(Client *c)
     if(c->isfloating) {return 0;}
     
     //alonecenteredis not enabled
-    if(c->alonecenteredsize < 0.05) {return 0;}
+    if(!c->iscenteredalone) {return 0;}
+    
+    //cannot be fullscreen
+	// if (!c->isfullscreen && lockfullscreen) {return 0;}
+
+
+    //not currently in monocle
+    if (&monocle == c->mon->lt[c->mon->sellt]->arrange) {return 0;}
+
     
     int n; Client *cli;
     for(n = 0, cli = nexttiled(selmon->clients); cli; cli = nexttiled(cli->next), n++);   
+    if (n > 1) {return 0;}
+
+    return 1;
+            
+}
+
+int
+shouldborderless(Client *c) 
+{
+    int n; Client *cli;
+    for(n = 0, cli = nextonscreen(selmon->clients); cli; cli = nextonscreen(cli->next), n++);   
     if (n > 1) {return 0;}
 
     return 1;
