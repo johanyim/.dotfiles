@@ -75,16 +75,16 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class     instance  title           tags mask  isfloating  isterminal  noswallow  alonecenteredsize monitor */
+	/* class     instance  title           tags mask  isfloating  isterminal  noswallow iscenteredalone monitor */
 	{ "Gimp",    NULL,     NULL,           0,         1,          0,          0,         0,             -1 },
 	{ "Firefox", NULL,     NULL,           1 << 8,    0,          0,         -1,         0,             -1 },
     //Terminals
-	{ TERMCLASS, NULL,     NULL,           0,         0,          1,          0,         0.62,          -1 },
+	{ TERMCLASS, NULL,     NULL,           0,         0,          1,          0,         1,          -1 },
 	//Other Terminals
-    { "St",      NULL,     NULL,           0,         0,          1,          0,         0.62,          -1 },
-	{ "st-256color",NULL,  NULL,           0,         0,          1,          0,         0.62,          -1 },
-	{ "Kitty",   NULL,     NULL,           0,         0,          1,          0,         0.62,          -1 },
-	{ "Alacritty",NULL,    NULL,           0,         0,          1,          0,         0.62,          -1 },
+    { "St",      NULL,     NULL,           0,         0,          1,          0,         1,          -1 },
+	{ "st-256color",NULL,  NULL,           0,         0,          1,          0,         1,          -1 },
+	{ "Kitty",   NULL,     NULL,           0,         0,          1,          0,         1,          -1 },
+	{ "Alacritty",NULL,    NULL,           0,         0,          1,          0,         1,          -1 },
     
     //A getaround for the braile font problem with alacritty
 	{ "FloatingClass",   "Battery",NULL,   0,         1,          1,          0,         0,             -1 },
