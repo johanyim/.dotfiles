@@ -1761,15 +1761,9 @@ resizeclient(Client *c, int x, int y, int w, int h)
 	wc.border_width = c->bw;
 
     if (shouldcenteralone(c)) {
-<<<<<<< HEAD
-        wc.x = c->x = (c->mon->mw - (c->mon->mw * c->mon->mfact)) / 2 ;  
-        wc.y = c->y = (c->mon->wy) + c->mon->gappov + c->bw ;
-        wc.width  = c->w = (c->mon->mw) * c->mon->mfact ;
-=======
         wc.x = c->x = (c->mon->mw - (c->mon->mw * c->mon->mfact) ) / 2 ;  
         wc.y = c->y = (c->mon->wy) + (c->mon->gappov) + (c->bw);
         wc.width  = c->w = (c->mon->mw) * (c->mon->mfact) ;
->>>>>>> centeralone_asint
         wc.height = c->h = (c->mon->wh) - (c->mon->gappov*2) - (c->bw * 4) ;
         // wc.x = c->x = (c->mon->mw - (c->mon->mw * c->alonecenteredsize)) / 2 ;  
         // wc.y = c->y = (c->mon->wy) + c->mon->gappov + c->bw ;
