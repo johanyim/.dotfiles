@@ -1,12 +1,4 @@
 /* Key binding functions */
-static void defaultgaps(const Arg *arg);
-static void incrgaps(const Arg *arg);
-static void incrigaps(const Arg *arg);
-static void incrogaps(const Arg *arg);
-static void incrohgaps(const Arg *arg);
-static void incrovgaps(const Arg *arg);
-static void incrihgaps(const Arg *arg);
-static void incrivgaps(const Arg *arg);
 static void togglegaps(const Arg *arg);
 /* Layouts (delete the ones you do not need) */
 static void tile(Monitor *m);
@@ -19,7 +11,7 @@ static void getgaps(Monitor *m, int *oh, int *ov, int *ih, int *iv, unsigned int
 static void getfacts(Monitor *m, int msize, int ssize, float *mf, float *sf, int *mr, int *sr);
 static void setgaps(int oh, int ov, int ih, int iv);
 /* helper */
-static void centeralone(Monitor *m);
+// static void centeralone(Monitor *m);
 
 
 /* Settings */
@@ -51,89 +43,6 @@ togglegaps(const Arg *arg)
 	enablegaps = !enablegaps;
 	#endif // PERTAG_PATCH
 	arrange(NULL);
-}
-
-void
-defaultgaps(const Arg *arg)
-{
-	setgaps(gappoh, gappov, gappih, gappiv);
-}
-
-void
-incrgaps(const Arg *arg)
-{
-	setgaps(
-		selmon->gappoh + arg->i,
-		selmon->gappov + arg->i,
-		selmon->gappih + arg->i,
-		selmon->gappiv + arg->i
-	);
-}
-
-void
-incrigaps(const Arg *arg)
-{
-	setgaps(
-		selmon->gappoh,
-		selmon->gappov,
-		selmon->gappih + arg->i,
-		selmon->gappiv + arg->i
-	);
-}
-
-void
-incrogaps(const Arg *arg)
-{
-	setgaps(
-		selmon->gappoh + arg->i,
-		selmon->gappov + arg->i,
-		selmon->gappih,
-		selmon->gappiv
-	);
-}
-
-void
-incrohgaps(const Arg *arg)
-{
-	setgaps(
-		selmon->gappoh + arg->i,
-		selmon->gappov,
-		selmon->gappih,
-		selmon->gappiv
-	);
-}
-
-void
-incrovgaps(const Arg *arg)
-{
-	setgaps(
-		selmon->gappoh,
-		selmon->gappov + arg->i,
-		selmon->gappih,
-		selmon->gappiv
-	);
-}
-
-void
-incrihgaps(const Arg *arg)
-{
-	setgaps(
-		selmon->gappoh,
-		selmon->gappov,
-		selmon->gappih + arg->i,
-		selmon->gappiv
-	);
-}
-
-void
-incrivgaps(const Arg *arg)
-{
-	setgaps(
-		selmon->gappoh,
-		selmon->gappov,
-		selmon->gappih,
-		selmon->gappiv + arg->i
-	);
 }
 
 void
@@ -185,31 +94,29 @@ getfacts(Monitor *m, int msize, int ssize, float *mf, float *sf, int *mr, int *s
 	*sr = ssize - stotal; // the remainder (rest) of pixels after a cfacts stack split
 }
 
-void
-centeralone(Monitor *m) {
-    unsigned int i, n;
-    int oh, ov, ih, iv;
-	
-    float mfacts, sfacts;
-	int mrest, srest;
-    int mh = 0, sh = 0;
-
-    getgaps(m, &oh, &ov, &ih, &iv, &n);
-	if (
-        n == 1 
-        //nexttiled(nexttiled(c)) == nexttiled(c)        
-        && selmon->sel->alonecenteredsize > 0.05
-       )
-    {
-        resizeclient(selmon->sel,
-                (selmon->mw - selmon->mw * selmon->sel->alonecenteredsize) / 2,
-                //selmon->my,
-                m->wy + ov + selmon->sel->bw,
-                selmon->mw * selmon->sel->alonecenteredsize,
-                m->wh - (ov*2) - (selmon->sel->bw * 4)
-        );
-    }
-}
+// void
+// centeralone(Monitor *m) {
+//     unsigned int n;
+//     int oh, ov, ih, iv;
+// 	
+//     float mfacts, sfacts;
+//
+//     getgaps(m, &oh, &ov, &ih, &iv, &n);
+// 	if (
+//         n == 1 
+//         //nexttiled(nexttiled(c)) == nexttiled(c)        
+//         && selmon->sel->alonecenteredsize > 0.05
+//        )
+//     {
+//         resizeclient(selmon->sel,
+//                 (selmon->mw - selmon->mw * selmon->sel->alonecenteredsize) / 2,
+//                 //selmon->my,
+//                 m->wy + ov + selmon->sel->bw,
+//                 selmon->mw * selmon->sel->alonecenteredsize,
+//                 m->wh - (ov*2) - (selmon->sel->bw * 4)
+//         );
+//     }
+// }
 
 /***
  * Layouts
@@ -302,7 +209,7 @@ centeredmaster(Monitor *m)
 			}
 		}
 	}
-    centeralone(m);
+    // centeralone(m);
 }
 
 /*
@@ -348,7 +255,7 @@ deck(Monitor *m)
 		} else {
 			resize(c, sx, sy, sw - (2*c->bw), sh - (2*c->bw), 0);
 		}
-    centeralone(m);
+    // centeralone(m);
 }
 
 /*
@@ -444,5 +351,5 @@ tile(Monitor *m)
 			resize(c, sx, sy, sw - (2*c->bw), sh * (c->cfact / sfacts) + ((i - m->nmaster) < srest ? 1 : 0) - (2*c->bw), 0);
 			sy += HEIGHT(c) + ih;
 		}
-    centeralone(m);
+    // centeralone(m);
 }

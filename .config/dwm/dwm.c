@@ -111,7 +111,8 @@ struct Client {
 	int basew, baseh, incw, inch, maxw, maxh, minw, minh, hintsvalid;
 	int bw, oldbw;
 	unsigned int tags;
-	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen,  isterminal, noswallow;
+	int isfixed, isfloating, isurgent, neverfocus, oldstate, 
+        isfullscreen, isterminal, noswallow;
     float alonecenteredsize;
 	pid_t pid;
 	Client *next;
@@ -198,8 +199,6 @@ static void enternotify(XEvent *e);
 static void expose(XEvent *e);
 static void focus(Client *c);
 static void focusin(XEvent *e);
-static void focusmaster(const Arg *arg);
-static void focusmasterreturn(const Arg *arg);
 static void focusmasterstrict(const Arg *arg);
 static void focusmasterback(const Arg *arg);
 static void focusmon(const Arg *arg);
@@ -247,7 +246,6 @@ static void sigstatusbar(const Arg *arg);
 static int solitary(Client *c);
 static void spawn(const Arg *arg);
 static void tag(const Arg *arg);
-static void tagmon(const Arg *arg);
 static void togglebar(const Arg *arg);
 static void togglefloating(const Arg *arg);
 static void toggletag(const Arg *arg);
@@ -271,7 +269,6 @@ static Monitor *wintomon(Window w);
 static int xerror(Display *dpy, XErrorEvent *ee);
 static int xerrordummy(Display *dpy, XErrorEvent *ee);
 static int xerrorstart(Display *dpy, XErrorEvent *ee);
-static void zoom(const Arg *arg);
 static void zoomin(const Arg *arg);
 static void zoomout(const Arg *arg);
 
@@ -279,12 +276,16 @@ static void keyrelease(XEvent *e);
 static void combotag(const Arg *arg);
 static void comboview(const Arg *arg);
 
-
 static pid_t getparentprocess(pid_t p);
 static int isdescprocess(pid_t p, pid_t c);
 static Client *swallowingclient(Window w);
 static Client *termforwin(const Client *c);
 static pid_t winpid(Window w);
+
+
+static int shouldcenteralone(Client *c); 
+static void centeralone(Client *c); // client gets centered alone, no borders, in the middle
+
 
 
 /* variables */
@@ -562,6 +563,9 @@ unswallow(Client *c)
 	focus(NULL);
 	arrange(c->mon);
 }
+
+
+
 
 void
 buttonpress(XEvent *e)
@@ -1118,9 +1122,7 @@ focus(Client *c)
 		detachstack(c);
 		attachstack(c);
 		grabbuttons(c, 1);
-		/* Avoid flickering when another client appears and the border
-		 * is restored */
-		if (!solitary(c)) {
+        if (!shouldcenteralone(c)) {
 		    XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColBorder].pixel);
 		}
 		setfocus(c);
@@ -1143,48 +1145,6 @@ focusin(XEvent *e)
 		setfocus(selmon->sel);
 }
 
-void
-focusmaster(const Arg *arg)
-{
-	Client *c;
-
-	if (selmon->nmaster < 1)
-		return;
-	if (!selmon->sel || (selmon->sel->isfullscreen && lockfullscreen))
-		return;
-
-	c = nexttiled(selmon->clients);
-
-	if (c)
-		focus(c);
-}
-void
-focusmasterreturn(const Arg *arg)
-{
-	Client *master;
-
-	if (selmon->nmaster > 1)
-		return;
-	if (!selmon->sel || (selmon->sel->isfullscreen && lockfullscreen))
-		return;
-
-	master = nexttiled(selmon->clients);
-
-	if (!master)
-		return;
-
-	int i;
-	for (i = 0; !(selmon->tagset[selmon->seltags] & 1 << i); i++);
-	i++;
-    
-	if (selmon->sel == master) {
-		if (selmon->tagmarked[i] && ISVISIBLE(selmon->tagmarked[i]))
-			focus(selmon->tagmarked[i]);
-    } else {
-		selmon->tagmarked[i] = selmon->sel;
-		focus(master);
-	}
-}
 
 void
 focusmasterstrict(const Arg *arg)
@@ -1560,6 +1520,7 @@ manage(Window w, XWindowAttributes *wa)
 		XWarpPointer(dpy, None, c->win, 0, 0, 0, 0, c->w/2, c->h/2);
 	if (term)
 		swallow(term, c);
+
 	focus(NULL);
 }
 
@@ -1776,7 +1737,7 @@ void
 resize(Client *c, int x, int y, int w, int h, int interact)
 {
 	if (applysizehints(c, &x, &y, &w, &h, interact))
-		resizeclient(c, x, y, w, h);
+        resizeclient(c, x, y, w, h);
 }
 
 void
@@ -1789,14 +1750,46 @@ resizeclient(Client *c, int x, int y, int w, int h)
 	c->oldw = c->w; c->w = wc.width = w;
 	c->oldh = c->h; c->h = wc.height = h;
 	wc.border_width = c->bw;
-	if (solitary(c)) {
-		c->w = wc.width += c->bw * 2;
-		c->h = wc.height += c->bw * 2;
-		wc.border_width = 0;
-	}
+
+    if (shouldcenteralone(c)) {
+        wc.x = c->x = (c->mon->mw - (c->mon->mw * c->alonecenteredsize)) / 2 ;  
+        wc.y = c->y = (c->mon->wy) + c->mon->gappov + c->bw ;
+        wc.width  = c->w = (c->mon->mw) * c->alonecenteredsize ;
+        wc.height = c->h = (c->mon->wh) - (c->mon->gappov*2) - (c->bw * 4) ;
+    }
+
 	XConfigureWindow(dpy, c->win, CWX|CWY|CWWidth|CWHeight|CWBorderWidth, &wc);
 	configure(c);
 	XSync(dpy, False);
+}
+
+//centers this client based on alonecenteredsize > 0.5 rule
+void
+centeralone(Client *c) 
+{
+
+    c->x = (c->mon->mw - c->mon->mw * c->alonecenteredsize) / 2 ;  //x TODO: dependent on mfact
+    c->y = (c->mon->wy)  + c->mon->gappov + c->bw;                                //y
+    c->w = (c->mon->mw)  * c->alonecenteredsize;                      //w TODO: dependent on mfact
+    c->h = (c->mon->wh)  - (c->mon->gappov*2) - (c->bw * 4) ;                  //h
+
+
+
+    resizeclient(c,
+            (c->mon->mw - c->mon->mw * c->alonecenteredsize) / 2,   //x TODO: dependent on mfact
+            (c->mon->wy)  + c->mon->gappov + c->bw,                                //y
+            (c->mon->mw)  * c->alonecenteredsize,                      //w TODO: dependent on mfact
+            (c->mon->wh)  - (c->mon->gappov*2) - (c->bw * 4)                  //h
+    );
+    
+    //for conditional testing
+    resizeclient(c,
+            (c->mon->mw - c->mon->mw * c->alonecenteredsize) / 2,   //x TODO: dependent on mfact
+            (c->mon->wy)  + c->mon->gappov + c->bw,                                //y
+            (c->mon->mw)  * c->alonecenteredsize * 3,                      //w TODO: dependent on mfact
+            (c->mon->wh)  - (c->mon->gappov*2) - (c->bw * 4)                  //h
+    );
+
 }
 
 void
@@ -2013,14 +2006,17 @@ void
 setlayout(const Arg *arg)
 {
 	if (!arg || !arg->v || arg->v != selmon->lt[selmon->sellt])
+        //XOR OPERATOR 
 		selmon->sellt ^= 1;
 	if (arg && arg->v)
 		selmon->lt[selmon->sellt] = (Layout *)arg->v;
 	strncpy(selmon->ltsymbol, selmon->lt[selmon->sellt]->symbol, sizeof selmon->ltsymbol);
-	if (selmon->sel)
-		arrange(selmon);
-	else
-		drawbar(selmon);
+	if (selmon->sel){
+        arrange(selmon);
+    }
+	else {
+        drawbar(selmon);
+    }
 }
 
 void
@@ -2171,20 +2167,42 @@ sigchld(int unused)
 	while (0 < waitpid(-1, NULL, WNOHANG));
 }
 
+// int
+// solitary(Client *c)
+// {
+// 	return (( c->mon->clients == c && !(c->next)) 
+//             || 
+//                 &monocle == c->mon->lt[c->mon->sellt]->arrange)
+// 	        &&  !c->isfullscreen 
+//             &&  !c->isfloating
+// 	        &&  NULL != c->mon->lt[c->mon->sellt]->arrange;
+// 	    
+// }
+
+// is the only tiled 
 int
-solitary(Client *c)
+shouldcenteralone(Client *c) 
 {
-	return ((
-                c->mon->clients == c 
-            && !(c->next)
-            )
-	    || 
-                &monocle == c->mon->lt[c->mon->sellt]->arrange)
-	        && !c->isfullscreen 
-            && !c->isfloating
-	        && NULL != c->mon->lt[c->mon->sellt]->arrange;
-	    
+    //client can't be floating
+    if(c->isfloating) {return 0;}
+    
+    //alonecenteredis not enabled
+    if(c->alonecenteredsize < 0.05) {return 0;}
+    
+    int n; Client *cli;
+    for(n = 0, cli = nexttiled(selmon->clients); cli; cli = nexttiled(cli->next), n++);   
+    if (n > 1) {return 0;}
+
+    return 1;
+            
 }
+
+// Client *
+// nexttiled(Client *c)
+// {
+// 	for (; c && (c->isfloating || !ISVISIBLE(c)); c = c->next);
+// 	return c;
+// }
 
 void
 sigstatusbar(const Arg *arg)
@@ -2222,13 +2240,6 @@ tag(const Arg *arg)
 	}
 }
 
-void
-tagmon(const Arg *arg)
-{
-	if (!selmon->sel || !mons->next)
-		return;
-	sendmon(selmon->sel, dirtomon(arg->i));
-}
 
 void
 togglebar(const Arg *arg)
@@ -2798,17 +2809,6 @@ xerrorstart(Display *dpy, XErrorEvent *ee)
 	return -1;
 }
 void
-zoom(const Arg *arg)
-{
-	Client *c = selmon->sel;
-
-	if (!selmon->lt[selmon->sellt]->arrange || !c || c->isfloating)
-		return;
-	if (c == nexttiled(selmon->clients) && !(c = nexttiled(c->next)))
-		return;
-	pop(c);
-}
-void
 zoomin(const Arg *arg)
 {
     Client *c = selmon->sel;
@@ -2827,6 +2827,9 @@ zoomin(const Arg *arg)
 	if (c == nexttiled(selmon->clients) && !(c = nexttiled(c->next)))
 		return;
 	pop(c);
+
+    XWarpPointer(dpy, None, selmon->sel->win, 0, 0, 0, 0, selmon->sel->w/2, selmon->sel->h/2);
+
 }
 void
 zoomout(const Arg *arg)
@@ -2835,25 +2838,24 @@ zoomout(const Arg *arg)
     Client *master;
     master = nexttiled(selmon->clients);
     
+    // do nothing if no master
 	if (!master)
 		return;
     
+    // do nothing if master is not selected
     if (selmon->sel != master) { //do nothing if not on master
         return;
     }
-    //::: 
-    //this is a copy of movestack.c
-    /* find the client after selmon->sel */
+
     for(c = selmon->sel->next; c && (!ISVISIBLE(c) || c->isfloating); c = c->next);
-    if(!c)
+    if(!c){
         for(c = selmon->clients; c && (!ISVISIBLE(c) || c->isfloating); c = c->next);
+    }
 
 	/* find the client before selmon->sel and c */
 	for(i = selmon->clients; i && (!p || !pc); i = i->next) {
-		if(i->next == selmon->sel)
-			p = i;
-		if(i->next == c)
-			pc = i;
+		if(i->next == selmon->sel){p = i;}
+		if(i->next == c){pc = i;}
 	}
 
 	/* swap c and selmon->sel selmon->clients in the selmon->clients list */
@@ -2873,6 +2875,7 @@ zoomout(const Arg *arg)
 			selmon->clients = selmon->sel;
 
 		arrange(selmon);
+	    XWarpPointer(dpy, None, selmon->sel->win, 0, 0, 0, 0, selmon->sel->w/2, selmon->sel->h/2);
 	}
 }
 

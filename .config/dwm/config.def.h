@@ -110,14 +110,6 @@ static const Layout layouts[] = {
 	{ "[M]",      monocle },
 	{ ":::",      gaplessgrid },
 	{ "|M|",      centeredmaster },
-    //{ "[@]",      spiral },
-	//{ "[\\]",     dwindle },
-	//{ "TTT",      bstack },
-	//{ "===",      bstackhoriz },
-	//{ "HHH",      grid },
-	//{ "###",      nrowgrid },
-	//{ "---",      horizgrid },
-	//{ ">M>",      centeredfloatingmaster },
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ NULL,       NULL },
 };
@@ -227,13 +219,10 @@ static const Key keys[] = {
 	{ 0,                            XK_Print,  spawn,          SHCMD("screenshot") },
 };
 
-
-
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static const Button buttons[] = {
     // dwmblocks signals
-    //
 	{ ClkStatusText,        0,              Button1,        sigstatusbar,   {.i = 1} }, //LMB
 	{ ClkStatusText,        0,              Button2,        sigstatusbar,   {.i = 2} }, //MMB
 	{ ClkStatusText,        0,              Button3,        sigstatusbar,   {.i = 3} }, //RMB
@@ -244,15 +233,9 @@ static const Button buttons[] = {
 	{ ClkStatusText,        ShiftMask,      Button3,        sigstatusbar,   {.i = 8} },
 	{ ClkStatusText,        ShiftMask,      Button4,        sigstatusbar,   {.i = 9} },
 	{ ClkStatusText,        ShiftMask,      Button5,        sigstatusbar,   {.i = 10} }, 
-	/* click                event mask      button          function        argument */
-	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
-	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} }, { ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
-	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
+
+    { ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
+	// { ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
-	{ ClkTagBar,            0,              Button1,        view,           {0} },
-	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
-	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
-	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
 
