@@ -1496,7 +1496,7 @@ manage(Window w, XWindowAttributes *wa)
 
 	wc.border_width = c->bw;
 	XConfigureWindow(dpy, w, CWBorderWidth, &wc);
-	XSetWindowBorder(dpy, w, scheme[SchemeNorm][ColBorder].pixel);
+    XSetWindowBorder(dpy, w, scheme[SchemeNorm][ColBorder].pixel);
 	configure(c); /* propagates border_width, if size doesn't change */
 	updatewindowtype(c);
 	updatesizehints(c);
@@ -2198,10 +2198,6 @@ shouldcenteralone(Client *c)
     //alonecenteredis not enabled
     if(!c->iscenteredalone) {return 0;}
     
-    //cannot be fullscreen
-	// if (!c->isfullscreen && lockfullscreen) {return 0;}
-
-
     //not currently in monocle
     if (&monocle == c->mon->lt[c->mon->sellt]->arrange) {return 0;}
 
@@ -2219,18 +2215,18 @@ shouldborderless(Client *c)
 {
     int n; Client *cli;
     for(n = 0, cli = nextonscreen(selmon->clients); cli; cli = nextonscreen(cli->next), n++);   
+    
+    // if (&monocle == c->mon->lt[c->mon->sellt]->arrange) {return 0;}
+    
+	// if (c->isfullscreen) {return 1;}
+    // if this client is fullscreened, and the number of clients on screen is 1
     if (n > 1) {return 0;}
+    if (&monocle == c->mon->lt[c->mon->sellt]->arrange) {return 1;}
 
     return 1;
             
 }
 
-// Client *
-// nexttiled(Client *c)
-// {
-// 	for (; c && (c->isfloating || !ISVISIBLE(c)); c = c->next);
-// 	return c;
-// }
 
 void
 sigstatusbar(const Arg *arg)
@@ -2325,7 +2321,7 @@ unfocus(Client *c, int setfocus)
 	if (!c)
 		return;
 	grabbuttons(c, 0);
-	XSetWindowBorder(dpy, c->win, scheme[SchemeNorm][ColBorder].pixel);
+    XSetWindowBorder(dpy, c->win, scheme[SchemeNorm][ColBorder].pixel);
 	if (setfocus) {
 		XSetInputFocus(dpy, root, RevertToPointerRoot, CurrentTime);
 		XDeleteProperty(dpy, root, netatom[NetActiveWindow]);
