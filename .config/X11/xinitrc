@@ -3,6 +3,7 @@ xwallpaper --no-randr --stretch "$JOHAN_WALLPAPERS/StarsMocha.png" &
 pipewire &
 pipewire-pulse &
 pipewire-media-session &
+clipmenud &
 dwmblocks &
 exec dbus-launch dwm
 

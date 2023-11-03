@@ -245,6 +245,7 @@ key_bindings:
 #- { key: Paste,                    action: Paste                            }
 #- { key: Copy,                     action: Copy                             }
 - { key: L,         mods: Control,      chars: "\x0c"                            }
+- { key: Back,         mods: Control,      chars: "\x17"                            }
 #- { key: PageUp,    mods: Shift,   action: ScrollPageUp,   mode: ~Alt       }
 #- { key: PageDown,  mods: Shift,   action: ScrollPageDown, mode: ~Alt       }
 #- { key: Home,      mods: Shift,   action: ScrollToTop,    mode: ~Alt       }
