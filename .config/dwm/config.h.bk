@@ -26,8 +26,10 @@ static const char dmenufont[]       = "NotoSansM Nerd Font:medium:pixelsize=16";
 #include "themes/mocha.h"
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { surface0, mantle, crust },
-	[SchemeSel]  = { surface0, mantle, base },
+	[SchemeNorm] = { surface0, crust, crust },
+	[SchemeSel]  = { surface0, crust, base },
+	// [SchemeNorm] = { surface0, mantle, crust },
+	// [SchemeSel]  = { surface0, mantle, base },
     /*                     border bg        fg (for dwm blocks specifically)*/
     [SchemeDisk]        = {flamingo,  mantle, crust}, //4
     [SchemeCpu]         = {peach,  mantle,   crust}, //8
@@ -54,13 +56,6 @@ static const unsigned int ulinevoffset  = 0;	/* how far above the bottom of the 
 static const int ulineall               = 0;	/* 1 to show underline on all tags, 0 for just the active ones */
 
 static const char *tagsel[][2] = {
-	//{ red,      base },
-	//{ blue,     base },
-	//{ lavender, base },
-	//{ yellow,   base },
-	//{ green,    base },
-	//{ peach,    base },
-	//{ mauve,    base },
 	{ red,      base },
 	{ green, base },
 	{ yellow,   base },
@@ -76,8 +71,8 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class     instance  title           tags mask  isfloating  isterminal  noswallow iscenteredalone monitor */
-	{ "Gimp",    NULL,     NULL,           0,         1,          0,          0,         0,             -1 },
-	{ "Firefox", NULL,     NULL,           1 << 8,    0,          0,         -1,         0,             -1 },
+	{ "Gimp",    NULL,     NULL,           0,         1,          0,          0,         0,          -1 },
+	{ "Firefox", NULL,     NULL,           1 << 8,    0,          0,         -1,         0,          -1 },
     //Terminals
 	{ TERMCLASS, NULL,     NULL,           0,         0,          1,          0,         1,          -1 },
 	//Other Terminals
@@ -87,11 +82,10 @@ static const Rule rules[] = {
 	{ "Alacritty",NULL,    NULL,           0,         0,          1,          0,         1,          -1 },
     
     //A getaround for the braile font problem with alacritty
-	{ "FloatingClass",   "Battery",NULL,   0,         1,          1,          0,         0,             -1 },
-	{ "FloatingClass",   NULL,     NULL,   0,         1,          1,          0,         0,             -1 },
-
+	{ "FloatingClass",   "Battery",NULL,   0,         1,          1,          0,         0,          -1 },
+	{ "FloatingClass",   NULL,     NULL,   0,         1,          1,          0,         0,          -1 },
     //xev
-	{ NULL,      NULL,     "Event Tester", 0,         0,          0,          1,         0,             -1 }, /* xev */
+	{ NULL,      NULL,     "Event Tester", 0,         0,          0,          1,         0,          -1 }, /* xev */
 };
 
 /* layout(s) */

@@ -1,24 +1,25 @@
 xsetroot -cursor_name left_ptr
+xwallpaper --no-randr --stretch "$JOHAN_WALLPAPERS/StarsMocha.png" &
+pipewire &
+pipewire-pulse &
+pipewire-media-session &
+dwmblocks &
+exec dbus-launch dwm
+
+
+
+# exec pipewire &
+# exec pipewire-media-session &
+# exec pipewire-pulse &
+
 # xwallpaper --stretch "$JOHAN_WALLPAPERS/space.jpg" &
 # xwallpaper --stretch "$JOHAN_WALLPAPERS/ThinkPadT480Mocha.png" &
-xwallpaper --no-randr --stretch "$JOHAN_WALLPAPERS/StarsMocha.png" &
 
 
-
-pipewire & 
-
-pipewire-media-session & 
-
-
+# pipewire-pulse &
 # wireplumber &
 #
 # pipewire &
-
-dwmblocks &
-
-# pipewire-pulse &
-
-exec dwm 
 
 
 

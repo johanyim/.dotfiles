@@ -26,18 +26,20 @@ static const char dmenufont[]       = "NotoSansM Nerd Font:medium:pixelsize=16";
 #include "themes/mocha.h"
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { surface0, mantle, crust },
-	[SchemeSel]  = { surface0, mantle, base },
+	[SchemeNorm] = { surface0, crust, crust },
+	[SchemeSel]  = { surface0, crust, mantle },
+	// [SchemeNorm] = { surface0, mantle, crust },
+	// [SchemeSel]  = { surface0, mantle, base },
     /*                     border bg        fg (for dwm blocks specifically)*/
-    [SchemeDisk]        = {flamingo,  mantle, crust}, //4
-    [SchemeCpu]         = {peach,  mantle,   crust}, //8
-    [SchemeRam]         = {red, mantle,  crust}, //9
-    [SchemeBluetooth]   = {blue, mantle, crust}, //6
-    [SchemeInternet]    = {teal, mantle, crust}, //6
-    [SchemeVolume]      = {mauve, mantle, crust}, //5
-    [SchemeBrightness]  = {yellow,mantle, crust}, //3
-    [SchemeBattery]     = {green, mantle, crust}, //7
-    [SchemeTime]        = {text,mantle,    crust}, //10
+    [SchemeDisk]        = {flamingo,  crust, crust}, //4
+    [SchemeCpu]         = {peach,  crust,   crust}, //8
+    [SchemeRam]         = {red, crust,  crust}, //9
+    [SchemeBluetooth]   = {blue, crust, crust}, //6
+    [SchemeInternet]    = {teal, crust, crust}, //6
+    [SchemeVolume]      = {mauve, crust, crust}, //5
+    [SchemeBrightness]  = {yellow,crust, crust}, //3
+    [SchemeBattery]     = {green, crust, crust}, //7
+    [SchemeTime]        = {text,crust,    crust}, //10
 };
 
 /* tagging */
@@ -54,13 +56,6 @@ static const unsigned int ulinevoffset  = 0;	/* how far above the bottom of the 
 static const int ulineall               = 0;	/* 1 to show underline on all tags, 0 for just the active ones */
 
 static const char *tagsel[][2] = {
-	//{ red,      base },
-	//{ blue,     base },
-	//{ lavender, base },
-	//{ yellow,   base },
-	//{ green,    base },
-	//{ peach,    base },
-	//{ mauve,    base },
 	{ red,      base },
 	{ green, base },
 	{ yellow,   base },
