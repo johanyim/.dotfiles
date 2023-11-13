@@ -16,6 +16,8 @@ settings:
     global: auto
   content.geolocation:
     https://www.google.com: true
+  content.notifications.enabled:
+    https://blog.csdn.net: false
   downloads.location.directory:
     global: $HOME/files/downloads
   scrolling.bar:
