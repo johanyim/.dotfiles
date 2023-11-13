@@ -60,7 +60,7 @@ alias grep='grep --color=auto'
 alias wifi='nmcli dev wifi connect'
 alias wifilist='nmcli dev wifi list'
 alias please='sudo $(fc -ln -1)'
-
+alias hx='helix'
 
 #default system variables
 export VISUAL=nvim

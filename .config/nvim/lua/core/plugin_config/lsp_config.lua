@@ -1,11 +1,11 @@
 require("mason").setup()
 require("mason-lspconfig").setup({
-    ensure_installed = { "lua_ls", "rust_analyzer" },
+    ensure_installed = { "lua_ls", "rust_analyzer", "bashls" },
 })
 
 local on_attach = function(_,_)
-    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, {})
-    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
+    vim.keymap.set("n", "<Leader>rn", vim.lsp.buf.rename, {})
+    vim.keymap.set("n", "<Leader>ca", vim.lsp.buf.code_action, {})
 
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {})
@@ -22,5 +22,8 @@ require("lspconfig").lua_ls.setup {
     capabilities = capabilities,
 }
 require("lspconfig").rust_analyzer.setup {
+    capabilities = capabilities,
+}
+require("lspconfig").bashls.setup {
     capabilities = capabilities,
 }

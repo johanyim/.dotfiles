@@ -210,7 +210,9 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_x,      spawn,          SHCMD("colormenu open") },
 	{ MODKEY|ControlMask,           XK_x,      spawn,          SHCMD("colormenu pick") },
 	{ MODKEY,                       XK_i,      spawn,          SHCMD("dm-wlanconnect") },
-	{ 0,                            XK_Print,  spawn,          SHCMD("screenshot") },
+	// { 0,                            XK_Print,  spawn,          SHCMD("screenshot") },
+	{ 0,                            XK_Print,  spawn,          SHCMD("fingerpaint") },
+	{ MODKEY|ShiftMask,             XK_z,      spawn,          SHCMD("fingerpaint") },
 };
 
 /* button definitions */

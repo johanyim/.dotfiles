@@ -20,7 +20,6 @@ return require('packer').startup(function(use)
     use 'nvim-treesitter/nvim-treesitter'
     use {
         'nvim-telescope/telescope.nvim',
-
         tag = '0.1.2',
         requires = { {'nvim-lua/plenary.nvim'} }
     }
@@ -58,13 +57,13 @@ return require('packer').startup(function(use)
     })
 
     -- markdown previews in browser
-    use({ 
-        "iamcco/markdown-preview.nvim", 
-        run = "cd app && npm install", 
-        setup = function() vim.g.mkdp_filetypes = { "markdown" } end, 
-        ft = { "markdown" }, 
+    use({
+        "iamcco/markdown-preview.nvim",
+        run = "cd app && npm install",
+        setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
+        ft = { "markdown" },
     })
-    
+
     -- live server 
     use({
         "aurum77/live-server.nvim",
@@ -74,26 +73,15 @@ return require('packer').startup(function(use)
         cmd = { "LiveServer", "LiveServerStart", "LiveServerStop" },
     })
 
-    -- neorg
     use({
-        "nvim-neorg/neorg",
-        config = function()
-            require('neorg').setup {
-                load = {
-                    ["core.defaults"] = {}, -- Loads default behaviour
-                    ["core.concealer"] = {}, -- Adds pretty icons to your documents
-                    ["core.dirman"] = { -- Manages Neorg workspaces
-                        config = {
-                            workspaces = {
-                                notes = "~/notes",
-                            },
-                        },
-                    },
-                },
-            }
-        end,
-        run = ":Neorg sync-parsers",
-        requires = "nvim-lua/plenary.nvim",
+        "NeogitOrg/neogit",
+        dependencies = {
+            "nvim-lua/plenary.nvim",         -- required
+            "nvim-telescope/telescope.nvim", -- optional
+            "sindrets/diffview.nvim",        -- optional
+            "ibhagwan/fzf-lua",              -- optional
+        },
+        config = true
     })
 
 end)

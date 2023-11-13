@@ -1,1 +1,3 @@
 numbering #45475a
+star #cdd6f4
+11111b #11111b
