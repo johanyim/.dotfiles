@@ -17,14 +17,12 @@ require('toggleterm').setup {
     },
     float_opts = {
         border = 'double',
-
-
     }
 }
 
 function _G.set_terminal_keymaps()
     local opts = {buffer = 0}
-    vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+    -- vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
     -- vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
     vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
     vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
@@ -36,10 +34,10 @@ end
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
 local Terminal  = require('toggleterm.terminal').Terminal
-local lazygit = Terminal:new({ cmd = "gitui -t mocha.ron", hidden = true })
+local gitui = Terminal:new({ cmd = "gitui -t mocha.ron", hidden = true })
 
-function _lazygit_toggle()
-  lazygit:toggle()
+function _gitui_toggle()
+  gitui:toggle()
 end
 
-vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _gitui_toggle()<CR>", {noremap = true, silent = true})
