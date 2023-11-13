@@ -15,4 +15,3 @@ vim.keymap.set('n', '<PageUp>',         '_',{noremap=true})
 vim.keymap.set('n', '<PageDown>',       '$',{noremap=true})
 
 
-vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _gitui_toggle()<CR>", {noremap = true, silent = true})
