@@ -41,6 +41,13 @@ return require('packer').startup(function(use)
     use 'saadparwaiz1/cmp_luasnip'
     use 'rafamadriz/friendly-snippets'
 
+        
+    -- terminal
+    use {"akinsho/toggleterm.nvim", tag = '*', config = function()
+        require("toggleterm").setup()
+    end}
+
+
     -- commenting
     use 'numToStr/Comment.nvim'
 
@@ -73,15 +80,5 @@ return require('packer').startup(function(use)
         cmd = { "LiveServer", "LiveServerStart", "LiveServerStop" },
     })
 
-    use({
-        "NeogitOrg/neogit",
-        dependencies = {
-            "nvim-lua/plenary.nvim",         -- required
-            "nvim-telescope/telescope.nvim", -- optional
-            "sindrets/diffview.nvim",        -- optional
-            "ibhagwan/fzf-lua",              -- optional
-        },
-        config = true
-    })
 
 end)

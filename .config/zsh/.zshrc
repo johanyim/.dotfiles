@@ -61,6 +61,7 @@ alias wifi='nmcli dev wifi connect'
 alias wifilist='nmcli dev wifi list'
 alias please='sudo $(fc -ln -1)'
 alias hx='helix'
+alias gitui='gitui -t mocha.ron'
 
 #default system variables
 export VISUAL=nvim
