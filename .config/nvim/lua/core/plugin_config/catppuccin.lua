@@ -18,9 +18,11 @@ require("catppuccin").setup {
 
 			}
 		end,
-    cmp = true,
-    nvimtree = true,
-    treesitter = true,
+    integrations = {
+        cmp = true,
+        nvimtree = true,
+        treesitter = true,
+    },
 }
 -- vim.o.termguicolors = true
 vim.cmd.colorscheme "catppuccin-mocha"

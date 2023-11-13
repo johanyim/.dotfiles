@@ -1,5 +1,25 @@
+local color = require("catppuccin.palettes").get_palette "mocha"
+
 require('toggleterm').setup {
-    direction = "float"
+    size = 10,
+    direction = "float",
+    highlights = {
+        NormalNC = {
+            -- guibg = color.green,
+        },
+        NormalFloat = {
+            link = 'Normal'
+        },
+        FloatBorder = {
+            guifg = color.surface0,
+            -- guibg = color.blue,
+        },
+    },
+    float_opts = {
+        border = 'double',
+
+
+    }
 }
 
 function _G.set_terminal_keymaps()
@@ -14,3 +34,12 @@ function _G.set_terminal_keymaps()
 end
 
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+
+local Terminal  = require('toggleterm.terminal').Terminal
+local lazygit = Terminal:new({ cmd = "gitui -t mocha.ron", hidden = true })
+
+function _lazygit_toggle()
+  lazygit:toggle()
+end
+
+vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
