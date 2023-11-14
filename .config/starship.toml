@@ -33,7 +33,7 @@ $sudo\
 $character """
 right_format = "$shell $time"
 
-continuation_prompt = '▶▶ '
+continuation_prompt = '   $character '
 
 # No new line between shell prompts
 add_newline = false

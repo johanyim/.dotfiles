@@ -1,98 +1,101 @@
-local ensure_packer = function()
-    local fn = vim.fn
-    local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-    if fn.empty(fn.glob(install_path)) > 0 then
-        fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-        vim.cmd [[packadd packer.nvim]]
-        return true
-    end
-    return false
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
-local packer_bootstrap = ensure_packer()
-
-return require('packer').startup(function(use)
-    use 'wbthomason/packer.nvim'
-    use { "catppuccin/nvim", as = "catppuccin" }
-    use 'nvim-tree/nvim-tree.lua'
-    use 'nvim-tree/nvim-web-devicons'
-    use 'nvim-lualine/lualine.nvim'
-    use 'nvim-treesitter/nvim-treesitter'
-    use {
+local plugins = {
+    { "catppuccin/nvim", as = "catppuccin" },
+    'nvim-tree/nvim-tree.lua',
+    'nvim-tree/nvim-web-devicons',
+    'nvim-lualine/lualine.nvim',
+    'nvim-treesitter/nvim-treesitter',
+    {
         'nvim-telescope/telescope.nvim',
         tag = '0.1.2',
-        requires = { {'nvim-lua/plenary.nvim'} }
-    }
-    use {
+        dependencies = { {'nvim-lua/plenary.nvim'} }
+    },
+    {
         'williamboman/mason.nvim',
         'williamboman/mason-lspconfig.nvim',
         'neovim/nvim-lspconfig',
-    }
+    },
     --completions for lua
-    use 'hrsh7th/cmp-nvim-lsp'
-    use 'hrsh7th/nvim-cmp'
-    use 'neovim/nvim-lspconfig'
-    use 'hrsh7th/cmp-nvim-lsp'
-    use 'hrsh7th/cmp-buffer'
-    use 'hrsh7th/cmp-path'
-    use 'hrsh7th/cmp-cmdline'
+    'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/nvim-cmp',
+    'neovim/nvim-lspconfig',
+    'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/cmp-buffer',
+    'hrsh7th/cmp-path',
+    'hrsh7th/cmp-cmdline',
 
-    use({
+    {
 	    "L3MON4D3/LuaSnip",
-	    tag = "v2.*",
-	    run = "make install_jsregexp"
-    })
+	    version = "v2.*",
+	    build = "make install_jsregexp"
+    },
 
     -- completions for all languages
-    use 'saadparwaiz1/cmp_luasnip'
-    use 'rafamadriz/friendly-snippets'
+    'saadparwaiz1/cmp_luasnip',
+    'rafamadriz/friendly-snippets',
 
     -- terminal
-    use {"akinsho/toggleterm.nvim", tag = '*'}
+    {"akinsho/toggleterm.nvim", version = '*'},
 
     -- commenting
-    use 'numToStr/Comment.nvim'
+    'numToStr/Comment.nvim',
 
     -- rust tools
-    use 'simrat39/rust-tools.nvim'
+    'simrat39/rust-tools.nvim',
 
     -- rgba colors 
-    use 'norcalli/nvim-colorizer.lua'
+    'norcalli/nvim-colorizer.lua',
 
     -- surround tags
-    use({
+    {
         "kylechui/nvim-surround",
-        tag = "*", -- Use for stability; omit to use `main` branch for the latest features
-    })
+        version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    },
 
     --move blocks
-    use 'fedepujol/move.nvim'
+    'fedepujol/move.nvim',
 
     -- markdown previews in browser
-    use({
+    {
         "iamcco/markdown-preview.nvim",
-        run = "cd app && npm install",
-        setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
+        cmd = {
+            "MarkdownPreviewToggle",
+            "MarkdownPreview",
+            "MarkdownPreviewStop" },
         ft = { "markdown" },
-    })
+        build = function() vim.fn["mkdp#util#install"]() end,
+    },
 
     -- live server 
-    use({
+    {
         "aurum77/live-server.nvim",
-        run = function()
+        build = function()
             require"live_server.util".install()
         end,
         cmd = { "LiveServer", "LiveServerStart", "LiveServerStop" },
-    })
+    },
 
     -- lsp diagnostic lines
-    use({
+    {
         "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
         -- config = function()
         --     require("lines").setup()
         -- end,
-    })
+    },
+}
 
+local opts = {}
 
-
-end)
+require("lazy").setup(plugins, opts)
