@@ -29,8 +29,14 @@ return require('packer').startup(function(use)
         'neovim/nvim-lspconfig',
     }
     --completions for lua
-    use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-nvim-lsp'
+    use 'hrsh7th/nvim-cmp'
+    use 'neovim/nvim-lspconfig'
+    use 'hrsh7th/cmp-nvim-lsp'
+    use 'hrsh7th/cmp-buffer'
+    use 'hrsh7th/cmp-path'
+    use 'hrsh7th/cmp-cmdline'
+
     use({
 	    "L3MON4D3/LuaSnip",
 	    tag = "v2.*",
@@ -41,12 +47,8 @@ return require('packer').startup(function(use)
     use 'saadparwaiz1/cmp_luasnip'
     use 'rafamadriz/friendly-snippets'
 
-        
     -- terminal
-    use {"akinsho/toggleterm.nvim", tag = '*', config = function()
-        require("toggleterm").setup()
-    end}
-
+    use {"akinsho/toggleterm.nvim", tag = '*'}
 
     -- commenting
     use 'numToStr/Comment.nvim'
@@ -62,6 +64,9 @@ return require('packer').startup(function(use)
         "kylechui/nvim-surround",
         tag = "*", -- Use for stability; omit to use `main` branch for the latest features
     })
+
+    --move blocks
+    use 'fedepujol/move.nvim'
 
     -- markdown previews in browser
     use({
@@ -79,6 +84,15 @@ return require('packer').startup(function(use)
         end,
         cmd = { "LiveServer", "LiveServerStart", "LiveServerStop" },
     })
+
+    -- lsp diagnostic lines
+    use({
+        "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+        -- config = function()
+        --     require("lines").setup()
+        -- end,
+    })
+
 
 
 end)

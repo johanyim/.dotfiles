@@ -1,4 +1,4 @@
-local color = require("catppuccin.palettes").get_palette "mocha"
+local colors = require("catppuccin.palettes").get_palette("mocha")
 
 require('toggleterm').setup {
     size = 10,
@@ -11,7 +11,7 @@ require('toggleterm').setup {
             link = 'Normal'
         },
         FloatBorder = {
-            guifg = color.surface0,
+            guifg = colors.surface0,
             -- guibg = color.blue,
         },
     },

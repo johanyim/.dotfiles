@@ -5,19 +5,22 @@ require("catppuccin").setup {
         macchiato = {},
         mocha = {},
     },
-    custom_highlights = function(colors)
-			return {
+    highlight_overrides = {
+        all = function(colors)
+            return {
                 Normal = { fg = colors.text, bg = colors.crust },
-				NormalNC = { fg = colors.text, bg = colors.crust },
-				NormalFloat = { fg = colors.text, bg = colors.crust },
+                NormalNC = { fg = colors.text, bg = colors.crust },
+                NormalFloat = { fg = colors.text, bg = colors.crust },
                 CursorLine = {bg = colors.mantle},
                 LineNr = {fg = colors.surface0},
                 NvimTreeNormal = {bg = colors.crust},
                 NvimTreeWinSeparator = {fg = colors.base, bg = colors.crust},
-                
-
-			}
-		end,
+                TelescopeBorder = {fg = colors.surface0},
+                -- LspCodeLens = {style = {"bold"}},
+                -- LspInfoTip = {style = {"bold"}},
+            }
+        end,
+    },
     integrations = {
         cmp = true,
         nvimtree = true,
