@@ -15,3 +15,6 @@ rt.setup({
         },
     },
 })
+
+local crates = require("crates")
+crates.setup()

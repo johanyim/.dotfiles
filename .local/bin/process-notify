@@ -1,0 +1,10 @@
+#!/bin/sh
+
+
+# run this: a2ln --command 'notify-send "{app};;{title};;{body}"'   
+
+message=$1
+
+
+
+herbe $message

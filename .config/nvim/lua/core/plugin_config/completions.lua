@@ -26,6 +26,6 @@ cmp.setup({
         { name = 'buffer' },
     }),
     experimental = {
-        ghost_text = true
+        ghost_text = { hl_group = 'GhostText' }
     }
 })

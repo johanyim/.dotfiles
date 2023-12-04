@@ -1,0 +1,5 @@
+#!/bin/bash
+
+target=$(exa -a ~/.dotfiles/.config | fzf)
+
+nvim ~/.dotfiles/.config/$target

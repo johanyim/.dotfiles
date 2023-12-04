@@ -1,5 +1,5 @@
 env:
-  TERM: alacritty #xterm-256color
+  TERM: alacritty-direct #xterm-256color
 window:
   opacity: 1.0 
   # If both are `0`, this setting is ignored.

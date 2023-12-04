@@ -14,4 +14,3 @@ vim.keymap.set('i','<C-Right>',          '<esc>ea',{noremap=true})
 vim.keymap.set('n', '<PageUp>',         '_',{noremap=true})
 vim.keymap.set('n', '<PageDown>',       '$',{noremap=true})
 
-

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+st -c "FloatingClass" -g "160x40" -e sh -c "~/code/rust/fingerpaint/target/debug/fingerpaint; sleep 0.1" 
+# st -c "FloatingClass" -g "160x40" -e sh -c "~/code/fingerpaint/target/release/fingerpaint" 
+# st -c "FloatingClass" -g "160x40" -e sh -c "~/code/qolor/target/debug/qolor ; sleep 0.1 " 
+
+# local input=$(echo "hello")
+# # alacritty -e ~/code/qolor/target/debug/main | ecqolorho ; sleep 10
+# alacritty -e herbe hello
+
+# ~/code/qolor/target/debug/main | herbe
+
+

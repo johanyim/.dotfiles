@@ -82,7 +82,9 @@ text = "#1E1E2E"
 style = "Beam"
 
 [env]
-TERM = "alacritty"
+# TERM = "xterm-256color" 
+# TERM = "alacritty"
+TERM = "alacritty-direct"
 
 [font]
 size = 7
@@ -118,7 +120,7 @@ family = "NotoSansM Nerd Font"
 # family = "Monaspace Neon"
 # style = "Regular"
 # [font.italic]
-# family = "Monaspace Neon"
+# family = "Monaspace Krypton"
 # style = "Italic"
 # [font.bold]
 # family = "Monaspace Neon"

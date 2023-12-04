@@ -60,7 +60,6 @@ alias grep='grep --color=auto'
 alias wifi='nmcli dev wifi connect'
 alias wifilist='nmcli dev wifi list'
 alias please='sudo $(fc -ln -1)'
-alias hx='helix'
 alias gitui='gitui -t mocha.ron'
 
 #default system variables
@@ -85,15 +84,25 @@ source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 # colors for fzf
 export FZF_DEFAULT_OPTS=" \
---color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
---color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
---color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+--color=bg+:#1e1e2e,bg:#11111b,spinner:#f5e0dc,hl:#f9e2af \
+--color=fg:#6c7086,header:#f38ba8,info:#45475a,pointer:#f5e0dc \
+--color=fg+:#9399b2,prompt:#f5e0dc,hl+:#fab387 \
+--prompt=' ' --color=prompt:#f5e0dc \
+--pointer=' ' --color=pointer:#9399b2 \
+--color=separator:#1e1e2e,scrollbar:#1e1e2e,query:#cdd6f4 \
+--height 50% --layout=reverse \
+--preview 'bat -n --color=always {}' \
+--preview-window=right,60% \
+--preview-window border-sharp --color=border:#1e1e2e \
+--border=none "
 
-# Finally, load zsh-syntax-highlighting
+export FZF_DEFAULT_COMMAND="rg --files --hidden -g '!.git/' -g '!*.cache/'"
+
+export FZF_ALT_C_COMMAND='find .'
+
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# zsh-syntax-highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
-
-
-
-
 
 source /home/johan/.config/broot/launcher/bash/br

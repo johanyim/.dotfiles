@@ -10,14 +10,7 @@ require('nvim-treesitter.configs').setup {
 }
 
 
-vim.keymap.set("n",    "ge",
-    function()
-        local result = vim.treesitter.get_captures_at_cursor(0)
-        print(vim.inspect(result))
-    end,
-    { noremap = true, silent = false }
-)
-vim.keymap.set("n",    "ge",
+vim.keymap.set("n",    "gt",
     function()
         local result = vim.treesitter.get_captures_at_cursor(0)
         print(vim.inspect(result))

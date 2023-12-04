@@ -244,7 +244,7 @@ static void seturgent(Client *c, int urg);
 static void showhide(Client *c);
 static void sigchld(int unused);
 static void sigstatusbar(const Arg *arg);
-static int solitary(Client *c);
+// static int solitary(Client *c);
 static void spawn(const Arg *arg);
 static void tag(const Arg *arg);
 static void togglebar(const Arg *arg);
@@ -1147,15 +1147,15 @@ focusin(XEvent *e)
 		setfocus(selmon->sel);
 }
 
-
 void
 focusmasterstrict(const Arg *arg)
 {
 	Client *master;
 
-    // cant handle when >1 masters on the monitor 
-	if (selmon->nmaster > 1)
-		return;
+    //trying to see if it can handle >1 masters
+ //    // cant handle when >1 masters on the monitor 
+	// if (selmon->nmaster > 1)
+	// 	return;
     
     // no selection, or fullscreen and locked on fullscreen
 	if (!selmon->sel || (selmon->sel->isfullscreen && lockfullscreen))

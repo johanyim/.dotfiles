@@ -7,7 +7,7 @@ export PATH="$PATH:$HOME/.local/bin"
 
 # default programs
 export EDITOR="nvim"
-export TERMINAL="alacritty" # "st"
+# export TERMINAL="alacritty" # "st"
 export BROWSER="qutebrowser"
 
 # Johan's specific files
@@ -65,4 +65,3 @@ export XSERVERRC="$XDG_CONFIG_HOME/X11/xserverrc"
 
 #configure .gitconfig path
 # git config --global include.path $XDG_CONFIG_HOME/git/.gitconfig
-

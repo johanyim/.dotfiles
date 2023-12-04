@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# Prints all batteries, their percentage remaining and an emoji corresponding
-# to charge status (🔌 for plugged up, 🔋 for discharging on battery, etc.).
-
 case $BLOCK_BUTTON in
 	1) alacritty --class "FloatingClass" -T "Battery" -e btm --battery --default_widget_type batt -e;;
     2) pkill -RTMIN+9 dwmblocks;;

@@ -15,20 +15,33 @@ local plugins = {
     { "catppuccin/nvim", as = "catppuccin" },
     'nvim-tree/nvim-tree.lua',
     'nvim-tree/nvim-web-devicons',
-    'nvim-lualine/lualine.nvim',
+
+    -- TreeSitter
     'nvim-treesitter/nvim-treesitter',
+
+    -- lualine and lsp progress integration
+    {
+        'nvim-lualine/lualine.nvim',
+        dependencies = {
+            'arkav/lualine-lsp-progress'
+            -- 'nvim-tree/nvim-web-devicons',
+            -- 'linrongbin16/lsp-progress.nvim',
+        }
+    },
+
     {
         'nvim-telescope/telescope.nvim',
         tag = '0.1.2',
         dependencies = { {'nvim-lua/plenary.nvim'} }
     },
+
+    -- lsp and mason
     {
         'williamboman/mason.nvim',
         'williamboman/mason-lspconfig.nvim',
         'neovim/nvim-lspconfig',
     },
-    --completions for lua
-    'hrsh7th/cmp-nvim-lsp',
+    -- completions for lua
     'hrsh7th/nvim-cmp',
     'neovim/nvim-lspconfig',
     'hrsh7th/cmp-nvim-lsp',
@@ -36,11 +49,18 @@ local plugins = {
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-cmdline',
 
+    -- lua snip
     {
 	    "L3MON4D3/LuaSnip",
 	    version = "v2.*",
 	    build = "make install_jsregexp"
     },
+
+    -- tmux-vim integration
+    'alexghergh/nvim-tmux-navigation',
+
+    -- harpoon 
+    { "ThePrimeagen/harpoon" },
 
     -- completions for all languages
     'saadparwaiz1/cmp_luasnip',
@@ -54,6 +74,7 @@ local plugins = {
 
     -- rust tools
     'simrat39/rust-tools.nvim',
+    { 'saecki/crates.nvim', tag = 'v0.4.0', },
 
     -- rgba colors 
     'norcalli/nvim-colorizer.lua',
@@ -63,9 +84,6 @@ local plugins = {
         "kylechui/nvim-surround",
         version = "*", -- Use for stability; omit to use `main` branch for the latest features
     },
-
-    --move blocks
-    'fedepujol/move.nvim',
 
     -- markdown previews in browser
     {
@@ -87,6 +105,11 @@ local plugins = {
         cmd = { "LiveServer", "LiveServerStart", "LiveServerStop" },
     },
 
+    --vimtex 
+    {
+        "lervag/vimtex",
+    },
+
     -- lsp diagnostic lines
     {
         "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
@@ -94,6 +117,12 @@ local plugins = {
         --     require("lines").setup()
         -- end,
     },
+
+    -- -- WIP
+    -- --notifications
+    -- "rcarriga/nvim-notify",
+    -- -- status line popups
+    -- "j-hui/fidget.nvim",
 }
 
 local opts = {}

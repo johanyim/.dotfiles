@@ -5,6 +5,7 @@ require("catppuccin").setup {
         macchiato = {},
         mocha = {},
     },
+    no_italic = true,
     highlight_overrides = {
         all = function(colors)
             return {
@@ -16,8 +17,10 @@ require("catppuccin").setup {
                 NvimTreeNormal = {bg = colors.crust},
                 NvimTreeWinSeparator = {fg = colors.base, bg = colors.crust},
                 TelescopeBorder = {fg = colors.surface0},
-                -- LspCodeLens = {style = {"bold"}},
-                -- LspInfoTip = {style = {"bold"}},
+                Comment = { style = {}},
+                NonText = { style = {"bold"}},
+                GhostText = { fg = colors.surface1},
+
             }
         end,
     },
@@ -27,5 +30,4 @@ require("catppuccin").setup {
         treesitter = true,
     },
 }
--- vim.o.termguicolors = true
 vim.cmd.colorscheme "catppuccin-mocha"
