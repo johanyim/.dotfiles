@@ -48,6 +48,10 @@ local plugins = {
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-cmdline',
+    -- {
+    --     "jose-elias-alvarez/null-ls.nvim",
+    --     ft = "go",
+    -- },
 
     -- lua snip
     {
@@ -71,6 +75,11 @@ local plugins = {
 
     -- commenting
     'numToStr/Comment.nvim',
+
+    {
+        "folke/todo-comments.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
+    },
 
     -- rust tools
     'simrat39/rust-tools.nvim',

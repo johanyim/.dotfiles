@@ -1,6 +1,6 @@
 require("mason").setup()
 require("mason-lspconfig").setup({
-    ensure_installed = { "lua_ls", "rust_analyzer", "bashls" },
+    ensure_installed = { "lua_ls", "rust_analyzer", "bashls", "gopls" },
 })
 
 local on_attach = function(_,_)
@@ -9,15 +9,19 @@ local on_attach = function(_,_)
 
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {})
-    vim.keymap.set("n", "gr", require('telescpe.builtin').lsp_references, {})
+    vim.keymap.set("n", "gr", require('telescope.builtin').lsp_references, {})
     vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 
 end
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
---local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-require("lspconfig").lua_ls.setup {
+--local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local lspconfig = require("lspconfig");
+local util = require("lspconfig/util")
+
+lspconfig.lua_ls.setup {
+    on_attach = on_attach,
     capabilities = capabilities,
     settings = {
         Lua = {
@@ -28,9 +32,35 @@ require("lspconfig").lua_ls.setup {
         },
     },
 }
-require("lspconfig").rust_analyzer.setup {
+lspconfig.rust_analyzer.setup {
+    on_attach = on_attach,
     capabilities = capabilities,
 }
-require("lspconfig").bashls.setup {
+lspconfig.bashls.setup {
+    on_attach = on_attach,
     capabilities = capabilities,
 }
+lspconfig.gopls.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    gmd = {"gopls"},
+    filetypes = {"go", "gomod", "gowork", "gotmpl"},
+    root_dir = util.root_pattern("go.work","go.mod", ".git"),
+    settings = {
+        gopls = {
+            completeUnimported = true,
+            usePlaceholders = true, 
+            analyses = {
+                unusedparams = true,
+
+            },
+
+        },
+    },
+
+}
+
+
+
+
+
