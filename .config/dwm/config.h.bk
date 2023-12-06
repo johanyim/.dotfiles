@@ -111,7 +111,7 @@ static const Layout layouts[] = {
 /* key definitions */
 #define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
-	{ MODKEY,                       KEY,      comboview,      {.ui = 1 << TAG} }, \
+	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
 	{ MODKEY|ShiftMask,             KEY,      toggletag,      {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      tag,            {.ui = 1 << TAG} },
@@ -220,7 +220,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_z,      spawn,          SHCMD("fingerpaint") },
     { MODKEY|ShiftMask,             XK_o,      spawn,          SHCMD("googler.sh")},
     //quick access to dotfiles
-	{ 0,                            XF86Tools, spawn,          SHCMD("open-dotfiles") },
+	{ 0,                            XF86XK_Tools, spawn,          SHCMD("open-dotfiles") },
 };
 
 /* button definitions */
