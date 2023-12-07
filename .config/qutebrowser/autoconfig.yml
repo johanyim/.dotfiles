@@ -6,6 +6,64 @@
 
 config_version: 2
 settings:
+  aliases:
+    global:
+      q: close
+      qa: quit
+      w: session-save
+      wq: quit --save
+      wqa: quit --save
+  backend:
+    global: webengine
+  bindings.key_mappings:
+    global:
+      <Ctrl-6>: <Ctrl-^>
+      <Ctrl-Enter>: <Ctrl-Return>
+      <Ctrl-I>: <Tab>
+      <Ctrl-J>: <Return>
+      <Ctrl-M>: <Return>
+      <Ctrl-[>: <Escape>
+      <Enter>: <Return>
+      <Shift-Enter>: <Return>
+      <Shift-Return>: <Return>
+  colors.hints.bg:
+    global: '#11111b'
+  colors.hints.fg:
+    global: '#f9e2af'
+  colors.hints.match.fg:
+    global: '#fab387'
+  colors.keyhint.bg:
+    global: '#292c3c'
+  colors.statusbar.caret.bg:
+    global: '#181825'
+  colors.statusbar.caret.fg:
+    global: '#fab387'
+  colors.statusbar.caret.selection.bg:
+    global: '#181825'
+  colors.statusbar.command.bg:
+    global: '#181825'
+  colors.statusbar.command.private.bg:
+    global: '#181825'
+  colors.statusbar.command.private.fg:
+    global: '#b5bfe2'
+  colors.statusbar.insert.bg:
+    global: '#181825'
+  colors.statusbar.normal.bg:
+    global: '#181825'
+  colors.statusbar.passthrough.bg:
+    global: '#181825'
+  colors.statusbar.private.bg:
+    global: '#181825'
+  colors.statusbar.progress.bg:
+    global: '#181825'
+  colors.tabs.bar.bg:
+    global: '#181825'
+  colors.webpage.darkmode.algorithm:
+    global: lightness-cielab
+  colors.webpage.darkmode.enabled:
+    global: true
+  colors.webpage.darkmode.policy.images:
+    global: never
   confirm_quit:
     global:
     - never
@@ -20,6 +78,68 @@ settings:
     https://blog.csdn.net: false
   downloads.location.directory:
     global: $HOME/files/downloads
+  downloads.location.suggestion:
+    global: both
+  downloads.remove_finished:
+    global: 10000
+  editor.command:
+    global:
+    - alacritty
+    - -e
+    - nvim
+    - '{file}'
+  editor.encoding:
+    global: utf-8
+  fileselect.folder.command:
+    global:
+    - xterm
+    - -e
+    - ranger
+    - --choosedir={}
+  fileselect.handler:
+    global: external
+  fileselect.multiple_files.command:
+    global:
+    - xterm
+    - -e
+    - ranger
+    - --choosefiles={}
+  fileselect.single_file.command:
+    global:
+    - xterm
+    - -e
+    - ranger
+    - --choosefile={}
+  fonts.default_family:
+    global: null
+  fonts.default_size:
+    global: 10pt
+  hints.border:
+    global: '0px solid #cdd6f4'
+  hints.mode:
+    global: letter
+  hints.next_regexes:
+    global:
+    - \bnext\b
+    - \bmore\b
+    - \bnewer\b
+    - \b[>→≫]\b
+    - \b(>>|»)\b
+    - \bcontinue\b
+  hints.padding:
+    global:
+      bottom: 4
+      left: 4
+      right: 4
+      top: 4
+  hints.radius:
+    global: 0
+  hints.scatter:
+    global: true
+  prompt.filebrowser:
+    global: false
+  prompt.radius:
+    global: 0
   scrolling.bar:
     global: overlay
   scrolling.smooth:
@@ -30,8 +150,27 @@ settings:
       left: 0
       right: 0
       top: 5
+  statusbar.position:
+    global: bottom
+  statusbar.show:
+    global: always
+  statusbar.widgets:
+    global:
+    - keypress
+    - search_match
+    - url
+    - scroll
+    - history
+    - tabs
+    - progress
+  tabs.background:
+    global: false
+  tabs.close_mouse_button:
+    global: none
   tabs.last_close:
     global: startpage
+  tabs.mode_on_change:
+    global: persist
   tabs.mousewheel_switching:
     global: false
   tabs.padding:
@@ -45,11 +184,17 @@ settings:
   tabs.show:
     global: switching
   tabs.show_switching_delay:
-    global: 800
+    global: 2000
+  tabs.title.alignment:
+    global: left
   tabs.title.elide:
     global: none
+  tabs.title.format:
+    global: '{audio}{index}:{current_title}'
   tabs.width:
     global: 10%
+  tabs.wrap:
+    global: false
   url.default_page:
     global: https://www.google.com/
   url.searchengines:
@@ -57,5 +202,9 @@ settings:
       DEFAULT: https://www.google.com/search?q={}
   url.start_pages:
     global: https://www.google.com
+  window.hide_decoration:
+    global: false
+  window.title_format:
+    global: '{perc}{current_title}{title_sep}qutebrowser'
   window.transparent:
     global: false

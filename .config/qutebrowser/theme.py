@@ -177,16 +177,16 @@ def setup(c, flavour, samecolorrows = False):
     # hints {{{
     ## Background color for hints. Note that you can use a `rgba(...)` value
     ## for transparency.
-    c.colors.hints.bg = palette["peach"]
+    c.colors.hints.bg = palette["crust"]
 
     ## Font color for hints.
-    c.colors.hints.fg = palette["mantle"]
+    c.colors.hints.fg = palette["yellow"]
 
     ## Hints
-    c.hints.border = "1px solid " + palette["mantle"]
+    c.hints.border = "0px solid " + palette["mantle"]
 
     ## Font color for the matched part of hints.
-    c.colors.hints.match.fg = palette["subtext1"]
+    c.colors.hints.match.fg = palette["peach"]
     # }}}
 
     # keyhints {{{
@@ -242,33 +242,33 @@ def setup(c, flavour, samecolorrows = False):
 
     # statusbar {{{
     ## Background color of the statusbar.
-    c.colors.statusbar.normal.bg = palette["base"]
+    c.colors.statusbar.normal.bg = palette["crust"]
     ## Background color of the statusbar in insert mode.
     c.colors.statusbar.insert.bg = palette["crust"]
     ## Background color of the statusbar in command mode.
-    c.colors.statusbar.command.bg = palette["base"]
+    c.colors.statusbar.command.bg = palette["crust"]
     ## Background color of the statusbar in caret mode.
-    c.colors.statusbar.caret.bg = palette["base"]
+    c.colors.statusbar.caret.bg = palette["crust"]
     ## Background color of the statusbar in caret mode with a selection.
-    c.colors.statusbar.caret.selection.bg = palette["base"]
+    c.colors.statusbar.caret.selection.bg = palette["crust"]
 
     ## Background color of the progress bar.
-    c.colors.statusbar.progress.bg = palette["base"]
+    c.colors.statusbar.progress.bg = palette["crust"]
     ## Background color of the statusbar in passthrough mode.
-    c.colors.statusbar.passthrough.bg = palette["base"]
+    c.colors.statusbar.passthrough.bg = palette["crust"]
 
     ## Foreground color of the statusbar.
-    c.colors.statusbar.normal.fg = palette["text"]
+    c.colors.statusbar.normal.fg = palette["blue"]
     ## Foreground color of the statusbar in insert mode.
-    c.colors.statusbar.insert.fg = palette["rosewater"]
+    c.colors.statusbar.insert.fg = palette["green"]
     ## Foreground color of the statusbar in command mode.
-    c.colors.statusbar.command.fg = palette["text"]
+    c.colors.statusbar.command.fg = palette["rosewater"]
     ## Foreground color of the statusbar in passthrough mode.
-    c.colors.statusbar.passthrough.fg = palette["peach"]
+    c.colors.statusbar.passthrough.fg = palette["lavender"]
     ## Foreground color of the statusbar in caret mode.
-    c.colors.statusbar.caret.fg = palette["peach"]
+    c.colors.statusbar.caret.fg = palette["mauve"]
     ## Foreground color of the statusbar in caret mode with a selection.
-    c.colors.statusbar.caret.selection.fg = palette["peach"]
+    c.colors.statusbar.caret.selection.fg = palette["mauve"]
 
     ## Foreground color of the URL in the statusbar on error.
     c.colors.statusbar.url.error.fg = palette["red"]
