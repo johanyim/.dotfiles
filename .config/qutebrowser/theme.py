@@ -200,8 +200,7 @@ def setup(c, flavour, samecolorrows = False):
     c.colors.keyhint.suffix.fg = palette["subtext1"]
     # }}}
 
-    # messages {{{
-    ## Background color of an error message.
+    # messages {{{ ## Background color of an error message.
     c.colors.messages.error.bg = palette["overlay0"]
     ## Background color of an info message.
     c.colors.messages.info.bg = palette["overlay0"]
@@ -258,7 +257,7 @@ def setup(c, flavour, samecolorrows = False):
     c.colors.statusbar.passthrough.bg = palette["crust"]
 
     ## Foreground color of the statusbar.
-    c.colors.statusbar.normal.fg = palette["blue"]
+    c.colors.statusbar.normal.fg = palette["text"]
     ## Foreground color of the statusbar in insert mode.
     c.colors.statusbar.insert.fg = palette["green"]
     ## Foreground color of the statusbar in command mode.
@@ -346,5 +345,5 @@ def setup(c, flavour, samecolorrows = False):
     # }}}
 
     # background color for webpages {{{
-    c.colors.webpage.bg = palette["base"]
+    c.colors.webpage.bg = palette["text"]
     # }}}

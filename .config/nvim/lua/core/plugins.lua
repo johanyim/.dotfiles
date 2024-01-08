@@ -41,6 +41,18 @@ local plugins = {
         'williamboman/mason-lspconfig.nvim',
         'neovim/nvim-lspconfig',
     },
+
+
+    {
+        'stevearc/aerial.nvim',
+        opts = {},
+        -- Optional dependencies
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "nvim-tree/nvim-web-devicons"
+        },
+    },
+
     -- completions for lua
     'hrsh7th/nvim-cmp',
     'neovim/nvim-lspconfig',
@@ -97,15 +109,11 @@ local plugins = {
     -- markdown previews in browser
     {
         "iamcco/markdown-preview.nvim",
-        cmd = {
-            "MarkdownPreviewToggle",
-            "MarkdownPreview",
-            "MarkdownPreviewStop" },
+        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
         ft = { "markdown" },
         build = function() vim.fn["mkdp#util#install"]() end,
     },
 
-    -- live server 
     {
         "aurum77/live-server.nvim",
         build = function()

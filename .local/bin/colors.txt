@@ -4,3 +4,7 @@ star #cdd6f4
 955c31 #955c31
 11111b #11111b
 11111b #11111b
+windowborder #181825
+e6e1fb #e6e1fb
+fafbfd #fafbfd
+f1f1f4 #f1f1f4

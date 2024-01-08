@@ -33,23 +33,4 @@ function C() {
     echo "\[\033[${style};${color[$1]}m\]"
 };
 
-
-#function make_prompt
-#{
-#    local RESET="\[\033[0m\]"
-#
-#    if [ "`id -u`" -eq 0 ]; then
-#        PS1="$RESET|$(C B 1)\D{%Y.%m.%d}$RESET|$(C G 1)[\w]
-#$RESET|$(C R 1)\$$RESET|$(C Y 0)\t$RESET|$(C W 1)\u\
-#$(C W 2)@$RESET$(C M 1)\h$(C K 1):$RESET"
-#    else
-#        PS1="$RESET|$(C B 1)\D{%Y.%m.%d}$RESET|$(C G 1)[\w]
-#$RESET|$(C K 1)\$$RESET|$(C Y 0)\t$RESET|$(C W 1)\u\
-#$(C W 2)@$RESET$(C M 1)\h$(C K 1):$RESET"
-#    fi
-#}
-#
-#make_prompt
-# default path
-
 cd ~

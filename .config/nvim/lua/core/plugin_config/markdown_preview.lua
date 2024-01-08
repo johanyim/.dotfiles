@@ -38,12 +38,25 @@ vim.g.mkdp_browser = ''
 
 -- set to 1, echo preview page URL in command line when opening preview page
 -- default is 0
-vim.g.mkdp_echo_preview_url = 0
+vim.g.mkdp_echo_preview_url = 1
+
+
+
+vim.cmd(
+[[
+function OpenMarkdownPreview (url)
+    execute "silent ! qutebrowser --target window " . a:url    
+endfunction
+]]
+)
+
+
+
 
 -- a custom Vim function name to open preview page
 -- this function will receive URL as param
 -- default is empty
-vim.g.mkdp_browserfunc = ''
+vim.g.mkdp_browserfunc = 'OpenMarkdownPreview'
 
 -- options for Markdown rendering
 -- mkit: markdown-it options for rendering
@@ -87,7 +100,7 @@ vim.g.mkdp_port = ''
 
 -- preview page title
 -- ${name} will be replace with the file name
-vim.g.mkdp_page_title = '「${name}」'
+vim.g.mkdp_page_title = '${name}.md'
 
 -- use a custom location for images
 vim.g.mkdp_images_path = "/home/user/.markdown_images"

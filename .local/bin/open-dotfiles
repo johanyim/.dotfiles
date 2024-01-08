@@ -1,3 +1,4 @@
 #!/bin/bash
+alacritty --working-directory ~/.dotfiles/.config --hold -e zsh -c "search-dotfiles; zsh" 
 
-alacritty -e 'search-dotfiles'
+

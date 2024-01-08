@@ -149,7 +149,7 @@ static const Key keys[] = {
 	// { MODKEY|ControlMask,           XK_l,      incnmaster,     {.i = +1} }, //demote to slave
 	// { MODKEY|ControlMask,           XK_h,      incnmaster,     {.i = -1} }, //promote to master
 	{ MODKEY|ControlMask,           XK_j,      incnmaster,     {.i = -1} }, //demote to slave
-	{ MODKEY|ControlMask,           XK_k,      incnmaster,     {.i = +1} }, //promote to master TODO: promote strict
+	{ MODKEY|ControlMask,           XK_k,      incnmaster,     {.i = +1} }, //promote to master  TODO: promote strict
 
 	//gaps toggle
     { MODKEY,                       XK_g,      togglegaps,     {0} },
@@ -218,9 +218,10 @@ static const Key keys[] = {
 	// { 0,                            XK_Print,  spawn,          SHCMD("screenshot") },
 	{ 0,                            XK_Print,  spawn,          SHCMD("fingerpaint") },
 	{ MODKEY|ShiftMask,             XK_z,      spawn,          SHCMD("fingerpaint") },
-    { MODKEY|ShiftMask,             XK_o,      spawn,          SHCMD("googler.sh")},
+    // { MODKEY|ShiftMask,             XK_o,      spawn,          SHCMD("googler.sh")},
     //quick access to dotfiles
-	{ 0,                            XF86XK_Tools, spawn,          SHCMD("open-dotfiles") },
+	{ 0,                            XF86XK_Tools, spawn,       SHCMD("open-dotfiles") },
+	{ 0,                            XF86XK_Favorites,spawn,    SHCMD("get-updates") },
 };
 
 /* button definitions */

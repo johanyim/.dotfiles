@@ -1,0 +1,5 @@
+#!/bin/bash
+
+selection=$(ls /etc/runit/sv | dmenu)
+#adding selection to startup
+sudo ln -s /etc/runit/sv/$selection /run/runit/service

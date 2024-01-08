@@ -1,0 +1,9 @@
+#!/bin/sh
+
+alias ls='exa -al --no-user --no-time -h '
+alias cd='z'
+alias grep='grep --color=auto'
+alias wifi='nmcli dev wifi connect'
+alias wifilist='nmcli dev wifi list'
+alias please='sudo $(fc -ln -1)'
+alias gitui='gitui -t mocha.ron'

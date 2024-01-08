@@ -26,6 +26,10 @@ settings:
       <Enter>: <Return>
       <Shift-Enter>: <Return>
       <Shift-Return>: <Return>
+  colors.completion.scrollbar.bg:
+    global: '#11111b'
+  colors.contextmenu.menu.fg:
+    global: '#cdd6f4'
   colors.hints.bg:
     global: '#11111b'
   colors.hints.fg:
@@ -58,12 +62,34 @@ settings:
     global: '#181825'
   colors.tabs.bar.bg:
     global: '#181825'
+  colors.tabs.pinned.even.bg:
+    global: darkseagreen
+  colors.tabs.selected.even.bg:
+    global: '#1e1e2e'
+  colors.tabs.selected.even.fg:
+    global: '#cdd6f4'
+  colors.tabs.selected.odd.bg:
+    global: '#1e1e2e'
+  colors.tooltip.fg:
+    global: null
+  colors.webpage.bg:
+    global: null
   colors.webpage.darkmode.algorithm:
     global: lightness-cielab
+  colors.webpage.darkmode.contrast:
+    global: 0.0
   colors.webpage.darkmode.enabled:
-    global: true
+    global: false
   colors.webpage.darkmode.policy.images:
     global: never
+  colors.webpage.darkmode.policy.page:
+    global: smart
+  colors.webpage.darkmode.threshold.background:
+    global: 0
+  colors.webpage.darkmode.threshold.foreground:
+    global: 256
+  colors.webpage.preferred_color_scheme:
+    global: auto
   confirm_quit:
     global:
     - never
@@ -92,24 +118,33 @@ settings:
     global: utf-8
   fileselect.folder.command:
     global:
-    - xterm
-    - -e
-    - ranger
-    - --choosedir={}
+    - alacritty
+    - --class
+    - FloatingClass
+    - --command
+    - lf
+    - -last-dir-path
+    - '{}'
   fileselect.handler:
     global: external
   fileselect.multiple_files.command:
     global:
-    - xterm
-    - -e
-    - ranger
-    - --choosefiles={}
+    - alacritty
+    - --class
+    - FloatingClass
+    - --command
+    - lf
+    - -selection-path
+    - '{}'
   fileselect.single_file.command:
     global:
-    - xterm
-    - -e
-    - ranger
-    - --choosefile={}
+    - alacritty
+    - --class
+    - FloatingClass
+    - --command
+    - lf
+    - -selection-path
+    - '{}'
   fonts.default_family:
     global: null
   fonts.default_size:
@@ -164,11 +199,11 @@ settings:
     - tabs
     - progress
   tabs.background:
-    global: false
+    global: true
   tabs.close_mouse_button:
     global: none
   tabs.last_close:
-    global: startpage
+    global: close
   tabs.mode_on_change:
     global: persist
   tabs.mousewheel_switching:

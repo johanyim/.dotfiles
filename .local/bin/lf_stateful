@@ -1,0 +1,8 @@
+#!/bin/sh
+
+state="$HOME/.local/bin/lf_state"
+last_wd=$(cat "$state")
+# echo "last_wd = $last_wd"
+new_last_wd=$(lf -print-last-dir "$last_wd")
+echo "$new_last_wd" > "$state"
+

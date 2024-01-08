@@ -1,0 +1,3 @@
+#!/bin/bash
+
+alacritty --class FloatingClass --hold -e yay

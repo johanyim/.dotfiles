@@ -1,5 +1,11 @@
 #!/bin/bash
 
-target=$(exa -a ~/.dotfiles/.config | fzf)
+directory="$HOME/.dotfiles/.config/"
 
-nvim ~/.dotfiles/.config/$target
+files=$(exa -a "$directory")
+
+target=$(fzf)
+
+if [ -n "$target" ]; then
+    nvim "$target" # Open the selected file in Neovim
+fi

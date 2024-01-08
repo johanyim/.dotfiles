@@ -1,6 +1,6 @@
 require("mason").setup()
 require("mason-lspconfig").setup({
-    ensure_installed = { "lua_ls", "rust_analyzer", "bashls", "gopls" },
+    ensure_installed = { "lua_ls", "rust_analyzer", "bashls", "gopls", "clangd", "tsserver" },
 })
 
 local on_attach = function(_,_)
@@ -32,14 +32,17 @@ lspconfig.lua_ls.setup {
         },
     },
 }
+
 lspconfig.rust_analyzer.setup {
     on_attach = on_attach,
     capabilities = capabilities,
 }
+
 lspconfig.bashls.setup {
     on_attach = on_attach,
     capabilities = capabilities,
 }
+
 lspconfig.gopls.setup {
     on_attach = on_attach,
     capabilities = capabilities,
@@ -60,7 +63,15 @@ lspconfig.gopls.setup {
 
 }
 
+lspconfig.clangd.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+}
 
+lspconfig.tsserver.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+}
 
 
 

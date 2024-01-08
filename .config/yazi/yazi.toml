@@ -15,35 +15,35 @@ cache_dir  = ""
 
 [opener]
 folder = [
-	{ exec = 'open -R "$@"', display_name = "Reveal in Finder" },
+	{ exec = 'open -R "$@"', desc = "Reveal in Finder" },
 	{ exec = '$EDITOR "$@"' },
 ]
 archive = [
-	{ exec = 'unar "$1"', display_name = "Extract here" },
+	{ exec = 'unar "$1"', desc = "Extract here" },
 ]
 text = [
 	{ exec = '$EDITOR "$@"', block = true },
 ]
 image = [
-	{ exec = 'feh "$@"', display_name = "Open", block = true },
-	# { exec = '''exiftool "$1"; echo "Press enter to exit"; read''', block = true, display_name = "Show EXIF" },
+	{ exec = 'feh "$@"', desc = "Open", block = true },
+	# { exec = '''exiftool "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show EXIF" },
 ]
 document = [
-	{ exec = 'zathura "$1"', display_name = "Open Document", block = true},
+	{ exec = 'zathura "$1"', desc = "Open Document", block = true},
 ]
 
 
 video = [
 	{ exec = 'mpv "$@"' },
-	{ exec = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, display_name = "Show media info" },
+	{ exec = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show media info" },
 ]
 audio = [
 	{ exec = 'mpv "$@"' },
-	{ exec = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, display_name = "Show media info" },
+	{ exec = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show media info" },
 ]
 fallback = [
-	{ exec = 'open "$@"', display_name = "Open" },
-	{ exec = 'open -R "$@"', display_name = "Reveal in Finder" },
+	{ exec = 'open "$@"', desc = "Open" },
+	{ exec = 'open -R "$@"', desc = "Reveal in Finder" },
 ]
 
 [open]

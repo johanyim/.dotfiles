@@ -1,24 +1,4 @@
 palette = "catppuccin_mocha"
-# format = """[](overlay0)\
-# [ ](fg:overlay0 bg:overlay0)\
-# $time\
-# [](fg:overlay0 bg:surface2)\
-# $directory\
-# [](fg:surface2 bg:surface1)\
-# $git_branch\
-# $git_status\
-# [](fg:surface1 bg:surface0)\
-# $nodejs\
-# $rust\
-# $golang\
-# $php\
-# [](surface0)\
-# \n\
-# [ ](surface0)\
-# [ ](red)\
-# $sudo\
-# [ ](surface0)"""
-
 format = """\
 $directory\
 $git_branch\
