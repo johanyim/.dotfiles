@@ -1,6 +1,8 @@
 require("mason").setup()
 require("mason-lspconfig").setup({
-    ensure_installed = { "lua_ls", "rust_analyzer", "bashls", "gopls", "clangd", "tsserver" },
+    ensure_installed = { "lua_ls", "rust_analyzer", "bashls",
+    "gopls", "clangd", "tsserver",
+    "pyright", "ruff_lsp"},
 })
 
 local on_attach = function(_,_)
@@ -55,12 +57,9 @@ lspconfig.gopls.setup {
             usePlaceholders = true, 
             analyses = {
                 unusedparams = true,
-
             },
-
         },
     },
-
 }
 
 lspconfig.clangd.setup {
@@ -73,5 +72,10 @@ lspconfig.tsserver.setup {
     capabilities = capabilities,
 }
 
+lspconfig.pyright.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    filetypes = {"python"}
+}
 
 

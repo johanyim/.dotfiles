@@ -31,3 +31,4 @@ end)
 -- short: vim.diagnostic.show(), virtual_text = true
 -- long: vim.diagnostic.hide(), virtual_text = false
 
+

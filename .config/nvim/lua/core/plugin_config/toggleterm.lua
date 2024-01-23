@@ -36,8 +36,8 @@ vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 local Terminal  = require('toggleterm.terminal').Terminal
 local gitui = Terminal:new({ cmd = "gitui -t mocha.ron", hidden = true })
 
-function _gitui_toggle()
+function Gitui_toggle()
   gitui:toggle()
 end
 
-vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _gitui_toggle()<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _Gitui_toggle()<CR>", {noremap = true, silent = true})

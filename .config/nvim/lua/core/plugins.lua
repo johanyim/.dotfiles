@@ -35,13 +35,6 @@ local plugins = {
         dependencies = { {'nvim-lua/plenary.nvim'} }
     },
 
-    -- lsp and mason
-    {
-        'williamboman/mason.nvim',
-        'williamboman/mason-lspconfig.nvim',
-        'neovim/nvim-lspconfig',
-    },
-
 
     {
         'stevearc/aerial.nvim',
@@ -53,6 +46,12 @@ local plugins = {
         },
     },
 
+    -- lsp and mason
+    {
+        'williamboman/mason.nvim',
+        'williamboman/mason-lspconfig.nvim',
+        'neovim/nvim-lspconfig',
+    },
     -- completions for lua
     'hrsh7th/nvim-cmp',
     'neovim/nvim-lspconfig',
@@ -60,16 +59,40 @@ local plugins = {
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-cmdline',
-    -- {
-    --     "jose-elias-alvarez/null-ls.nvim",
-    --     ft = "go",
-    -- },
+    {
+        "jose-elias-alvarez/null-ls.nvim",
+        ft = {"python"},
+    },
+
 
     -- lua snip
     {
 	    "L3MON4D3/LuaSnip",
 	    version = "v2.*",
 	    build = "make install_jsregexp"
+    },
+
+
+    -- --which key
+    -- {
+    --     "folke/which-key.nvim",
+    --     event = "VeryLazy",
+    --     init = function()
+    --         vim.o.timeout = true
+    --         vim.o.timeoutlen = 300
+    --     end,
+    --     opts = {
+    --         -- your configuration comes here
+    --         -- or leave it empty to use the default settings
+    --         -- refer to the configuration section below
+    --     }
+    -- },
+
+    -- auto close parens
+    {
+        'windwp/nvim-autopairs',
+        event = "InsertEnter",
+        opts = {} -- this is equalent to setup({}) function
     },
 
     -- tmux-vim integration
@@ -89,9 +112,24 @@ local plugins = {
     'numToStr/Comment.nvim',
 
     {
+        "folke/trouble.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        opts = {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+        },
+    },
+    -- todo comments
+    {
         "folke/todo-comments.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
     },
+
+    -- -- rainbow parentheses
+    -- {
+    --     "HiPhish/nvim-ts-rainbow2",
+    --     dependencies = { "nvim-treesitter/nvim-treesitter" },
 
     -- rust tools
     'simrat39/rust-tools.nvim',

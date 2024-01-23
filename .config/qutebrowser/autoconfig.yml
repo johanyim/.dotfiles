@@ -122,8 +122,7 @@ settings:
     - --class
     - FloatingClass
     - --command
-    - lf
-    - -last-dir-path
+    - lf_stateful
     - '{}'
   fileselect.handler:
     global: external
@@ -133,8 +132,7 @@ settings:
     - --class
     - FloatingClass
     - --command
-    - lf
-    - -selection-path
+    - lf_stateful_select
     - '{}'
   fileselect.single_file.command:
     global:
@@ -142,8 +140,7 @@ settings:
     - --class
     - FloatingClass
     - --command
-    - lf
-    - -selection-path
+    - lf_stateful_select
     - '{}'
   fonts.default_family:
     global: null

@@ -1,0 +1,4 @@
+#!/bin/bash
+label=/dev/sdb
+sudo dd if=$1 of=$label bs=4M status=progress
+

@@ -5,9 +5,8 @@ last_wd=$(cat "$state")
 
 if [ ! -z $1 ]
 then
-    new_last_wd=$(lf -last-dir-path "$1" -print-last-dir "$last_wd")
+    new_last_wd=$(lf -selection-path "$1" -print-last-dir "$last_wd")
 else
     new_last_wd=$(lf -print-last-dir "$last_wd")
 fi
 echo "$new_last_wd" > "$state"
-
