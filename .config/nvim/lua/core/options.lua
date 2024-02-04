@@ -1,6 +1,6 @@
 -- side numbers
 vim.wo.number = true
-vim.wo.relativenumber = true
+-- vim.wo.relativenumber = true
 
 -- see the keys being pressed
 vim.opt.showcmd = true
@@ -50,6 +50,10 @@ vim.opt.scrolloff= SCROLL_OFF
 
 -- TESTING this is a looooooong test this is a looooooong test this is a looooooong test this is a looooooong test this is a looooooong test this is a looooooong test this is a looooooong test this is a looooooong test LOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 
-
 -- use term gui colors 
 vim.opt.termguicolors = true
+
+-- python 2/3 support
+-- vim.g.python2_host_prog = ''
+vim.g.python3_host_prog = '/usr/bin/python'
+

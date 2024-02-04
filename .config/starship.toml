@@ -8,6 +8,7 @@ $rust\
 $golang\
 $php\
 $python\
+$conda\
 \n\
 $sudo\
 $character """
@@ -112,6 +113,11 @@ format = '[[$symbol ($version) ](lavender)]($style)'
 symbol = ""
 style = "yellow"
 format = '[${symbol} ${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+
+[conda]
+symbol = "󱔎"
+style = "bg:surface0"
+format = '[[$symbol $environment](green)]($style)'
 
 [time]
 time_format = "%H:%M:%S " # Hour:Minute Format

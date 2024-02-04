@@ -1,8 +1,7 @@
 require("mason").setup()
 require("mason-lspconfig").setup({
     ensure_installed = { "lua_ls", "rust_analyzer", "bashls",
-    "gopls", "clangd", "tsserver",
-    "pyright", "ruff_lsp"},
+    "gopls", "clangd", "tsserver", "ruff_lsp"},
 })
 
 local on_attach = function(_,_)
@@ -77,5 +76,4 @@ lspconfig.pyright.setup {
     capabilities = capabilities,
     filetypes = {"python"}
 }
-
 

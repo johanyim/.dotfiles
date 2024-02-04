@@ -144,6 +144,8 @@ local plugins = {
         version = "*", -- Use for stability; omit to use `main` branch for the latest features
     },
 
+
+
     -- markdown previews in browser
     {
         "iamcco/markdown-preview.nvim",
@@ -172,6 +174,11 @@ local plugins = {
         --     require("lines").setup()
         -- end,
     },
+
+    -- {
+    --     'luk400/vim-jukit',
+    -- },
+
 
     -- -- WIP
     -- --notifications
