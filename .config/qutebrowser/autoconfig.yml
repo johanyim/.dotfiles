@@ -100,6 +100,10 @@ settings:
     global: auto
   content.geolocation:
     https://www.google.com: true
+    https://www.thecompleteuniversityguide.co.uk: true
+  content.media.video_capture:
+    http://localhost:3000: true
+    https://mediapipe-studio.webapps.google.com: true
   content.notifications.enabled:
     https://blog.csdn.net: false
   downloads.location.directory:

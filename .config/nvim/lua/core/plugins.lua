@@ -108,6 +108,12 @@ local plugins = {
     -- terminal
     {"akinsho/toggleterm.nvim", version = '*'},
 
+    -- "sindrets/diffview.nvim",
+    -- git 
+    "tpope/vim-fugitive",
+    "lewis6991/gitsigns.nvim",
+
+
     -- commenting
     'numToStr/Comment.nvim',
 
