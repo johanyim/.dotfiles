@@ -146,13 +146,6 @@ local plugins = {
 
 
 
-    -- markdown previews in browser
-    {
-        "iamcco/markdown-preview.nvim",
-        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-        ft = { "markdown" },
-        build = function() vim.fn["mkdp#util#install"]() end,
-    },
 
     {
         "aurum77/live-server.nvim",
@@ -175,9 +168,35 @@ local plugins = {
         -- end,
     },
 
-    -- {
-    --     'luk400/vim-jukit',
-    -- },
+    -- -- Writing 
+    -- markdown previews in browser
+    {
+        "tadmccorkle/markdown.nvim",
+        ft = "markdown", -- or 'event = "VeryLazy"'
+        opts = {
+            -- configuration here or empty for defaults
+        },
+    },
+    {
+        "iamcco/markdown-preview.nvim",
+        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+        ft = { "markdown" },
+        build = function() vim.fn["mkdp#util#install"]() end,
+    },
+    { "folke/zen-mode.nvim", },
+    { "preservim/vim-pencil", },
+    {
+        "lukas-reineke/headlines.nvim",
+        dependencies = "nvim-treesitter/nvim-treesitter",
+        config = true, -- or `opts = {}`
+    },
+
+    'nvim-treesitter/playground',
+
+
+
+
+
 
 
     -- -- WIP
