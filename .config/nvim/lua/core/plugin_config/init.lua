@@ -21,6 +21,7 @@ require("core.plugin_config.todo_comments")
 require("core.plugin_config.aerial")
 require("core.plugin_config.zen_mode")
 require("core.plugin_config.headlines")
+require("core.plugin_config.gitsigns")
 -- getting images
 -- require("core.plugin_config.hologram")
 -- require("core.plugin_config.image")

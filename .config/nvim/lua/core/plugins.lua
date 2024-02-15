@@ -112,6 +112,7 @@ local plugins = {
     -- git 
     "tpope/vim-fugitive",
     "lewis6991/gitsigns.nvim",
+    "akinsho/git-conflict.nvim",
 
 
     -- commenting

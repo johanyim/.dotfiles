@@ -1,7 +1,10 @@
 require("mason").setup()
 require("mason-lspconfig").setup({
     ensure_installed = { "lua_ls", "rust_analyzer", "bashls",
-    "gopls", "clangd", "tsserver", "ruff_lsp"},
+    "gopls", "clangd", "ruff_lsp",
+    "html", "cssls", "eslint", "jsonls",
+    "tsserver", "tailwindcss",
+    "emmet_ls" },
 })
 
 local on_attach = function(_,_)
@@ -68,12 +71,20 @@ lspconfig.clangd.setup {
 
 lspconfig.tsserver.setup {
     on_attach = on_attach,
+    filetypes = {"typescript", "typescriptreact", "typescript.tsx"},
+    cmd = {"typescript-language-server", "--stdio"},
     capabilities = capabilities,
 }
 
-lspconfig.pyright.setup {
+lspconfig.emmet_ls.setup({
     on_attach = on_attach,
     capabilities = capabilities,
-    filetypes = {"python"}
+    filetypes = { "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "svelte", "pug", "typescriptreact", "vue" },
+})
+
+lspconfig.pyright.setup {
+    on_attach = on_attach,
+    filetypes = {"python"},
+    capabilities = capabilities,
 }
 
