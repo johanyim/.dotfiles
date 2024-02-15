@@ -76,6 +76,12 @@ lspconfig.tsserver.setup {
     capabilities = capabilities,
 }
 
+lspconfig.tailwindcss.setup {
+    on_attach = on_attach,
+    filetypes = { "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "svelte", "pug", "typescriptreact", "vue" },
+    capabilities = capabilities,
+}
+
 lspconfig.emmet_ls.setup({
     on_attach = on_attach,
     capabilities = capabilities,

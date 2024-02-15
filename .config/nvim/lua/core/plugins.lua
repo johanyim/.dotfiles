@@ -52,8 +52,18 @@ local plugins = {
         'williamboman/mason-lspconfig.nvim',
         'neovim/nvim-lspconfig',
     },
-    -- completions for lua
-    'hrsh7th/nvim-cmp',
+    -- completions
+    {
+        'hrsh7th/nvim-cmp',
+        dependencies = {
+            {"roobert/tailwindcss-colorizer-cmp.nvim", config = true },
+        },
+        opts = function(_, opts)
+            opts.formatting = {
+                format = require("tailwindcss-colorizer-cmp").formatter,
+            }
+        end,
+    },
     'neovim/nvim-lspconfig',
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-buffer',
@@ -143,7 +153,7 @@ local plugins = {
     { 'saecki/crates.nvim', tag = 'v0.4.0', },
 
     -- rgba colors 
-    'norcalli/nvim-colorizer.lua',
+    'NvChad/nvim-colorizer.lua',
 
     -- surround tags
     {
