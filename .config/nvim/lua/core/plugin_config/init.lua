@@ -1,32 +1,47 @@
-require("core.plugin_config.catppuccin")
-require("core.plugin_config.nvim_tree")
-require("core.plugin_config.lualine")
-require("core.plugin_config.null_ls")
-require("core.plugin_config.lsp_config")
-require("core.plugin_config.treesitter")
-require("core.plugin_config.harpoon")
-require("core.plugin_config.telescope")
-require("core.plugin_config.completions")
-require("core.plugin_config.rust_config")
-require("core.plugin_config.colorizer")
-require("core.plugin_config.markdown_preview")
-require("core.plugin_config.comment")
-require("core.plugin_config.nvim_surround")
-require("core.plugin_config.toggleterm")
-require("core.plugin_config.diagnostic_lines")
-require("core.plugin_config.vimtex")
-require("core.plugin_config.tmux")
-require("core.plugin_config.trouble")
-require("core.plugin_config.todo_comments")
-require("core.plugin_config.aerial")
-require("core.plugin_config.zen_mode")
-require("core.plugin_config.headlines")
-require("core.plugin_config.gitsigns")
--- getting images
--- require("core.plugin_config.hologram")
--- require("core.plugin_config.image")
--- require("core.plugin_config.magma")
--- require("core.plugin_config.lsp_progress")
--- require("core.plugin_config.ts_rainbow")
--- require("core.plugin_config.live_server")
+local base = "core.plugin_config"
+local files = {
+    {"color", {
+        "catppuccin",
+        "colorizer",
+        "todo_comments",
+        -- "ts_rainbow",
+    }},
+    {"lsp", {
+        "aerial",
+        "completions",
+        "diagnostic_lines",
+        "lsp_config",
+        "rust_config",
+        "treesitter",
+    }},
+    {"ui", {
+        "gitsigns",
+        "lualine",
+        "nvim_tree",
+        "telescope",
+        "tmux",
+        "toggleterm",
+        "trouble",
+    }},
+    {"workflow", {
+      "comment",
+      "harpoon",
+      "live_server",
+      "null_ls",
+      "nvim_surround",
+    }},
+    {"writing", {
+        "headlines",
+        "markdown_preview",
+        "vimtex",
+        "zen_mode",
+    }},
+}
 
+for _, category in ipairs(files) do
+    local category_name = category[1]
+    local sub_files = category[2]
+    for _, file_name in ipairs(sub_files) do
+        require(base .. "." .. category_name .. "." .. file_name)
+    end
+end

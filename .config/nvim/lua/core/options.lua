@@ -41,6 +41,7 @@ vim.opt.smartcase = true
 -- tab completion options as a menu
 vim.opt.wildmenu = true
 
+vim.opt.spelllang = 'en_gb'
 
 
 -- space between line and bottom/top of buffer
