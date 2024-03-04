@@ -17,7 +17,8 @@ local files = {
     {"ui", {
         "gitsigns",
         "lualine",
-        "nvim_tree",
+        -- "nvim_tree",
+        "oil",
         "telescope",
         "tmux",
         "toggleterm",
@@ -45,3 +46,4 @@ for _, category in ipairs(files) do
         require(base .. "." .. category_name .. "." .. file_name)
     end
 end
+

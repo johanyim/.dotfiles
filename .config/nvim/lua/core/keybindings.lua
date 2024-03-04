@@ -13,4 +13,6 @@ vim.keymap.set('i','<C-Right>',          '<esc>ea',{noremap=true})
 
 vim.keymap.set('n', '<PageUp>',         '_',{noremap=true})
 vim.keymap.set('n', '<PageDown>',       '$',{noremap=true})
+-- tmux auto run
+vim.keymap.set('n', '<leader>.',        '<cmd>wall<CR><cmd>silent exec "!tmux_repeat"<CR>',{noremap=true, silent=true})
 

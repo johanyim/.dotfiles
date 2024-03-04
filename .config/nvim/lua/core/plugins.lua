@@ -11,7 +11,7 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
     "catppuccin/nvim",
-    'nvim-tree/nvim-tree.lua',
+    -- 'nvim-tree/nvim-tree.lua',
     'nvim-tree/nvim-web-devicons',
     'nvim-treesitter/nvim-treesitter',
     {
@@ -25,6 +25,10 @@ local plugins = {
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
 
+    {
+        'stevearc/oil.nvim',
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+    },
 
     {
         'stevearc/aerial.nvim',
@@ -93,6 +97,8 @@ local plugins = {
         opts = {} -- this is equalent to setup({}) function
     },
 
+
+
     -- tmux-vim integration
     'alexghergh/nvim-tmux-navigation',
 
@@ -104,7 +110,7 @@ local plugins = {
     'rafamadriz/friendly-snippets',
 
     -- terminal
-    {"akinsho/toggleterm.nvim", version = '*'},
+    {"akinsho/toggleterm.nvim"},
 
     -- "sindrets/diffview.nvim",
     -- git 

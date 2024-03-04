@@ -18,8 +18,6 @@ cmp.setup({
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
         ["<A-j>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Select },
         ["<A-k>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Select },
-        ["<C-j>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Select },
-        ["<C-k>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Select },
     }),
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },

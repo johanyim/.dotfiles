@@ -2,11 +2,16 @@ require("telescope").load_extension("harpoon")
 local HarpoonUi = require("harpoon.ui")
 
 
-vim.keymap.set('n', '<space>h', require('harpoon.mark').add_file)
-vim.keymap.set('n', '<space>j', HarpoonUi.nav_next)
-vim.keymap.set('n', '<space>k', HarpoonUi.nav_prev)
-vim.keymap.set('n', '<space>l', HarpoonUi.toggle_quick_menu)
-vim.keymap.set('n', '<space>L', ':Telescope harpoon marks<cr>')
+-- vim.keymap.set('n', '<space>h', require('harpoon.mark').add_file)
+-- vim.keymap.set('n', '<space>j', HarpoonUi.nav_next)
+-- vim.keymap.set('n', '<space>k', HarpoonUi.nav_prev)
+-- vim.keymap.set('n', '<space>l', HarpoonUi.toggle_quick_menu)
+-- vim.keymap.set('n', '<space>L', ':Telescope harpoon marks<cr>')
+vim.keymap.set('n', '<A-h>', require('harpoon.mark').add_file)
+vim.keymap.set('n', '<A-j>', HarpoonUi.nav_next)
+vim.keymap.set('n', '<A-k>', HarpoonUi.nav_prev)
+vim.keymap.set('n', '<A-l>', HarpoonUi.toggle_quick_menu)
+vim.keymap.set('n', '<A-L>', ':Telescope harpoon marks<cr>')
 -- vim.keymap.set('n', '<space>t', function() require("harpoon.term").gotoTerminal(1) end )
 
 require('harpoon').setup({
@@ -30,8 +35,8 @@ require('harpoon').setup({
 
     -- enable tabline with harpoon marks
     tabline = false,
-    tabline_prefix = "   ",
-    tabline_suffix = "   ",
+    tabline_prefix = " |",
+    tabline_suffix = "| ",
 })
 
 
