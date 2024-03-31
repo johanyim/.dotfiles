@@ -23,6 +23,7 @@ local files = {
         "tmux",
         "toggleterm",
         "trouble",
+        "godbolt",
     }},
     {"workflow", {
       "comment",

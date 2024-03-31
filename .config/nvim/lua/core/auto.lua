@@ -1,5 +1,5 @@
 vim.api.nvim_create_autocmd({"VimEnter"}, {
-    pattern = "*.md",
+    pattern = {"*.md", "*.wiki"},
     callback = function()
         vim.cmd('ZenMode')
         vim.keymap.set('n', '<Space>m',':MarkdownPreviewToggle<enter>',{noremap=true})
@@ -7,7 +7,7 @@ vim.api.nvim_create_autocmd({"VimEnter"}, {
 })
 
 vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
-    pattern = "*.md",
+    pattern = {"*.md", "*.wiki"},
     callback = function()
         vim.cmd('PencilSoft')
         vim.cmd('set spell')

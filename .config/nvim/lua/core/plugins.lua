@@ -146,6 +146,10 @@ local plugins = {
     'simrat39/rust-tools.nvim',
     { 'saecki/crates.nvim', tag = 'v0.4.0', },
 
+    -- compiler explorer
+    'p00f/godbolt.nvim',
+
+
     -- rgba colors 
     'NvChad/nvim-colorizer.lua',
 
@@ -177,6 +181,10 @@ local plugins = {
         -- config = function()
         --     require("lines").setup()
         -- end,
+    },
+
+    {
+        "vimwiki/vimwiki",
     },
 
     -- -- Writing 

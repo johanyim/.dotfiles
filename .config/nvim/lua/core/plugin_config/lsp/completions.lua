@@ -15,7 +15,7 @@ cmp.setup({
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.abort(),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        ['<A-l>'] = cmp.mapping.confirm({ select = true }),
         ["<A-j>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Select },
         ["<A-k>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Select },
     }),

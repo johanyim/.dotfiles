@@ -4,7 +4,8 @@ require("mason-lspconfig").setup({
     "gopls", "clangd", "ruff_lsp",
     "html", "cssls", "eslint", "jsonls",
     "tsserver", "tailwindcss",
-    "emmet_ls" },
+    "emmet_ls",
+    "astro"},
 })
 
 local on_attach = function(_,_)
@@ -78,14 +79,14 @@ lspconfig.tsserver.setup {
 
 lspconfig.tailwindcss.setup {
     on_attach = on_attach,
-    filetypes = { "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "svelte", "pug", "typescriptreact", "vue" },
+    filetypes = { "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "svelte", "pug", "typescriptreact", "vue", "astro" },
     capabilities = capabilities,
 }
 
 lspconfig.emmet_ls.setup({
     on_attach = on_attach,
     capabilities = capabilities,
-    filetypes = { "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "svelte", "pug", "typescriptreact", "vue" },
+    filetypes = { "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "svelte", "pug", "typescriptreact", "vue", "astro" },
 })
 
 lspconfig.pyright.setup {
@@ -94,3 +95,7 @@ lspconfig.pyright.setup {
     capabilities = capabilities,
 }
 
+lspconfig.astro.setup ({
+    filetypes = { "astro" },
+
+})
