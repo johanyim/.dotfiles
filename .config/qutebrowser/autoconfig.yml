@@ -101,6 +101,7 @@ settings:
   content.blocking.method:
     global: auto
   content.geolocation:
+    https://careers.l3harris.com: true
     https://cbct.fa.em2.oraclecloud.com: true
     https://www.google.com: true
     https://www.thecompleteuniversityguide.co.uk: true

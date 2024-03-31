@@ -1,0 +1,4 @@
+#!/bin/bash
+
+alacritty --working-directory $NOTES -e $EDITOR index.wiki
+

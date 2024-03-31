@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Store the last command in a variable
+last_command=$(fc -ln -1)
+
+# Store the current window and pane
+current_window=$(tmux display-message -p '#I')
+current_pane=$(tmux display-message -p '#P')
+
+# Go to the next pane or create one if it doesn't exist
+tmux select-pane -t :.+
+if [ $? -ne 0 ]; then
+    tmux split-window
+fi
+
+
+# cancel the current command
+tmux send-keys C-c
+# Send the last command
+tmux send-keys Up C-m
+
+# If we're in a different window, go back to the original window and pane
+tmux select-window -t "$current_window"
+tmux select-pane -t "$current_pane"

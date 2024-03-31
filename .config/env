@@ -27,6 +27,8 @@ export JOHAN_MUSIC="$JOHAN_AUDIO/music" #files/audio/music
 
 export JOHAN_VIDEOS="$JOHAN_FILES/videos" #files/videos
 
+export NOTES="$HOME/vimwiki"
+
 # cleaning up $HOME directory
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"

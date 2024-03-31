@@ -1,4 +1,4 @@
-#files: 804	version: 5.9
+#files: 808	version: 5.9
 
 _comps=(
 '-' '_precommand'
@@ -218,6 +218,7 @@ _comps=(
 'ctags' '_ctags'
 'ctags-exuberant' '_ctags'
 'ctags-universal' '_ctags'
+'ctr' '_ctr'
 'curl' '_curl'
 'cut' '_cut'
 'cvs' '_cvs'
@@ -575,8 +576,6 @@ _comps=(
 'hd' '_hexdump'
 'head' '_head'
 'heat' '_openstack'
-'_helix' '_helix'
-'helix' '_helix'
 'help' '_sccs'
 'hexdump' '_hexdump'
 'hilite' '_precommand'
@@ -586,6 +585,7 @@ _comps=(
 'hostname' '_hostname'
 'hotjava' '_webbrowser'
 'htop' '_htop'
+'hugo' '_hugo'
 'hyperfine' '_hyperfine'
 'iceweasel' '_mozilla'
 'icombine' '_ispell'
@@ -965,6 +965,7 @@ _comps=(
 'podgrep' '_perl_modules'
 'podpath' '_perl_modules'
 'podtoc' '_perl_modules'
+'poetry' '_poetry'
 'poff' '_pon'
 'policytool' '_java'
 'pon' '_pon'
@@ -1228,6 +1229,7 @@ _comps=(
 'tee' '_tee'
 'telnet' '_telnet'
 'tex' '_tex'
+'texdoc' '_texdoc'
 'texi2any' '_texinfo'
 'texi2dvi' '_texinfo'
 'texi2pdf' '_texinfo'
@@ -1280,6 +1282,7 @@ _comps=(
 'txt' '_hosts'
 'type' '_which'
 'typeset' '_typeset'
+'udevadm' '_udevadm'
 'ulimit' '_ulimit'
 'uml_mconsole' '_uml'
 'uml_moo' '_uml'
@@ -1523,6 +1526,7 @@ _comps=(
 'zmail' '_mail'
 'zmodload' '_zmodload'
 'zmv' '_zmv'
+'zola' '_zola'
 'zone' '_hosts'
 'zparseopts' '_zparseopts'
 'zpool' '_zfs'
@@ -1653,13 +1657,14 @@ bindkey '^[/' _history-complete-older
 bindkey '^[~' _bash_complete-word
 
 autoload -Uz _xwallpaper _alacritty _bluetoothctl _busctl _bwrap \
-            _cargo _clipsim _curl _docker _email-notmuch \
-            _exa _foot _footclient _googler _helix \
-            _hyperfine _kitty _lf _libinput _loginctl \
-            _meson _mkinitcpio _ninja _notmuch _pacman \
-            _pass _patchelf _pip _pkgfile _pulseaudio \
-            _qpdf _rustup _tlp _tlp-radio-device _tlp-run-on \
-            _tlp-stat _xwallpaper _yay _zathura _cdr \
+            _cargo _clipsim _ctr _curl _docker \
+            _email-notmuch _exa _foot _footclient _googler \
+            _hugo _hyperfine _kitty _lf _libinput \
+            _loginctl _meson _mkinitcpio _ninja _notmuch \
+            _pacman _pass _patchelf _pip _pkgfile \
+            _poetry _pulseaudio _qpdf _rustup _texdoc \
+            _tlp _tlp-radio-device _tlp-run-on _tlp-stat _udevadm \
+            _xwallpaper _yay _zathura _zola _cdr \
             _all_labels _all_matches _alternative _approximate _arg_compile \
             _arguments _bash_completions _cache_invalid _call_function _combination \
             _complete _complete_debug _complete_help _complete_help_generic _complete_tag \

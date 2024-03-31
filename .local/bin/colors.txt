@@ -12,3 +12,4 @@ dixitinner #423b45
 dixitouter #f6dca9
 dixitbackground #ef7718
 dixittext #44160e
+dixitbackground #87dfa1
