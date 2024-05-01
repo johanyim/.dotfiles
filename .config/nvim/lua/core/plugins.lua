@@ -145,6 +145,13 @@ local plugins = {
     -- rust tools
     'simrat39/rust-tools.nvim',
     { 'saecki/crates.nvim', tag = 'v0.4.0', },
+    {
+        'rust-lang/rust.vim',
+        ft = "rust",
+        init = function ()
+            vim.g.rustfmt_autosave = 1
+        end
+    },
 
     -- compiler explorer
     'p00f/godbolt.nvim',

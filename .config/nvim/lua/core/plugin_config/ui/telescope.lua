@@ -43,10 +43,12 @@ telescope.setup({
         find_files = {
             prompt_title = "find_files",
             results_title = "Current directory",
+            hidden = true,
         },
         oldfiles = {
             prompt_title = "oldfiles",
-            results_title = "History"
+            results_title = "History",
+            hidden = true,
         },
     },
 })
