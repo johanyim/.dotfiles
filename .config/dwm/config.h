@@ -5,7 +5,6 @@
 
 #define TERMINAL  "alacritty"
 #define TERMCLASS "Alacritty"
-
 /* appearance */
 static const unsigned int borderpx  = 4;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -115,9 +114,11 @@ static const Layout layouts[] = {
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-	{ MODKEY|ShiftMask,             KEY,      toggletag,      {.ui = 1 << TAG} }, \
+	{ MODKEY|ShiftMask,             KEY,      swaptags,       {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      tag,            {.ui = 1 << TAG} },
 
+    //previous Mod+shift: tag window multiple tags
+	// { MODKEY|ShiftMask,             KEY,      toggletag,      {.ui = 1 << TAG} }, \
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
@@ -136,22 +137,25 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_a,      spawn,          {.v = browser } },
 	
-    //stack navigation
+    
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      focusmasterstrict,    {0} },
 	{ MODKEY,                       XK_l,      focusmasterback,{0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
-    //stack alteration
+
 	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_h,      zoomin,         {0} },
 	{ MODKEY|ShiftMask,             XK_l,      zoomout,        {0} },
-    //promote and demote master
-	// { MODKEY|ControlMask,           XK_l,      incnmaster,     {.i = +1} }, //demote to slave
-	// { MODKEY|ControlMask,           XK_h,      incnmaster,     {.i = -1} }, //promote to master
-	{ MODKEY|ControlMask,           XK_j,      incnmaster,     {.i = -1} }, //demote to slave
-	{ MODKEY|ControlMask,           XK_k,      incnmaster,     {.i = +1} }, //promote to master  TODO: promote strict
+    
+    { MODKEY|ControlMask,           XK_j,      rotatestack,    {.i = +1 } }, //rotate counter-CW
+	{ MODKEY|ControlMask,           XK_k,      rotatestack,    {.i = -1 } }, //rotate CW
+    { MODKEY|ControlMask,           XK_h,      rotatestack,    {.i = -1 } }, //rotate CW
+	{ MODKEY|ControlMask,           XK_l,      rotatestack,    {.i = +1 } }, //rotate counter-CW
+	// { MODKEY|ControlMask,           XK_h,      incnmaster,     {.i = +1} }, //promote to master 
+	// { MODKEY|ControlMask,           XK_l,      incnmaster,     {.i = -1} }, //demote to slave
+
 
 	//gaps toggle
     { MODKEY,                       XK_g,      togglegaps,     {0} },
@@ -160,11 +164,12 @@ static const Key keys[] = {
 	//toggle floating for current window
     { MODKEY,                       XK_v,      togglefloating, {0} },
 
-    //Changing layout appearance
 	{ MODKEY|ControlMask|ShiftMask, XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY|ControlMask|ShiftMask, XK_h,      setmfact,       {.f = -0.05} },
-	{ MODKEY|ControlMask|ShiftMask, XK_k,      setcfact,       {.f = +0.25} },
-	{ MODKEY|ControlMask|ShiftMask, XK_j,      setcfact,       {.f = -0.25} },
+	// { MODKEY|ControlMask|ShiftMask, XK_k,      setcfact,       {.f = +0.25} },
+	// { MODKEY|ControlMask|ShiftMask, XK_j,      setcfact,       {.f = -0.25} },
+	{ MODKEY|ControlMask|ShiftMask, XK_k,      incnmaster,     {.i = +1} }, //promote to master 
+	{ MODKEY|ControlMask|ShiftMask, XK_j,      incnmaster,     {.i = -1} }, //demote to slave
 	//{ MODKEY|ShiftMask,             XK_o,      setcfact,       {.f =  0.00} },
     
     //close client
@@ -217,13 +222,13 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_x,      spawn,          SHCMD("colormenu open") },
 	{ MODKEY|ControlMask,           XK_x,      spawn,          SHCMD("colormenu pick") },
 	{ MODKEY,                       XK_i,      spawn,          SHCMD("dm-wlanconnect") },
-	// { 0,                            XK_Print,  spawn,          SHCMD("screenshot") },
-	{ 0,                            XK_Print,  spawn,          SHCMD("fingerpaint") },
-	{ MODKEY|ShiftMask,             XK_z,      spawn,          SHCMD("fingerpaint") },
+	{ MODKEY|ShiftMask,             XK_i,      spawn,          SHCMD("bluetooth.sh") },
+	// { 0,                            XK_Print,  spawn,          SHCMD("fingerpaint") },
+	{ MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("screenshot") },
     // { MODKEY|ShiftMask,             XK_o,      spawn,          SHCMD("googler.sh")},
     //quick access to dotfiles
-	{ 0,                            XF86XK_Tools, spawn,       SHCMD("open-dotfiles") },
-	{ 0,                            XF86XK_Favorites,spawn,    SHCMD("get-updates") },
+	// { 0,                            XF86XK_Tools, spawn,       SHCMD("open-dotfiles") },
+	// { 0,                            XF86XK_Favorites,spawn,    SHCMD("get-updates") },
 };
 
 /* button definitions */

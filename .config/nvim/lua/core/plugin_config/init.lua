@@ -17,7 +17,6 @@ local files = {
     {"ui", {
         "gitsigns",
         "lualine",
-        -- "nvim_tree",
         "oil",
         "telescope",
         "tmux",

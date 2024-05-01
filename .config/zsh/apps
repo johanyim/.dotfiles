@@ -48,8 +48,10 @@ export FZF_DEFAULT_OPTS=" \
 --preview-window border-sharp --color=border:#1e1e2e \
 --border=none "
 export FZF_DEFAULT_COMMAND="rg --files --hidden -g '!.git/' -g '!*.cache/'"
-export FZF_ALT_C_COMMAND='find .'
+export FZF_ALT_C_COMMAND=""
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+export DISABLE_AUTO_TITLE=true
 
 # zsh-syntax-highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null

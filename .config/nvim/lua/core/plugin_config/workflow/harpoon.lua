@@ -12,10 +12,10 @@ vim.keymap.set('n', '<A-n>', HarpoonUi.nav_next)
 vim.keymap.set('n', '<A-p>', HarpoonUi.nav_prev)
 vim.keymap.set('n', '<A-M>', HarpoonUi.toggle_quick_menu)
 
--- vim.keymap.set('n', '<A-H>', require('harpoon.mark').add_file)
--- vim.keymap.set('n', '<A-J>', HarpoonUi.nav_next)
--- vim.keymap.set('n', '<A-K>', HarpoonUi.nav_prev)
--- vim.keymap.set('n', '<A-L>', HarpoonUi.toggle_quick_menu)
+vim.keymap.set('n', '<C-H>', require('harpoon.mark').add_file)
+vim.keymap.set('n', '<C-J>', HarpoonUi.nav_next) -- I have no idea why this doesn't work?
+vim.keymap.set('n', '<C-K>', HarpoonUi.nav_prev)
+vim.keymap.set('n', '<C-L>', HarpoonUi.toggle_quick_menu)
 -- vim.keymap.set('n', '<A-L>', ':Telescope harpoon marks<cr>')
 -- vim.keymap.set('n', '<space>t', function() require("harpoon.term").gotoTerminal(1) end )
 
