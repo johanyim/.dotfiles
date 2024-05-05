@@ -2,6 +2,7 @@ xsetroot -cursor_name left_ptr
 xwallpaper --no-randr --stretch "$JOHAN_WALLPAPERS/StarsMocha.png" &
 setxkbmap -option caps:escape &
 xinput disable 9 &
+xinput --set-prop "TPPS/2 IBM TrackPoint" "libinput Accel Speed" 0.6 &
 xmousepasteblock &
 dunst &
 a2ln &

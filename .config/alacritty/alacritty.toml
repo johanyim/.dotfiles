@@ -21,7 +21,7 @@ white = "#A6ADC8"
 yellow = "#F9E2AF"
 
 [colors.cursor]
-cursor = "#F5E0DC"
+cursor = "#cdd6f4"
 text = "#1E1E2E"
 
 [colors.dim]
@@ -71,8 +71,8 @@ background = "#A6ADC8"
 foreground = "#1E1E2E"
 
 [colors.selection]
-background = "#F5E0DC"
-text = "#1E1E2E"
+background = "#B4BEFE"
+text = "#11111B"
 
 [colors.vi_mode_cursor]
 cursor = "#B4BEFE"
