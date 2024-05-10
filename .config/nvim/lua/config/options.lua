@@ -1,3 +1,6 @@
+vim.g.mapleader = ','
+vim.g.maplocalleader = ','
+
 -- side numbers
 vim.wo.number = true
 -- vim.wo.relativenumber = true

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-alias ls='exa -al --no-user --no-time -h '
+alias ls='eza -al --no-user --no-time -h --icons=always'
 alias cd='z'
 alias grep='grep --color=auto'
 alias wifi='nmcli dev wifi connect'

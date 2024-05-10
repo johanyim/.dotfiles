@@ -1,2 +1,0 @@
-#!/bin/sh
-rsync -uvrP --delete-after ~/website/ root@johanyim.com:/var/www/johanyim/

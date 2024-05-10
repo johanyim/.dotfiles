@@ -1,0 +1,9 @@
+#!/bin/bash
+setxkbmap -option caps:escape &
+xinput disable 9 &
+xinput --set-prop "TPPS/2 IBM TrackPoint" "libinput Accel Speed" 0.6 &
+xmousepasteblock &
+pipewire &
+pipewire-pulse &
+pipewire-media-session 
+

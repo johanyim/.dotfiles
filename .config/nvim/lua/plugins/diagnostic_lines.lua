@@ -11,7 +11,7 @@ return {
             virtual_text = true,
         })
 
-        vim.keymap.set('', '<leader>d', function()
+        vim.keymap.set('n', '<leader>d', function()
             if diagnostics_active then
                 vim.diagnostic.config({
                     virtual_text = false,

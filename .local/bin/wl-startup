@@ -1,5 +1,0 @@
-#!/bin/sh
-
-wbg $JOHAN_WALLPAPERS/StarsMocha.png &
-exec somebar 
-

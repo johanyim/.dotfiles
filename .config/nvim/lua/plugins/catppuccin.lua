@@ -22,20 +22,26 @@ return {
                         NvimTreeNormal = {bg = colors.crust},
                         NvimTreeWinSeparator = {fg = colors.base, bg = colors.crust},
                         TelescopeBorder = {fg = colors.surface0},
-                        Comment = { style = {}},
+                        Comment = { style = {} },
                         NonText = { style = {"bold"}},
+
+                        DiagnosticVirtualTextError = { fg = colors.red },
+                        DiagnosticVirtualTextWarning = { fg = colors.yellow},
+                        DiagnosticVirtualTextInfo = { fg = colors.sapphire},
+                        DiagnosticVirtualTextHint = { fg = colors.teal },
+
                         GhostText = { fg = colors.surface1}, -- completions color
-                        RustInlayHints = { fg = colors.surface0 }
+                        LspInlayHint = { fg = colors.surface0, bg = colors.none },
 
                     }
                 end,
             },
             integrations = {
                 cmp = true,
-                nvimtree = true,
                 treesitter = true,
             },
         }
         vim.cmd.colorscheme "catppuccin-mocha"
     end
 }
+

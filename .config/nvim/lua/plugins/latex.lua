@@ -7,7 +7,7 @@ return {
         vim.g.vimtex_quickfix_open_on_warning = 0
         vim.g.vimtex_view_forward_search_on_start = false
     end
-},
+}
 -- " This is necessary for VimTeX to load properly. The "indent" is optional.
 -- " Note that most plugin managers will do this automatically.
 -- filetype plugin indent on

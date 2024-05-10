@@ -35,6 +35,7 @@ return {
                             -- Get the language server to recognize the `vim` global
                             globals = {'vim'},
                         },
+                        hint = {enable = true}
                     },
                 },
             }
@@ -109,6 +110,7 @@ return {
             vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
             vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {})
             vim.keymap.set("n", "gr", require('telescope.builtin').lsp_references, {})
+            vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
             vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
         end
 
