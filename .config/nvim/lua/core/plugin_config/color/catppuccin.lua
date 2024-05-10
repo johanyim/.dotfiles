@@ -19,7 +19,8 @@ require("catppuccin").setup {
                 TelescopeBorder = {fg = colors.surface0},
                 Comment = { style = {}},
                 NonText = { style = {"bold"}},
-                GhostText = { fg = colors.surface1},
+                GhostText = { fg = colors.surface1}, -- completions color
+                RustInlayHints = { fg = colors.surface0 }
 
             }
         end,

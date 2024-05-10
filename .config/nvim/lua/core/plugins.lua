@@ -10,26 +10,26 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
-    "catppuccin/nvim",
-    -- 'nvim-tree/nvim-tree.lua',
-    'nvim-tree/nvim-web-devicons',
-    'nvim-treesitter/nvim-treesitter',
-    'nvim-nreesitter/playground',
-    {
-        'nvim-lualine/lualine.nvim',
-        dependencies = { 'arkav/lualine-lsp-progress' }
-    },
-
+    {"catppuccin/nvim"},
     {
         'nvim-telescope/telescope.nvim',
         tag = '0.1.5',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
-
+    {'nvim-tree/nvim-web-devicons'},
+    {'nvim-treesitter/nvim-treesitter', build = ":TSUpdate"},
     {
         'stevearc/oil.nvim',
         dependencies = { "nvim-tree/nvim-web-devicons" },
     },
+    -- 'nvim-tree/nvim-tree.lua',
+    -- 'nvim-treesitter/playground',
+    {
+        'nvim-lualine/lualine.nvim',
+        dependencies = { 'arkav/lualine-lsp-progress' }
+    },
+
+
 
     {
         'stevearc/aerial.nvim',
@@ -43,7 +43,6 @@ local plugins = {
     {
         'williamboman/mason.nvim',
         'williamboman/mason-lspconfig.nvim',
-        'neovim/nvim-lspconfig',
     },
     -- completions
     {
@@ -67,6 +66,15 @@ local plugins = {
         ft = {"python"},
     },
 
+
+    -- {
+    --     "MysticalDevil/inlay-hints.nvim",
+    --     event = "LspAttach",
+    --     dependencies = { "neovim/nvim-lspconfig" },
+    --     config = function()
+    --         require("inlay-hints").setup()
+    --     end
+    -- },
 
     -- lua snip
     {
@@ -143,9 +151,16 @@ local plugins = {
     --     "HiPhish/nvim-ts-rainbow2",
     --     dependencies = { "nvim-treesitter/nvim-treesitter" },
 
+
     -- rust tools
-    'simrat39/rust-tools.nvim',
-    { 'saecki/crates.nvim', tag = 'v0.4.0', },
+    {
+        'mrcjkb/rustaceanvim',
+        version = '^4', -- Recommended
+        lazy = false, -- This plugin is already lazy
+        -- dependencies = { "lvimuser/lsp-inlayhints.nvim", },
+    },
+
+    'saecki/crates.nvim',
     {
         'rust-lang/rust.vim',
         ft = "rust",
@@ -189,10 +204,6 @@ local plugins = {
         -- config = function()
         --     require("lines").setup()
         -- end,
-    },
-
-    {
-        "vimwiki/vimwiki",
     },
 
     -- -- Writing 
@@ -246,11 +257,6 @@ local plugins = {
             })
         end
     }
-
-
-
-
-
 
     -- -- WIP
     -- --notifications

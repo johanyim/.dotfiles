@@ -13,6 +13,7 @@ vim.opt.cursorline = true
 vim.opt.autoread = true
 vim.opt.history = 10000
 
+-- vim.lsp.inlay_hint.enable()
 
 -- show mode in command area
 vim.opt.showmode = false
@@ -57,4 +58,5 @@ vim.opt.termguicolors = true
 -- python 2/3 support
 -- vim.g.python2_host_prog = ''
 vim.g.python3_host_prog = '/usr/bin/python'
+
 

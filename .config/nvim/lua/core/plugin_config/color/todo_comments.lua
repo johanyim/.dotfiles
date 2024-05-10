@@ -26,5 +26,5 @@ todo_comments.setup {
 }
 
 
-vim.keymap.set("n", "<leader>P", "<cmd>TodoTrouble<CR>")
+vim.keymap.set("n", "<leader>q", "<cmd>TodoTrouble<CR>")
 

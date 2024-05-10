@@ -38,19 +38,19 @@ lspconfig.lua_ls.setup {
     },
 }
 
-lspconfig.rust_analyzer.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    filetypes = { "rust" },
-    root_dir = util.root_pattern("Cargo.toml"),
-    settings = {
-        ['rust-analyzer'] = {
-            cargo = {
-                allFeatures = true,
-            },
-        },
-    },
-}
+-- lspconfig.rust_analyzer.setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     filetypes = { "rust" },
+--     root_dir = util.root_pattern("Cargo.toml"),
+--     settings = {
+--         ['rust-analyzer'] = {
+--             cargo = {
+--                 allFeatures = true,
+--             },
+--         },
+--     },
+-- }
 
 lspconfig.bashls.setup {
     on_attach = on_attach,
@@ -106,5 +106,6 @@ lspconfig.pyright.setup {
 
 lspconfig.astro.setup ({
     filetypes = { "astro" },
-
 })
+
+lspconfig.gleam.setup({})
