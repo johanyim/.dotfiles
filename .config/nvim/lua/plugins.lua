@@ -1,4 +1,3 @@
-
 return {
     {'nvim-tree/nvim-web-devicons'},
     -- lsp and mason
@@ -10,11 +9,11 @@ return {
     {
         "L3MON4D3/LuaSnip",
         version = "v2.*",
-        build = "make install_jsregexp"
+        build = "make install_jsregexp",
+        dependencies = "rafamadriz/friendly-snippets",
     },
     -- completions for all languages
     'saadparwaiz1/cmp_luasnip',
-    'rafamadriz/friendly-snippets',
 
     -- --which key
     -- {

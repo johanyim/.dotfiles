@@ -6,16 +6,23 @@ return {
         end
     },
     {
-        "williamboman/mason-lspconfig.nvim",
+        "williamboman/mason-lspconfig",
         config = function ()
             require("mason-lspconfig").setup({
-                ensure_installed = { "lua_ls", "rust_analyzer", "bashls",
+                ensure_installed = { "lua_ls", 
+                    -- "rust_analyzer", 
+                    "bashls",
                     "gopls", "clangd", "ruff_lsp",
                     "html", "cssls", "eslint", "jsonls",
                     "tsserver", "tailwindcss",
                     "emmet_ls",
+                    "phpactor",
                     "astro"},
             })
+
+            -- require("mason-lspconfig").setup_handlers({
+            --     ["rust_analyzer"] = function () end -- rust analyzer is handled by rustaceanvim
+            -- })
         end
     },
 
@@ -25,6 +32,7 @@ return {
     --local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
             local util = require("lspconfig/util")
+
 
             local lspconfig = require("lspconfig")
             lspconfig.lua_ls.setup {
@@ -102,7 +110,13 @@ return {
             lspconfig.astro.setup ({
                 filetypes = { "astro" },
             })
-            lspconfig.gleam.setup({})
+
+            lspconfig.phpactor.setup ({
+                cmd = { "phpactor", "language-server" },
+                filetypes = {"php", "blade" },
+                root_dir = lspconfig.util.root_pattern("composer.json", ".git"),
+                capabilities = capabilities,
+            })
 
             vim.keymap.set("n", "<Leader>rn", vim.lsp.buf.rename, {})
             vim.keymap.set("n", "<Leader>ca", vim.lsp.buf.code_action, {})

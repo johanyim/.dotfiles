@@ -38,8 +38,11 @@ vim.opt.smartindent = true
 -- vim.opt.cindent = true
 
 vim.opt.hlsearch = true
--- vim.opt.ignorecase = false
+vim.opt.ignorecase = true
 vim.opt.smartcase = true
+
+-- git signs 
+vim.opt.signcolumn = "yes"
 
 
 -- tab completion options as a menu
