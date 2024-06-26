@@ -3,6 +3,7 @@ return {
     tag = '0.1.5',
     dependencies = { 'nvim-lua/plenary.nvim' },
     lazy = false,
+    priority = 100,
     config = function()
         require("telescope").setup({
             defaults = {

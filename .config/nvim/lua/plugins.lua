@@ -62,6 +62,12 @@ return {
     },
 
 
+    -- -- write as sudo
+    --{
+    --    "lambdalisue/vim-suda"
+    --},
+
+
     -- -- Writing 
     -- markdown previews in browser
     { "preservim/vim-pencil", },

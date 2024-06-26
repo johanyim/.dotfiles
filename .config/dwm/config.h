@@ -3,8 +3,10 @@
 #include <X11/XF86keysym.h>
 
 
-#define TERMINAL  "alacritty"
-#define TERMCLASS "Alacritty"
+#define TERMINAL  "wezterm"
+#define TERMCLASS "wezterm"
+// #define TERMINAL  "alacritty"
+// #define TERMCLASS "Alacritty"
 /* appearance */
 static const unsigned int borderpx  = 4;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -81,6 +83,7 @@ static const Rule rules[] = {
 	{ "st-256color",NULL,  NULL,           0,         0,          1,          0,         1,          -1 },
 	{ "Kitty",   NULL,     NULL,           0,         0,          1,          0,         1,          -1 },
 	{ "Alacritty",NULL,    NULL,           0,         0,          1,          0,         1,          -1 },
+	{ "wezterm",NULL,    NULL,           0,         0,          1,          0,         1,          -1 },
     
     //A getaround for the braile font problem with alacritty
 	{ "FloatingClass",   "Battery",NULL,   0,         1,          1,          0,         0,          -1 },
@@ -129,6 +132,7 @@ static const Layout layouts[] = {
 static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", mantle, "-nf", overlay0, "-sb", base, "-sf", yellow, NULL };
 static const char *termcmd[]  = { TERMINAL, NULL };
 static const char *browser[]  = { "qutebrowser", NULL };
+static const char *alt_browser[]  = { "firefox", NULL };
 
 #include "movestack.c"
 static const Key keys[] = {
@@ -136,6 +140,7 @@ static const Key keys[] = {
     { MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_a,      spawn,          {.v = browser } },
+	{ MODKEY|ShiftMask,             XK_a,      spawn,          {.v = alt_browser } },
 	
     
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
@@ -223,12 +228,7 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask,           XK_x,      spawn,          SHCMD("colormenu pick") },
 	{ MODKEY,                       XK_i,      spawn,          SHCMD("dm-wlanconnect") },
 	{ MODKEY|ShiftMask,             XK_i,      spawn,          SHCMD("bluetooth.sh") },
-	// { 0,                            XK_Print,  spawn,          SHCMD("fingerpaint") },
 	{ MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("screenshot") },
-    // { MODKEY|ShiftMask,             XK_o,      spawn,          SHCMD("googler.sh")},
-    //quick access to dotfiles
-	// { 0,                            XF86XK_Tools, spawn,       SHCMD("open-dotfiles") },
-	// { 0,                            XF86XK_Favorites,spawn,    SHCMD("get-updates") },
 };
 
 /* button definitions */
@@ -244,7 +244,7 @@ static const Button buttons[] = {
 	{ ClkStatusText,        ShiftMask,      Button2,        sigstatusbar,   {.i = 7} },
 	{ ClkStatusText,        ShiftMask,      Button3,        sigstatusbar,   {.i = 8} },
 	{ ClkStatusText,        ShiftMask,      Button4,        sigstatusbar,   {.i = 9} },
-	{ ClkStatusText,        ShiftMask,      Button5,        sigstatusbar,   {.i = 10} }, 
+	{ ClkStatusText,        ShiftMask,      Button5,        sigstatusbar,   {.i = 10}}, 
 
     { ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	// { ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },

@@ -26,25 +26,25 @@ count_selected = { fg = "#1e1e2e", bg = "#89b4fa" }
 
 # Border
 border_symbol = "│"
-border_style  = { fg = "#11111b" }
+border_style  = { fg = "#7f849c" }
 
 # Highlighting
 syntect_theme = "~/.config/yazi/Catppuccin-mocha.tmTheme"
 
 [status]
-separator_open  = ""
-separator_close = ""
-separator_style = { bg = "#1e1e2e", fg = "#11111b" }
+separator_open  = ""
+separator_close = ""
+separator_style = { fg = "#45475a", bg = "#45475a" }
 
 # Mode
-mode_normal = { bg = "#11111b", fg = "#89b4fa", bold = true }
-mode_select = { bg = "#11111b", fg = "#a6e3a1", bold = true }
-mode_unset  = { bg = "#11111b", fg = "#f2cdcd", bold = true }
+mode_normal = { fg = "#1e1e2e", bg = "#89b4fa", bold = true }
+mode_select = { fg = "#1e1e2e", bg = "#a6e3a1", bold = true }
+mode_unset  = { fg = "#1e1e2e", bg = "#f2cdcd", bold = true }
 
 # Progress
 progress_label  = { fg = "#ffffff", bold = true }
-progress_normal = { fg = "#89b4fa", bg = "#11111b" }
-progress_error  = { fg = "#f38ba8", bg = "#11111b" }
+progress_normal = { fg = "#89b4fa", bg = "#45475a" }
+progress_error  = { fg = "#f38ba8", bg = "#45475a" }
 
 # Permissions
 permissions_t = { fg = "#89b4fa" }
@@ -102,9 +102,6 @@ rules = [
 	{ mime = "application/x-bzip2",         fg = "#f5c2e7" },
 	{ mime = "application/x-7z-compressed", fg = "#f5c2e7" },
 	{ mime = "application/x-rar",           fg = "#f5c2e7" },
-
-  # Directories
-  { mime = "inode/directory", fg = "#89b4fa" },
 
 	# Fallback
 	{ name = "*", fg = "#cdd6f4" },

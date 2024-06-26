@@ -3,8 +3,10 @@
 #include <X11/XF86keysym.h>
 
 
-#define TERMINAL  "alacritty"
-#define TERMCLASS "Alacritty"
+#define TERMINAL  "wezterm"
+#define TERMCLASS "wezterm"
+// #define TERMINAL  "alacritty"
+// #define TERMCLASS "Alacritty"
 /* appearance */
 static const unsigned int borderpx  = 4;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -81,6 +83,7 @@ static const Rule rules[] = {
 	{ "st-256color",NULL,  NULL,           0,         0,          1,          0,         1,          -1 },
 	{ "Kitty",   NULL,     NULL,           0,         0,          1,          0,         1,          -1 },
 	{ "Alacritty",NULL,    NULL,           0,         0,          1,          0,         1,          -1 },
+	{ "wezterm",NULL,    NULL,           0,         0,          1,          0,         1,          -1 },
     
     //A getaround for the braile font problem with alacritty
 	{ "FloatingClass",   "Battery",NULL,   0,         1,          1,          0,         0,          -1 },
@@ -129,6 +132,7 @@ static const Layout layouts[] = {
 static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", mantle, "-nf", overlay0, "-sb", base, "-sf", yellow, NULL };
 static const char *termcmd[]  = { TERMINAL, NULL };
 static const char *browser[]  = { "qutebrowser", NULL };
+static const char *alt_browser[]  = { "firefox", NULL };
 
 #include "movestack.c"
 static const Key keys[] = {
@@ -136,25 +140,26 @@ static const Key keys[] = {
     { MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_a,      spawn,          {.v = browser } },
+	{ MODKEY|ShiftMask,             XK_a,      spawn,          {.v = alt_browser } },
 	
-    //stack navigation
+    
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      focusmasterstrict,    {0} },
 	{ MODKEY,                       XK_l,      focusmasterback,{0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
-    //stack alteration
+
 	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_h,      zoomin,         {0} },
 	{ MODKEY|ShiftMask,             XK_l,      zoomout,        {0} },
     
-    //rotate stack
-    { MODKEY|ControlMask,           XK_j,      rotatestack,    {.i = -1 } }, //rotate CW
-	{ MODKEY|ControlMask,           XK_k,      rotatestack,    {.i = +1 } }, //rotate counter-CW
-    //more in master
-	{ MODKEY|ControlMask,           XK_h,      incnmaster,     {.i = +1} }, //promote to master 
-	{ MODKEY|ControlMask,           XK_l,      incnmaster,     {.i = -1} }, //demote to slave
+    { MODKEY|ControlMask,           XK_j,      rotatestack,    {.i = +1 } }, //rotate counter-CW
+	{ MODKEY|ControlMask,           XK_k,      rotatestack,    {.i = -1 } }, //rotate CW
+    { MODKEY|ControlMask,           XK_h,      rotatestack,    {.i = -1 } }, //rotate CW
+	{ MODKEY|ControlMask,           XK_l,      rotatestack,    {.i = +1 } }, //rotate counter-CW
+	// { MODKEY|ControlMask,           XK_h,      incnmaster,     {.i = +1} }, //promote to master 
+	// { MODKEY|ControlMask,           XK_l,      incnmaster,     {.i = -1} }, //demote to slave
 
 
 	//gaps toggle
@@ -164,11 +169,12 @@ static const Key keys[] = {
 	//toggle floating for current window
     { MODKEY,                       XK_v,      togglefloating, {0} },
 
-    //Changing layout appearance
 	{ MODKEY|ControlMask|ShiftMask, XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY|ControlMask|ShiftMask, XK_h,      setmfact,       {.f = -0.05} },
-	{ MODKEY|ControlMask|ShiftMask, XK_k,      setcfact,       {.f = +0.25} },
-	{ MODKEY|ControlMask|ShiftMask, XK_j,      setcfact,       {.f = -0.25} },
+	// { MODKEY|ControlMask|ShiftMask, XK_k,      setcfact,       {.f = +0.25} },
+	// { MODKEY|ControlMask|ShiftMask, XK_j,      setcfact,       {.f = -0.25} },
+	{ MODKEY|ControlMask|ShiftMask, XK_k,      incnmaster,     {.i = +1} }, //promote to master 
+	{ MODKEY|ControlMask|ShiftMask, XK_j,      incnmaster,     {.i = -1} }, //demote to slave
 	//{ MODKEY|ShiftMask,             XK_o,      setcfact,       {.f =  0.00} },
     
     //close client
@@ -222,12 +228,7 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask,           XK_x,      spawn,          SHCMD("colormenu pick") },
 	{ MODKEY,                       XK_i,      spawn,          SHCMD("dm-wlanconnect") },
 	{ MODKEY|ShiftMask,             XK_i,      spawn,          SHCMD("bluetooth.sh") },
-	// { 0,                            XK_Print,  spawn,          SHCMD("fingerpaint") },
 	{ MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("screenshot") },
-    // { MODKEY|ShiftMask,             XK_o,      spawn,          SHCMD("googler.sh")},
-    //quick access to dotfiles
-	// { 0,                            XF86XK_Tools, spawn,       SHCMD("open-dotfiles") },
-	// { 0,                            XF86XK_Favorites,spawn,    SHCMD("get-updates") },
 };
 
 /* button definitions */
@@ -243,7 +244,7 @@ static const Button buttons[] = {
 	{ ClkStatusText,        ShiftMask,      Button2,        sigstatusbar,   {.i = 7} },
 	{ ClkStatusText,        ShiftMask,      Button3,        sigstatusbar,   {.i = 8} },
 	{ ClkStatusText,        ShiftMask,      Button4,        sigstatusbar,   {.i = 9} },
-	{ ClkStatusText,        ShiftMask,      Button5,        sigstatusbar,   {.i = 10} }, 
+	{ ClkStatusText,        ShiftMask,      Button5,        sigstatusbar,   {.i = 10}}, 
 
     { ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	// { ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },

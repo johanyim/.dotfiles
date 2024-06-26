@@ -9,7 +9,7 @@ return {
         "williamboman/mason-lspconfig",
         config = function ()
             require("mason-lspconfig").setup({
-                ensure_installed = { "lua_ls", 
+                ensure_installed = { "lua_ls",
                     -- "rust_analyzer", 
                     "bashls",
                     "gopls", "clangd", "ruff_lsp",
@@ -85,6 +85,7 @@ return {
             lspconfig.clangd.setup {
                 capabilities = capabilities,
             }
+            
 
             lspconfig.tsserver.setup {
                 filetypes = {"typescript", "typescriptreact", "typescript.tsx"},
@@ -94,6 +95,10 @@ return {
 
             lspconfig.tailwindcss.setup {
                 filetypes = { "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "svelte", "pug", "typescriptreact", "vue", "astro" },
+                capabilities = capabilities,
+            }
+            lspconfig.html.setup {
+                filetypes = {"html", "php", "blade"},
                 capabilities = capabilities,
             }
 
@@ -109,6 +114,7 @@ return {
 
             lspconfig.astro.setup ({
                 filetypes = { "astro" },
+                capabilities = capabilities,
             })
 
             lspconfig.phpactor.setup ({

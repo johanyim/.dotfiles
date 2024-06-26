@@ -90,9 +90,15 @@ settings:
     global: 256
   colors.webpage.preferred_color_scheme:
     global: auto
+  completion.scrollbar.width:
+    global: 12
   confirm_quit:
     global:
     - never
+  content.blocking.adblock.lists:
+    global:
+    - https://easylist.to/easylist/easylist.txt
+    - https://easylist.to/easylist/easyprivacy.txt
   content.blocking.enabled:
     global: false
   content.blocking.hosts.lists:
@@ -115,7 +121,7 @@ settings:
   downloads.location.suggestion:
     global: both
   downloads.remove_finished:
-    global: 10000
+    global: 5000
   editor.command:
     global:
     - alacritty
@@ -176,6 +182,10 @@ settings:
     global: 0
   hints.scatter:
     global: true
+  input.mouse.rocker_gestures:
+    global: false
+  new_instance_open_target:
+    global: window
   prompt.filebrowser:
     global: false
   prompt.radius:
@@ -204,9 +214,11 @@ settings:
     - tabs
     - progress
   tabs.background:
-    global: true
+    global: false
   tabs.close_mouse_button:
     global: none
+  tabs.close_mouse_button_on_bar:
+    global: ignore
   tabs.last_close:
     global: close
   tabs.mode_on_change:
@@ -224,7 +236,7 @@ settings:
   tabs.show:
     global: switching
   tabs.show_switching_delay:
-    global: 2000
+    global: 500
   tabs.title.alignment:
     global: left
   tabs.title.elide:
@@ -232,11 +244,15 @@ settings:
   tabs.title.format:
     global: '{audio}{index}:{current_title}'
   tabs.width:
-    global: 10%
+    global: 100
   tabs.wrap:
     global: false
   url.default_page:
     global: https://www.google.com/
+  url.incdec_segments:
+    global:
+    - path
+    - query
   url.searchengines:
     global:
       DEFAULT: https://www.google.com/search?q={}

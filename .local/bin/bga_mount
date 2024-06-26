@@ -1,0 +1,6 @@
+#!/bin/sh
+read -p "Enter your BGA password: " -s pw
+
+sudo mount -t cifs -o username=jyim,password=$pw //bga004/Shared /mnt/bga/Shared
+sudo mount -t cifs -o username=jyim,password=$pw //BGA004/Users/jyim /mnt/bga/jyim
+# sudo mount -t cifs -o username=jyim,password=$pw //bga-sql-1/ /mnt/bga/sql

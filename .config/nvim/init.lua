@@ -21,7 +21,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require("config.options")
 require("config.autocmd")
--- require("config.colors")
 require("config.keybindings")
 require("lazy").setup("plugins")
 local opts = {}

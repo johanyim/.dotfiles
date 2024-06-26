@@ -15,7 +15,7 @@ fi
 
 
 # cancel the current command
-# tmux send-keys C-c
+tmux send-keys C-c
 # Send the last command
 tmux send-keys Up C-m
 
