@@ -31,7 +31,7 @@ return {
                         DiagnosticVirtualTextHint = { fg = colors.teal },
 
                         GhostText = { fg = colors.surface1}, -- completions color
-                        LspInlayHint = { fg = colors.surface0, bg = colors.none },
+                        LspInlayHint = { fg = colors.surface1, bg = colors.none },
 
                     }
                 end,
