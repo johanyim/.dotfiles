@@ -123,7 +123,7 @@ return {
 				capabilities = capabilities,
 			})
 			lspconfig.html.setup({
-				filetypes = { "html", "php", "blade" },
+				filetypes = { "html", "php", "blade", "svelte" },
 				capabilities = capabilities,
 			})
 
@@ -156,10 +156,22 @@ return {
 				capabilities = capabilities,
 			})
 
+			lspconfig.svelte.setup({
+				cmd = { "svelteserver", "--stdio" },
+				filetypes = { "svelte" },
+				capabilities = capabilities,
+				-- root_dir = root_pattern("package.json", ".git"),
+			})
+
 			lspconfig.phpactor.setup({
 				cmd = { "phpactor", "language-server" },
 				filetypes = { "php", "blade" },
 				root_dir = lspconfig.util.root_pattern("composer.json", ".git"),
+				capabilities = capabilities,
+			})
+
+			lspconfig.gleam.setup({
+				filetypes = { "gleam" },
 				capabilities = capabilities,
 			})
 

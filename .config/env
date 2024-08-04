@@ -47,6 +47,12 @@ export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export PATH="$PATH:$CARGO_HOME/bin"
 export RUSTC_WRAPPER="$CARGO_HOME/bin/sccache"
 
+# LUA
+
+export LUA_PATH='/usr/share/lua/5.4/?.lua;/usr/local/share/lua/5.4/?.lua;/usr/local/share/lua/5.4/?/init.lua;/usr/share/lua/5.4/?/init.lua;/usr/local/lib/lua/5.4/?.lua;/usr/local/lib/lua/5.4/?/init.lua;/usr/lib/lua/5.4/?.lua;/usr/lib/lua/5.4/?/init.lua;./?.lua;./?/init.lua;/home/johan/.luarocks/share/lua/5.4/?.lua;/home/johan/.luarocks/share/lua/5.4/?/init.lua'
+export LUA_CPATH='/usr/local/lib/lua/5.4/?.so;/usr/lib/lua/5.4/?.so;/usr/local/lib/lua/5.4/loadall.so;/usr/lib/lua/5.4/loadall.so;./?.so;/home/johan/.luarocks/lib/lua/5.4/?.so'
+# export PATH='/home/johan/.luarocks/bin:/home/johan/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/johan/.local/bin:/home/johan/.local/share/cargo/bin:/opt/cuda/bin:/opt/cuda/nsight_compute:/opt/cuda/nsight_systems/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/lib/rustup/bin'
+
 # GO 
 export GOPATH="$XDG_DATA_HOME/go"
 export GOMODCACHE="$XDG_CACHE_HOME/go/mod"

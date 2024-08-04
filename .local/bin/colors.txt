@@ -1,1 +1,13 @@
 sad #11111b
+45475a #45475a
+c8c8a6 #c8c8a6
+eeeeee #eeeeee
+d32f2f #d32f2f
+0288d1 #0288d1
+0288d1 #0288d1
+d32f2f #d32f2f
+ffffff #ffffff
+ffffff #ffffff
+d32f2f #d32f2f
+11111b #11111b
+ffaff3 #ffaff3

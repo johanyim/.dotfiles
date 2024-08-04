@@ -114,6 +114,7 @@ settings:
   content.media.video_capture:
     http://localhost:3000: true
     https://mediapipe-studio.webapps.google.com: true
+    https://teams.microsoft.com: true
   content.notifications.enabled:
     https://blog.csdn.net: false
   downloads.location.directory:

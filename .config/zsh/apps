@@ -2,6 +2,7 @@
 
 # starship
 eval "$(starship init zsh)"
+
 # zoxide
 eval "$(zoxide init zsh)"
 
@@ -54,10 +55,12 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 export DISABLE_AUTO_TITLE=true
 
-# zsh-syntax-highlighting
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
-source /home/johan/.config/broot/launcher/bash/br
-
 # adding python poetry
 fpath+=/home/johan/.config/zsh/poetry
 autoload -Uz compinit && compinit
+
+# zsh-syntax-highlighting
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+
+source /home/johan/.config/broot/launcher/bash/br
+

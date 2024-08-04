@@ -1,0 +1,3 @@
+download_dir = "/home/johan/files/downloads/torrents"
+# default
+daemon_addr = "127.0.0.1:3030"
