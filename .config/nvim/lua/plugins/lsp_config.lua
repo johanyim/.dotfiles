@@ -9,6 +9,8 @@ return {
 					"svelte-language-server",
 					"stylua",
 					"eslint-lsp",
+					"pyright",
+					"tinymist",
 				},
 			})
 		end,
@@ -23,13 +25,17 @@ return {
 					"bashls",
 					"gopls",
 					"clangd",
-					"ruff_lsp",
+					"ruff",
 					"html",
 					"cssls",
 					"jsonls",
-					"tsserver",
+					"ts_ls",
 					"emmet_ls",
 					"astro",
+					"elixirls",
+					"marksman",
+					"yamlls",
+					"asm_lsp",
 				},
 			})
 
@@ -73,8 +79,13 @@ return {
 			--         },
 			--     },
 			-- }
+			lspconfig.marksman.setup({
+				filetypes = { "markdown" },
+				capabilities = capabilities,
+			})
 
 			lspconfig.bashls.setup({
+				filetypes = { "bash", "zsh", "sh" },
 				capabilities = capabilities,
 			})
 
@@ -98,7 +109,7 @@ return {
 				capabilities = capabilities,
 			})
 
-			lspconfig.tsserver.setup({
+			lspconfig.ts_ls.setup({
 				filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
 				cmd = { "typescript-language-server", "--stdio" },
 				capabilities = capabilities,
@@ -121,6 +132,25 @@ return {
 					"astro",
 				},
 				capabilities = capabilities,
+			})
+
+			lspconfig.cssls.setup({
+				capabilities = capabilities,
+				filetypes = {
+					"css",
+					"eruby",
+					"html",
+					"javascript",
+					"javascriptreact",
+					"less",
+					"sass",
+					"scss",
+					"svelte",
+					"pug",
+					"typescriptreact",
+					"vue",
+					"astro",
+				},
 			})
 			lspconfig.html.setup({
 				filetypes = { "html", "php", "blade", "svelte" },
@@ -151,6 +181,11 @@ return {
 				capabilities = capabilities,
 			})
 
+			lspconfig.ruff.setup({
+				filetypes = { "python" },
+				capabilities = capabilities,
+			})
+
 			lspconfig.astro.setup({
 				filetypes = { "astro" },
 				capabilities = capabilities,
@@ -163,15 +198,47 @@ return {
 				-- root_dir = root_pattern("package.json", ".git"),
 			})
 
-			lspconfig.phpactor.setup({
-				cmd = { "phpactor", "language-server" },
-				filetypes = { "php", "blade" },
-				root_dir = lspconfig.util.root_pattern("composer.json", ".git"),
+			lspconfig.gleam.setup({
+				filetypes = { "gleam" },
 				capabilities = capabilities,
 			})
 
-			lspconfig.gleam.setup({
-				filetypes = { "gleam" },
+			lspconfig.elixirls.setup({
+				cmd = { "elixir-ls" },
+				filetypes = { "elixir" },
+				capabilities = capabilities,
+			})
+
+			lspconfig.yamlls.setup({
+				filetypes = { "yaml", "yml" },
+				settings = {
+					yaml = {
+						format = {
+							enable = true,
+						},
+						validate = true,
+						schemaStore = {
+							enable = false,
+							url = "",
+						},
+					},
+				},
+				capabilities = capabilities,
+			})
+
+			lspconfig.tinymist.setup({
+				-- cmd = { "tinymist" },
+				-- filetypes = { "typst", "typ" },
+				capabilities = capabilities,
+			})
+			--
+			-- lspconfig.nextls.setup({
+			-- 	filetypes = { "elixir" },
+			-- 	capabilities = capabilities,
+			-- })
+
+			lspconfig.asm_lsp.setup({
+				filetypes = { "asm" },
 				capabilities = capabilities,
 			})
 

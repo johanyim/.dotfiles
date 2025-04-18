@@ -1,0 +1,5 @@
+#!/bin/sh
+
+sudo umount /home/johan/windows/Shared
+sudo umount /home/johan/windows/Personal
+sudo umount /home/johan/windows/CCTV

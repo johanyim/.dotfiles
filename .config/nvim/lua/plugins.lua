@@ -44,6 +44,32 @@ return {
 		end,
 	},
 
+	-- tailwind folding/concealing
+	{
+		"razak17/tailwind-fold.nvim",
+		opts = {
+			enabled = false,
+			symbol = "…", -- 󱏿
+			highlight = {
+				fg = "#a6e3a1", -- [[ symbol color ]]
+			},
+			ft = {
+				"html",
+				"svelte",
+				"astro",
+
+				"vue",
+				"tsx",
+				"php",
+				"blade",
+				"eruby",
+			},
+		},
+
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		ft = { "html", "svelte", "astro", "vue", "typescriptreact", "php", "blade" },
+	},
+
 	-- -- Writing
 	-- markdown previews in browser
 	{ "preservim/vim-pencil" },

@@ -104,6 +104,15 @@ family = "NotoSansM Nerd Font"
 family = "NotoSansM Nerd Font"
 
 # [font.normal]
+# family = "Tamzen"
+# [font.italic]
+# family = "Tamzen"
+# [font.bold]
+# family = "Tamzen"
+# [font.bold_italic]
+# family = "Tamzen"
+
+# [font.normal]
 # family = "JetBrains Mono Nerd Font"
 # style = "Regular"
 # [font.italic]

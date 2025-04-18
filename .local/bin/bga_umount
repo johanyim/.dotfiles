@@ -1,4 +1,0 @@
-#!/bin/sh
-
-sudo umount /mnt/bga/Shared
-sudo umount /mnt/bga/jyim

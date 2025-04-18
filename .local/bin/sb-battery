@@ -28,10 +28,10 @@ for battery in /sys/class/power_supply/BAT?*; do
 	esac
     ending="%"
 	case 1 in
-	    $(( ${capacity} >= 98)) ) icon="󱟢" ; capacity="Full";ending="";;
-	    $(( ${capacity} >= 70)) ) icon="󱊣"  ;;
-	    $(( ${capacity} >= 30)) ) icon="󱊢" ;;
-	    $(( ${capacity} >= 1)) ) icon="󱊡" ;;
+	    $(( ${capacity} >= 82)) ) icon="󱟢 " ; capacity="Full";ending="";;
+	    $(( ${capacity} >= 70)) ) icon="󱊣 "  ;;
+	    $(( ${capacity} >= 30)) ) icon="󱊢 " ;;
+	    $(( ${capacity} >= 1)) ) icon="󱊡 " ;;
 	    * ) icon="󰂎 " ;;
 	esac
 	printf "%s%s%s%s" "$status" "$icon" "$capacity" "$ending"

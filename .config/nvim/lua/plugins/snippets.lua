@@ -9,7 +9,7 @@ return {
 		{ "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
 		{
 			"L3MON4D3/LuaSnip",
-			-- dependencies = { "rafamadriz/friendly-snippets" },
+			dependencies = { "rafamadriz/friendly-snippets" },
 		},
 		"saadparwaiz1/cmp_luasnip",
 		"neovim/nvim-lspconfig",
@@ -41,9 +41,9 @@ return {
 			sources = cmp.config.sources({
 				{ name = "luasnip" },
 				{ name = "nvim_lsp" },
-				-- { name = 'path' },
+				{ name = "path" },
 			}, {
-				-- { name = 'buffer' },
+				{ name = "buffer" },
 			}),
 			window = {
 				-- completion = cmp.config.window.bordered(),

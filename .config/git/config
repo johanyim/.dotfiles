@@ -1,8 +1,6 @@
 [user]
 	name = johanyim
 	email = 37012949+johanyim@users.noreply.github.com
-[init]
-	defaultBranch = main
 [color]
 	ui = auto
 [pull]
@@ -13,14 +11,10 @@
 	directory = /mnt/bga/jyim/My Documents/code/ExchequerAPI
 [help]
     autocorrect = 10
-[commit]
-    verbose = true
 [core]
     pager = bat --decorations=never
 [diff]
     algorithm = histogram
-[url "git@github.com:"]
-	insteadOf = "https://github.com/"
 [alias]
     lg1 = log --abbrev-commit --decorate --format=format:'%C(bold yellow)[%as]: %C(reset)%C(bold blue)%h%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset) %C(dim black)[%ah]:%C(reset)' --all
     lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
@@ -29,3 +23,5 @@
     wdiff2 = diff --word-diff
 [merge]
 	conflictstyle = zdiff3
+[init]
+    defaultBranch = main

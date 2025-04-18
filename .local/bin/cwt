@@ -1,0 +1,5 @@
+#!/bin/bash
+cargo watch -q -c -i static -x "test $1 -- --nocapture --color always"
+
+
+

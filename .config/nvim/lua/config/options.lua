@@ -62,3 +62,15 @@ vim.opt.termguicolors = true
 -- python 2/3 support
 -- vim.g.python2_host_prog = ''
 vim.g.python3_host_prog = "/usr/bin/python"
+
+-- vim.g.clipboard = {
+-- 	name = "OSC 52",
+-- 	copy = {
+-- 		["+"] = require("vim.clipboard.osc52").copy,
+-- 		["*"] = require("vim.clipboard.osc52").copy,
+-- 	},
+-- 	paste = {
+-- 		["+"] = require("vim.clipboard.osc52").paste,
+-- 		["*"] = require("vim.clipboard.osc52").paste,
+-- 	},
+-- }

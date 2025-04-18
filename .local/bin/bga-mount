@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# sudo mount -t cifs -o username=jyim //bga004/Shared /mnt/bga/Shared
+# sudo mount -t cifs -o username=jyim //BGA004/Users/jyim /mnt/bga/jyim
+# sudo mount -t cifs -o username=jyim,password=$pw //bga-sql-1/ /mnt/bga/sql
+sudo mount.cifs -v //bga004/Users/jyim /home/johan/windows/Personal  --verbose -o user=jyim,uid=johan
+sudo mount.cifs -v //bga004/Shared /home/johan/windows/Shared  --verbose -o user=jyim,uid=johan
+sudo mount -t cifs -o username=jyim //bga713/OrangeCCTV /home/johan/windows/CCTV
+

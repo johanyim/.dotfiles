@@ -64,7 +64,7 @@ return {
 		vim.keymap.set("n", "<Space>p", builtin.find_files, {})
 
 		vim.keymap.set("n", "<Space><Space>", builtin.oldfiles, {})
-		vim.keymap.set("n", "<Space>o", builtin.oldfiles, {})
+		-- vim.keymap.set("n", "<Space>o", builtin.oldfiles, {})
 		-- vim.keymap.set('n', '<CR>', builtin.find_files, {})
 		-- vim.keymap.set('n', '<C-CR>', builtin.oldfiles, {})
 		vim.keymap.set("n", "<Space>g", builtin.live_grep, {})
@@ -73,5 +73,6 @@ return {
 		vim.keymap.set("n", "<Space>t", builtin.highlights, {})
 		vim.keymap.set("n", "<Space>d", builtin.diagnostics, {})
 		vim.keymap.set("n", "<Space>k", builtin.keymaps, {})
+		vim.keymap.set("n", "<Space>r", builtin.lsp_references, {})
 	end,
 }

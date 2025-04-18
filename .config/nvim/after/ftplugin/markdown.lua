@@ -1,0 +1,2 @@
+-- remove shifting text when concealing characters
+-- vim.opt.conceallevel = 0

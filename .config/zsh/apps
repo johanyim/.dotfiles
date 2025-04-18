@@ -55,6 +55,10 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 export DISABLE_AUTO_TITLE=true
 
+
+# asdf for erlang and elixir management
+. "$HOME/.asdf/asdf.sh"
+
 # adding python poetry
 fpath+=/home/johan/.config/zsh/poetry
 autoload -Uz compinit && compinit
@@ -63,4 +67,7 @@ autoload -Uz compinit && compinit
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 
 source /home/johan/.config/broot/launcher/bash/br
+
+
+
 
